@@ -1,0 +1,21 @@
+{
+    "familityBackofficeApp": {
+        "serviceStopPointDaysOfWeek": {
+            "home": {
+                "title": "Service Stop Point Days Of Weeks",
+                "createLabel": "Create a new Service Stop Point Days Of Week",
+                "createOrEditLabel": "Create or edit a Service Stop Point Days Of Week"
+            },
+            "created": "A new Service Stop Point Days Of Week is created with identifier {{ param }}",
+            "updated": "A Service Stop Point Days Of Week is updated with identifier {{ param }}",
+            "deleted": "A Service Stop Point Days Of Week is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Service Stop Point Days Of Week {{ id }}?"
+            },
+            "detail": {
+                "title": "Service Stop Point Days Of Week"
+            },
+            "day": "Day"
+        }
+    }
+}

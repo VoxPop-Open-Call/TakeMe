@@ -1,0 +1,104 @@
+<h1 class="lg-title mb-0">{{ 'familityBackofficeApp.organization.detail.title' | translate }}</h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6 left">
+        <button class="btn btn-light" (click)="goBack()">
+            <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+            {{ 'backoffice.back' | translate }}
+        </button>
+    </div>
+    <div class="col-md-6 right">
+        <span *ngIf="this.typeOrganization === organizationType.BUS_COMPANY">
+            <button type="button" class="btn btn-circle btn-outline-primary btn-xs" (click)="showDrivers()">
+                <fa-icon icon="person" class="pe-2"></fa-icon>
+                Monitors
+            </button>
+            <button type="button" class="btn btn-circle btn-outline-primary btn-xs" (click)="showVehicles()">
+                <fa-icon icon="car" class="pe-2"></fa-icon>
+                Vehicles
+            </button>
+        </span>
+        <button type="button" (click)="goToEdit()" class="btn btn-circle btn-primary btn-xs font-white">
+            <fa-icon icon="pencil" class="pe-2"></fa-icon>
+            Edit
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="organization">
+    <h4>
+        <span>Operator</span>
+        <span>{{ organization.name }} ({{ organization.statusType }})</span>
+    </h4>
+    <dl class="row-md jh-entity-details">
+        <dt><span>NIF</span></dt>
+        <dd>
+            <span>({{ organization.nifCountry }}) {{ organization.nifNumber }}</span>
+        </dd>
+    </dl>
+
+    <dl class="row-md jh-entity-details">
+        <dt><span>Last Modified</span></dt>
+        <dd>
+            <span>{{ organization.lastModifiedDate | formatExpressionDateTime }}</span>
+        </dd>
+    </dl>
+
+    <hr>
+
+    <h4>Location</h4>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Address</span></dt>
+        <dd>
+            <span>{{ organization.location.street }}, {{ organization.location.portNumber }} {{ organization.location.floor }}</span>
+            <br>
+            <span>{{ organization.location.postalCode }}</span>
+            <span>{{ organization.location.city }}</span>
+        </dd>
+    </dl>
+
+    <dl class="row-md jh-entity-details">
+        <dt><span>Latitude/Longitude (Plus code)</span></dt>
+        <dd>
+            <span>
+                <a [href]="'https://www.google.com/maps/search/?api=1&query=' + organization.location.latitude + ',' + organization.location.longitude"
+                   target="_blank" >
+                {{ organization.location.latitude }}/{{ organization.location.longitude }} ({{ organization.location.plusCode }})
+                </a>
+            </span>
+        </dd>
+    </dl>
+
+    <hr>
+
+    <h4>Contacts</h4>
+    <div *ngFor="let contact of organization.contacts">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{ contact.name }}</span>
+        </dd>
+
+        <dt><span>Phone Number</span></dt>
+        <dd>
+            <span>{{ contact.phoneNumber }}</span>
+        </dd>
+
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{ contact.email }}</span>
+        </dd>
+
+        <dt><span>Public</span></dt>
+        <dd>
+            <span>
+                <input type="checkbox" disabled [(ngModel)]="contact.publicData">
+            </span>
+        </dd>
+    </div>
+</div>

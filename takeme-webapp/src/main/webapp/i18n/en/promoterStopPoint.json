@@ -1,0 +1,27 @@
+{
+  "familityBackofficeApp": {
+    "promoterStopPoint": {
+      "home": {
+        "title": "Promoter Stop Points",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Promoter Stop Point",
+        "createOrEditLabel": "Create or edit a Promoter Stop Point",
+        "notFound": "No Promoter Stop Points found"
+      },
+      "created": "A new Promoter Stop Point is created with identifier {{ param }}",
+      "updated": "A Promoter Stop Point is updated with identifier {{ param }}",
+      "deleted": "A Promoter Stop Point is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Promoter Stop Point {{ id }}?"
+      },
+      "detail": {
+        "title": "Promoter Stop Point"
+      },
+      "id": "ID",
+      "name": "Name",
+      "scheduledTime": "Scheduled Time",
+      "promoterItinerary": "Promoter Itinerary",
+      "location": "Location"
+    }
+  }
+}

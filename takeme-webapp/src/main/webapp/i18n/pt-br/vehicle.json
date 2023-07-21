@@ -1,0 +1,24 @@
+{
+    "familityBackofficeApp": {
+        "vehicle": {
+            "home": {
+                "title": "Veículos",
+                "createLabel": "Criar um novo Veículo",
+                "createOrEditLabel": "Criar ou editar um Veículo"
+            },
+            "created": "Um novo Veículo foi criado com identificador {{ param }}",
+            "updated": "Um Veículo foi atualizado com identificador {{ param }}",
+            "deleted": "Um Veículo foi excluído com identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Veículo {{ id }}?"
+            },
+            "detail": {
+                "title": "Veículo"
+            },
+            "designation": "Designação",
+            "licensePlate": "Placa",
+            "capacity": "Capacidade",
+            "organization": "Organização"
+        }
+    }
+}

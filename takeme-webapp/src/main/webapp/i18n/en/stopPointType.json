@@ -1,0 +1,9 @@
+{
+    "familityBackofficeApp": {
+        "StopPointType": {
+            "null": "",
+            "COLLECTION": "COLLECTION",
+            "DELIVER": "DELIVER"
+        }
+    }
+}

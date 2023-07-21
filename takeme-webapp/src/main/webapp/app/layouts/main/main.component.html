@@ -1,0 +1,20 @@
+<jhi-page-ribbon></jhi-page-ribbon>
+
+<div *ngIf="isAuthenticated()" class="row h-100 m-0 p-0">
+    <div class="col-sm-6 col-md-2 h-100 m-0 p-0 dark-background scrollable">
+        <router-outlet name="navbar"></router-outlet>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-10 h-100 m-0 p-0 scrollable">
+        <div class="card jh-card m-0 h-100">
+            <router-outlet></router-outlet>
+            <router-outlet name="popup"></router-outlet>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!isAuthenticated()" class="row h-100 m-0 p-0">
+    <div class="h-100 m-0 p-0 scrollable">
+        <router-outlet></router-outlet>
+        <router-outlet name="popup"></router-outlet>
+    </div>
+</div>

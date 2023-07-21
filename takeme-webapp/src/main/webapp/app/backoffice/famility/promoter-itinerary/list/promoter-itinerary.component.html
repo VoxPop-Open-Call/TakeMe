@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading" data-cy="PromoterItineraryHeading">
+        <span jhiTranslate="familityBackofficeApp.promoterItinerary.home.title">Promoter Itineraries</span>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <jhi-filter [filters]="filters"></jhi-filter>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="promoterItineraries?.length === 0">
+        <span jhiTranslate="familityBackofficeApp.promoterItinerary.home.notFound">No Promoter Itineraries found</span>
+    </div>
+
+    <div class="table-responsive table-entities" id="entities" *ngIf="promoterItineraries && promoterItineraries.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+                    <th>
+                        <div class="d-flex">
+                            <span jhiTranslate="familityBackofficeApp.promoterItinerary.service">Service</span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex">
+                            <span jhiTranslate="familityBackofficeApp.promoterItinerary.name">Name</span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex">
+                            <span jhiTranslate="familityBackofficeApp.promoterItinerary.startDate">Start Date</span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex">
+                            <span jhiTranslate="familityBackofficeApp.promoterItinerary.endDate">End Date</span>
+                        </div>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let promoterItinerary of promoterItineraries; trackBy: trackId" data-cy="entityTable">
+                    <td>
+                        <div *ngIf="promoterItinerary.service">
+                            <a (click)="goToService(promoterItinerary.service.id)">{{ promoterItinerary.service.name }}</a>
+                        </div>
+                    </td>
+                    <td class="pointer" (click)="goToDetailed(promoterItinerary.id)">{{ promoterItinerary.name }}</td>
+                    <td class="pointer" (click)="goToDetailed(promoterItinerary.id)">{{ promoterItinerary.startDate | formatExpressionDate }}</td>
+                    <td class="pointer" (click)="goToDetailed(promoterItinerary.id)">{{ promoterItinerary.endDate | formatExpressionDate }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="promoterItineraries && promoterItineraries.length > 0">
+        <div class="d-flex justify-content-center">
+            <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+
+        <div class="pagination">
+            <ngb-pagination
+                [collectionSize]="totalItems"
+                [page]="page + 1"
+                [pageSize]="itemsPerPage"
+                [maxSize]="5"
+                [rotate]="true"
+                (pageChange)="navigateToPage($event)"
+            >
+                <ng-template ngbPaginationPrevious>
+                    <div jhiTranslate="global.paginator.previous">Previous</div>
+                </ng-template>
+                <ng-template ngbPaginationNext>
+                    <div jhiTranslate="global.paginator.next">Next</div>
+                </ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+</div>

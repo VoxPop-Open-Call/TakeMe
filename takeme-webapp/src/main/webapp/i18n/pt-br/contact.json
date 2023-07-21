@@ -1,0 +1,32 @@
+{
+    "familityBackofficeApp": {
+        "contact": {
+            "home": {
+                "title": "Contatos",
+                "createLabel": "Criar um novo Contato",
+                "createOrEditLabel": "Criar ou editar um Contato"
+            },
+            "created": "Novo contato criado com o identificador {{ param }}",
+            "updated": "Contato atualizado com o identificador {{ param }}",
+            "deleted": "Contato excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Contato {{ id }}?"
+            },
+            "detail": {
+                "title": "Contato"
+            },
+            "name": "Nome",
+            "phoneNumber": "Contato telefônico",
+            "contact": "Contato",
+            "email": "Email",
+            "publicData": "Informação pública",
+            "organization": "Organização",
+            "date": "Data",
+            "status": "Estado",
+            "identification-document": "Documento de Identificação",
+            "identification-document-number": "Número do documento",
+            "birthday": "Data de Nascimento",
+            "change-photo": "Alterar foto"
+        }
+    }
+}

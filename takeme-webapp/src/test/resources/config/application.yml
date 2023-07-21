@@ -1,0 +1,149 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+management:
+    endpoints:
+        web:
+            base-path: /management
+            exposure:
+                include:
+                  [
+                       'configprops',
+                       'env',
+                       'health',
+                       'info',
+                       'threaddump',
+                       'logfile'
+                  ]
+    endpoint:
+        health:
+            show-details: when-authorized
+    info:
+        git:
+            mode: full
+    health:
+        mail:
+            enabled: false # When using the MailService, configure an SMTP server and set this to true
+    metrics:
+        enabled: false # http://micrometer.io/ is disabled by default, as we use http://metrics.dropwizard.io/ instead
+
+spring:
+    application:
+        name: famility_backoffice
+    profiles:
+        # The commented value for `active` can be replaced with valid Spring profiles to load.
+        # Otherwise, it will be filled in by maven when building the WAR file
+        # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+        active: #spring.profiles.active#
+    jpa:
+        open-in-view: false
+        properties:
+            hibernate.jdbc.time_zone: UTC
+            hibernate.id.new_generator_mappings: true
+            hibernate.connection.provider_disables_autocommit: true
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+            # modify batch size as necessary
+            hibernate.jdbc.batch_size: 25
+            hibernate.order_inserts: true
+            hibernate.order_updates: true
+            hibernate.query.fail_on_pagination_over_collection_fetch: true
+            hibernate.query.in_clause_parameter_padding: true
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    messages:
+        basename: i18n/messages
+    mvc:
+        favicon:
+            enabled: false
+    thymeleaf:
+        mode: HTML
+
+server:
+    servlet:
+        session:
+            cookie:
+                http-only: true
+
+# Properties to be exposed on the /info management endpoint
+info:
+    # Comma separated list of profiles that will trigger the ribbon to show
+    display-ribbon-on-profiles: "dev"
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+    async:
+        core-pool-size: 2
+        max-pool-size: 50
+        queue-capacity: 10000
+    # By default CORS is disabled. Uncomment to enable.
+    cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+        allowed-headers: "*"
+        exposed-headers: "Authorization,Link,X-Total-Count"
+        allow-credentials: true
+        max-age: 1800
+    mail:
+        from: famility_backoffice@localhost
+    api-docs:
+        default-include-pattern: /api/.*
+        title: TakeMe by Famility Backoffice API
+        description: TakeMe by Famility Backoffice API documentation
+        version: 0.0.1
+        terms-of-service-url:
+        contact-name:
+        contact-url:
+        contact-email:
+        license:
+        license-url:
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+application:
+    itineraryStopPointsByChild: 10
+    firebase:
+        configFile: TBD
+        databaseUrl: https://<TBD>.firebaseio.com/
+        tokenUrl: https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=
+        verifyEmailUrl: https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=
+        resetPasswordEmailUrl: https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=
+        appKey: TBD
+    photo:
+        width: 500
+        height: 500
+        contentType: image/jpeg
+    googleMaps:
+        apiKey: AIzaSyC9gZOXTas8pgw_YATwFdIddZqd0iH3D5U
+        withTraffic: false
+    angularEnvironment:
+        authorizationHeader: X-Authorization-Firebase

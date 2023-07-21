@@ -1,0 +1,61 @@
+<ion-card class="w-100">
+    <ion-card-content class="w-100">
+        <ion-item>
+            <ion-grid>
+                <ion-row class="v-align">
+                    <ion-col size="small" (click)="showDestinationLocationDetail(itineraryStopPoint.stopPoint.location)"><img class="sm-image-icon-bkg"
+                            [src]="(itineraryStopPoint.stopPoint.location.type === 'SCHOOL' || itineraryStopPoint.stopPoint.location.type === 'SCHOOL_EXTERNAL') ? 'assets/icon/ic-school.svg' : 'assets/icon/ic-home.svg' ">
+                    </ion-col>
+                    <ion-col>
+                        <ion-grid>
+                            <ion-row class="v-align" (click)="showDestinationLocationDetail(itineraryStopPoint.stopPoint.location)">
+                                {{itineraryStopPoint.stopPoint.location.designation}}&nbsp;
+                                <!-- <span class="bkg-display xsm-title" *ngIf="itineraryStopPoint.stopPoint.location.type === 'SCHOOL'"><b>Famility</b></span> -->
+                            </ion-row>
+                            <ion-row class="sm-title sub-title">
+                                <app-location-link [location]="itineraryStopPoint.stopPoint.location"></app-location-link>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <div class="h-padding-7 sm-title">
+            <div class="bottom-divider sub-title ">
+                <ion-icon name="calendar"></ion-icon>
+                <span><b>&nbsp;Hora combinada:</b>
+                    {{itineraryStopPoint.stopPoint.scheduledTime | date:'HH:mm'}}</span>
+                <br>
+                <div *ngIf="itineraryStopPoint.stopPoint.estimatedArriveTime">
+                    <ion-icon name="time"></ion-icon>
+                    <span><b>&nbsp;Hora prevista:</b>
+                        {{itineraryStopPoint.stopPoint.estimatedArriveTime | date:'HH:mm'}}</span>
+                    <br>
+                </div>
+                <div *ngIf="itineraryStopPoint.stopPoint.effectiveArriveTime">
+                    <ion-icon name="time"></ion-icon>
+                    <span><b>&nbsp;Hora efetiva:</b>
+                        {{itineraryStopPoint.stopPoint.effectiveArriveTime | date:'HH:mm'}}</span>
+                </div>
+            </div>
+
+            <ion-list *ngFor="let child of itineraryStopPoint.stopPoint.childList; index as i">
+                <ion-grid class="padding-0" (click)="showChildDetail(child)">
+                    <ion-row class="padding-0">
+                        <ion-col size="small">
+                            <img class="xsm-image-avatar"
+                                [src]="childPhotos[i] ? 'data:image/jpg;base64,' + childPhotos[i] : 'assets/img/empty_photo.svg'">
+                        </ion-col>
+                        <ion-col>
+                            <span><b>{{child.name}}</b></span>
+                            <br>
+                            <span class="sub-title" *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'COLLECTION'">Recolha </span>
+                            <span class="sub-title" *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'DELIVER'">Entrega </span>
+                            <!-- <span class="bkg-display xsm-title" *ngIf="child.famility"><b>Famility</b></span> -->
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </div>
+    </ion-card-content>
+</ion-card>

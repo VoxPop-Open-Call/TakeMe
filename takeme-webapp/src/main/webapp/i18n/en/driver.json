@@ -1,0 +1,23 @@
+{
+    "familityBackofficeApp": {
+        "driver": {
+            "home": {
+                "title": "Monitors",
+                "createLabel": "Create a new Monitor",
+                "createOrEditLabel": "Create or edit a Monitor"
+            },
+            "created": "A new Driver is created with identifier {{ param }}",
+            "updated": "A Driver is updated with identifier {{ param }}",
+            "deleted": "A Driver is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Monitor {{ id }}?"
+            },
+            "detail": {
+                "title": "Monitor"
+            },
+            "name": "Name",
+            "driverLicense": "Driver License",
+            "organization": "Promoter"
+        }
+    }
+}

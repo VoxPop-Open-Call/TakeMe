@@ -1,0 +1,11 @@
+{
+    "familityBackofficeApp": {
+        "OrganizationType": {
+            "null": "",
+            "BUS_COMPANY": "Operadora",
+            "SCHOOL": "Escola",
+            "TUTOR": "Responsável",
+            "FAMILITY": "Promotora"
+        }
+    }
+}

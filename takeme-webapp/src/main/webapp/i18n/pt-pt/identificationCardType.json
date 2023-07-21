@@ -1,0 +1,21 @@
+{
+    "familityBackofficeApp": {
+        "identificationCardType": {
+            "home": {
+                "title": "Identification Card Types",
+                "createLabel": "Criar um(a) novo(a) Identification Card Type",
+                "createOrEditLabel": "Criar ou editar um(a) Identification Card Type"
+            },
+            "created": "A new Identification Card Type is created with identifier {{ param }}",
+            "updated": "A Identification Card Type is updated with identifier {{ param }}",
+            "deleted": "A Identification Card Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Identification Card Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Identification Card Type"
+            },
+            "name": "Name"
+        }
+    }
+}

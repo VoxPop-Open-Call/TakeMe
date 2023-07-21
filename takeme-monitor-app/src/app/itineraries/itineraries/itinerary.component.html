@@ -1,0 +1,61 @@
+<ion-card>
+    <ion-card-content (click)="goToItineraryDetail()">
+        <ion-item>
+            <ion-grid class="display">
+                <ion-row class="display">
+                    <ion-col size="8" class="left">{{itinerary.name}}</ion-col>
+                    <ion-col size="4" class="right sm-title">
+                        <ion-row class="flex-right">
+                            <span class="yellow-text" *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'">Por iniciar</span>
+                            <span class="yellow-text" *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS'">Em curso</span>
+                            <span class="sub-title" *ngIf="itinerary.itineraryStatusType === 'FINISHED'">Concluído</span>
+                            <span class="red-text" *ngIf="itinerary.itineraryStatusType === 'CANCELED'">Cancelado</span>
+                        </ion-row>
+                        <ion-row *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'" class="flex-right">
+                            <ion-label class="md-title yellow-text">
+                                {{itinerary.scheduledTime | date:'H:mm'}}
+                            </ion-label>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <div class="v-h-padding-5-10">
+            <ion-label class="sub-title sm-title v-margin-3">
+                <ion-icon name="pin"></ion-icon>
+                {{itinerary.estimatedStartLocation.designation}}, {{itinerary.estimatedStartLocation.street}}
+                , {{itinerary.estimatedStartLocation.portNumber}}
+            </ion-label>
+            <br>
+            <ion-label class="sub-title sm-title v-margin-3">
+                <ion-icon name="bus"></ion-icon>
+                {{itinerary.vehicle.licensePlate}}
+            </ion-label>
+            <br>
+
+            <ion-label class="sub-title sm-title v-margin-3" *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS'">
+                <ion-icon name="time"></ion-icon>
+                <span> Iniciado às {{itinerary.effectiveStartTime | date:'H:mm'}}</span>
+            </ion-label>
+
+            <ion-label class="sub-title sm-title v-margin-3" *ngIf="itinerary.itineraryStatusType === 'FINISHED'">
+                <ion-icon name="time"></ion-icon>
+                <span> Iniciado às {{itinerary.effectiveStartTime | date:'H:mm'}}</span>
+                <br>
+                <ion-icon name="time"></ion-icon>
+                <span> Concluído às {{itinerary.effectiveEndTime | date:'H:mm'}}</span>
+            </ion-label>
+
+            <ion-label class="sub-title sm-title v-margin-3" *ngIf="itinerary.itineraryStatusType === 'CANCELED'">
+                <div *ngIf="itinerary.effectiveStartTime" class="sub-title">
+                    <ion-icon name="time"></ion-icon>
+                    <span> Iniciado às {{itinerary.effectiveStartTime | date:'H:mm'}}</span>
+                    <br>
+                </div>
+                <ion-icon name="time"></ion-icon>
+                <span> Cancelado às {{itinerary.effectiveEndTime | date:'H:mm'}}</span>
+            </ion-label>
+
+        </div>
+    </ion-card-content>
+</ion-card>

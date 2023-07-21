@@ -1,0 +1,189 @@
+<div>
+  <h2 id="page-heading" data-cy="ChildItinerarySubscriptionHeading">
+    <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.home.title">Child Itinerary Subscriptions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-child-itinerary-subscription"
+        [routerLink]="['/child-itinerary-subscription/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.home.createLabel">
+          Create a new Child Itinerary Subscription
+        </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="childItinerarySubscriptions?.length === 0">
+    <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.home.notFound">No Child Itinerary Subscriptions found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="childItinerarySubscriptions && childItinerarySubscriptions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="statusType">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.statusType">Status Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="subscriptionDate">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.subscriptionDate">Subscription Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="activationDate">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.activationDate">Activation Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deactivationDate">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.deactivationDate">Deactivation Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="comments">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.comments">Comments</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="additionalInformation">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.additionalInformation">Additional Information</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cardNumber">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.cardNumber">Card Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="child.name">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.child">Child</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="promoterItinerary.name">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.promoterItinerary">Promoter Itinerary</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <div class="d-flex">
+              <span jhiTranslate="familityBackofficeApp.childItinerarySubscription.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let childItinerarySubscription of childItinerarySubscriptions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/child-itinerary-subscription', childItinerarySubscription.id, 'view']">{{
+              childItinerarySubscription.id
+            }}</a>
+          </td>
+          <td jhiTranslate="{{ 'familityBackofficeApp.StatusType.' + childItinerarySubscription.statusType }}">
+            {{ childItinerarySubscription.statusType }}
+          </td>
+          <td>{{ childItinerarySubscription.subscriptionDate | formatMediumDatetime }}</td>
+          <td>{{ childItinerarySubscription.activationDate | formatMediumDatetime }}</td>
+          <td>{{ childItinerarySubscription.deactivationDate | formatMediumDatetime }}</td>
+          <td>{{ childItinerarySubscription.comments }}</td>
+          <td>{{ childItinerarySubscription.additionalInformation }}</td>
+          <td>{{ childItinerarySubscription.cardNumber }}</td>
+          <td>
+            <div *ngIf="childItinerarySubscription.child">
+              <a [routerLink]="['/child', childItinerarySubscription.child.id, 'view']">{{ childItinerarySubscription.child.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="childItinerarySubscription.promoterItinerary">
+              <a [routerLink]="['/promoter-itinerary', childItinerarySubscription.promoterItinerary.id, 'view']">{{
+                childItinerarySubscription.promoterItinerary.name
+              }}</a>
+            </div>
+          </td>
+          <td>
+            {{ childItinerarySubscription.user?.login }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/child-itinerary-subscription', childItinerarySubscription.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/child-itinerary-subscription', childItinerarySubscription.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(childItinerarySubscription)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="childItinerarySubscriptions && childItinerarySubscriptions.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

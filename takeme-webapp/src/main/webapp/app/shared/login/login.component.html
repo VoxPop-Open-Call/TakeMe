@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h4 class="modal-title" jhiTranslate="login.title">Sign In</h4>
+  <button jhiTranslate="backoffice.close" aria-label="Close" data-dismiss="modal"
+          class="btn btn-light" type="button" (click)="activeModal.dismiss('closed')">
+    Close
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
+        <strong>Failed to sign in!</strong> Please check your credentials and try again.
+      </div>
+      <div class="alert alert-danger" *ngIf="tutorVerificationError" jhiTranslate="login.messages.error.verification">
+        <strong>Failed to sign in!</strong> Please verify your email and try again.
+      </div>
+    </div>
+    <div class="col-md-8">
+      <form class="form" role="form" (ngSubmit)="login()">
+        <div class="form-group">
+          <label class="username-label" for="username" jhiTranslate="global.form.email">Email</label>
+          <input type="text" class="form-control" name="username" id="username"
+                 placeholder="{{'global.form.email.placeholder' | translate}}"
+                 [(ngModel)]="username">
+        </div>
+        <div class="form-group margin-b-10">
+          <label for="password" jhiTranslate="login.form.password">Password</label>
+          <input type="password" class="form-control" name="password" id="password"
+                 placeholder="{{'login.form.password.placeholder' | translate}}"
+                 [(ngModel)]="password">
+        </div>
+        <div class="form-check margin-b-15">
+          <label class="form-check-label" for="rememberMe">
+            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe"
+                   checked>
+            <span jhiTranslate="login.form.rememberme">Remember me</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-circle font-white margin-b-15" jhiTranslate="login.form.button">Sign In</button>
+      </form>
+      <div class="alert alert-warning">
+        <a class="alert-link" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Forgot your password?</a>
+      </div>
+    </div>
+  </div>
+</div>

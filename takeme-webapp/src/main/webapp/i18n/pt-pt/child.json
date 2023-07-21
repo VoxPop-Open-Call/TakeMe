@@ -1,0 +1,33 @@
+{
+    "familityBackofficeApp": {
+        "child": {
+            "home": {
+                "title": "Children",
+                "createLabel": "Criar um(a) novo(a) Child",
+                "createOrEditLabel": "Criar ou editar um(a) Child"
+            },
+            "created": "A new Child is created with identifier {{ param }}",
+            "updated": "A Child is updated with identifier {{ param }}",
+            "deleted": "A Child is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Child {{ id }}?"
+            },
+            "detail": {
+                "title": "Child"
+            },
+            "name": "Name",
+            "nifCountry": "Nif Country",
+            "nifNumber": "Nif Number",
+            "photoUrl": "Photo Url",
+            "dateOfBirth": "Date Of Birth",
+            "famility": "Famility",
+            "statusType": "Status Type",
+            "tutor": "Tutor",
+            "organization": "Organization",
+            "active": "Ativas",
+            "no-services": "Criança sem serviços válidos",
+            "non-famility": "Não Famility",
+            "non-famility-children": "Crianças Não-Famility: "
+        }
+    }
+}

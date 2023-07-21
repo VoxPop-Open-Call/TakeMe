@@ -1,0 +1,41 @@
+{
+    "familityBackofficeApp": {
+        "tutor": {
+            "home": {
+                "title": "Responsáveis",
+                "createLabel": "Criar um novo Responsável",
+                "createOrEditLabel": "Criar ou editar um Responsável"
+            },
+            "created": "Um novo Responsável foi criado com identificador {{ param }}",
+            "updated": "Um Responsável foi atualizado com identificador {{ param }}",
+            "deleted": "Um Responsável foi excluído com identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Responsável {{ id }}?"
+            },
+            "detail": {
+                "title": "Responsável"
+            },
+            "name": "Nome",
+            "nifCountry": "País CPF",
+            "nifNumber": "Número CPF",
+            "identificationCardNumber": "Número do Documento de Identificação",
+            "phoneNumber": "Número de Telefone",
+            "famility": "Famility",
+            "yes": "Sim",
+            "no": "Não",
+            "photoUrl": "Url Foto",
+            "userId": "Id Usuário",
+            "statusType": "Tipo de Estado",
+            "identificationCardType": "Tipo de Documento de Identificação",
+            "location": "Localização",
+            "child": "Aluno",
+            "itinerary": "Itinerário",
+            "service": "Serviço",
+            "status": "Estado",
+            "subscriptionDate": "Data de Adesão",
+            "activationDate": "Data de Ativação",
+            "deactivationDate": "Data de Desativação",
+            "comments": "Comentários"
+        }
+    }
+}

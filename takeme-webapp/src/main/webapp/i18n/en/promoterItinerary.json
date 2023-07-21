@@ -1,0 +1,35 @@
+{
+  "familityBackofficeApp": {
+    "promoterItinerary": {
+      "home": {
+        "title": "Itinerary Templates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Promoter Itinerary",
+        "createOrEditLabel": "Create or edit a Promoter Itinerary",
+        "notFound": "No Promoter Itineraries found"
+      },
+      "created": "A new Promoter Itinerary is created with identifier {{ param }}",
+      "updated": "A Promoter Itinerary is updated with identifier {{ param }}",
+      "deleted": "A Promoter Itinerary is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Promoter Itinerary {{ id }}?"
+      },
+      "detail": {
+        "title": "Promoter Itinerary"
+      },
+      "id": "ID",
+      "name": "Itinerary Name",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "service": "Service",
+      "operator": "Operator",
+      "notFound": " has no itineraries",
+      "yes": "Yes",
+      "no": "No",
+      "comments": "Comments",
+      "enrollment": "Enrollment",
+      "enrollmentMessage": "You must first fill the enrollment form available",
+      "enrollmentUrl": " here"
+    }
+  }
+}

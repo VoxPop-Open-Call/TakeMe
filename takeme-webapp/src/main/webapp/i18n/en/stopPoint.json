@@ -1,0 +1,26 @@
+{
+    "familityBackofficeApp": {
+        "stopPoint": {
+            "home": {
+                "title": "Stop Points",
+                "createLabel": "Create a new Stop Point",
+                "createOrEditLabel": "Create or edit a Stop Point"
+            },
+            "created": "A new Stop Point is created with identifier {{ param }}",
+            "updated": "A Stop Point is updated with identifier {{ param }}",
+            "deleted": "A Stop Point is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Stop Point {{ id }}?"
+            },
+            "detail": {
+                "title": "Stop Point"
+            },
+            "stopPointType": "Stop Point Type",
+            "combinedTime": "Combined Time",
+            "location": "Location",
+            "itinerary": "Itinerary",
+            "child": "Child",
+            "stopAuditEvent": "Stop Audit Event"
+        }
+    }
+}

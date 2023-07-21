@@ -1,0 +1,27 @@
+{
+    "familityBackofficeApp": {
+        "serviceStopPoint": {
+            "home": {
+                "title": "Pontos de Parada de  Serviço",
+                "createLabel": "Criar um novo Ponto de Parada de Serviço",
+                "createOrEditLabel": "Criar ou editar um Ponto de Parada de Serviço"
+            },
+            "created": "Um novo Ponto de Parada de Serviço foi criado com o identificador {{ param }}",
+            "updated": "Um Ponto de Parada de Serviço foi criado com o identificador {{ param }}",
+            "deleted": "Um Ponto de Parada de Serviço foi excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Ponto de Parada de Serviço {{ id }}?"
+            },
+            "detail": {
+                "title": "Ponto de Parada de Serviço"
+            },
+            "stopPointType": "Tipo de Ponto de Parada",
+            "startHour": "Hora Inicial",
+            "combinedTime": "Tempo Combinado",
+            "startFrequencyDate": "Data de Frequência Inicial",
+            "statusType": "Tipo de Status",
+            "frequency": "Frequência",
+            "serviceStopPointDaysOfWeek": "Dias da Semana de Ponto de Parada de Serviço"
+        }
+    }
+}

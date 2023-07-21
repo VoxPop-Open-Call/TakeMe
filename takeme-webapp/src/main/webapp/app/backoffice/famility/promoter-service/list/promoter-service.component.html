@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 jhiTranslate="familityBackofficeApp.promoterService.home.title" class="lg-title mb-0 float-start">Services</h1>
+        <a [routerLink]="['/promoter/services/new']">
+            <button type="button" class="btn btn-circle btn-primary btn-md font-white mb-0 float-end">
+                <fa-icon icon="plus" class="pe-2"></fa-icon>
+                {{ 'backoffice.add' | translate }}
+            </button>
+        </a>
+    </div>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<hr>
+
+<div *ngIf="services.length > 0">
+    <p-table [value]="services" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="w-1"></th>
+                <th jhiTranslate="familityBackofficeApp.promoterService.name">Name</th>
+                <th jhiTranslate="familityBackofficeApp.promoterService.transportType">Transport Type</th>
+                <th jhiTranslate="familityBackofficeApp.promoterService.startDate">Start Date</th>
+                <th jhiTranslate="familityBackofficeApp.promoterService.endDate">End Date</th>
+                <th jhiTranslate="familityBackofficeApp.promoterService.needsETA">Needs ETA?</th>
+                <th jhiTranslate="familityBackofficeApp.promoterService.enrollmentURL">Enrollment URL</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-service let-expanded="expanded">
+            <tr>
+                <td>
+                    <button type="button" pButton [pRowToggler]="service" class="p-button-text p-button-rounded p-button-plain"
+                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td class="pointer" (click)="goToServiceEdit(service.id)">
+                    <img class="sm-avatar margin-r-15" alt="Service Logo"
+                         [src]="service.logo ? 'data:image/jpg;base64,' + service.logo : '/content/images/empty_photo.svg'">
+                    {{ service.name }}
+                </td>
+                <td class="pointer" (click)="goToServiceEdit(service.id)"
+                    jhiTranslate="familityBackofficeApp.promoterService.transportTypeEnum.{{service.transportType}}"></td>
+                <td class="pointer" (click)="goToServiceEdit(service.id)">{{ service.startDate | formatExpressionDate }}</td>
+                <td class="pointer" (click)="goToServiceEdit(service.id)">{{ service.endDate ? (service.endDate | formatExpressionDate) : "N/A" }}</td>
+                <td class="pointer" (click)="goToServiceEdit(service.id)">
+                    <span *ngIf="service.needsETA" jhiTranslate="familityBackofficeApp.promoterItinerary.yes">Yes</span>
+                    <span *ngIf="!service.needsETA" jhiTranslate="familityBackofficeApp.promoterItinerary.no">No</span>
+                </td>
+                <td>
+                    <a href="{{ service.enrollmentURL }}"
+                       target="_blank">{{ ((service.enrollmentURL.length > 50) ? (service.enrollmentURL  | slice:0:50) + '...' : (service.enrollmentURL)) }}</a>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-service>
+            <td colspan="7">
+                <div class="p-3 padding-t-15">
+                    <p-table [value]="service.itineraries" dataKey="detail" *ngIf="service.itineraries.length > 0">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th jhiTranslate="familityBackofficeApp.promoterItinerary.name">Itinerary Name</th>
+                                <th jhiTranslate="familityBackofficeApp.promoterItinerary.operator">Operator</th>
+                                <th jhiTranslate="familityBackofficeApp.promoterItinerary.startDate">Start Date</th>
+                                <th jhiTranslate="familityBackofficeApp.promoterItinerary.endDate">End Date</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-itinerary>
+                            <tr>
+                                <td class="pointer" (click)="goToItineraryDetail(service.id, itinerary.id)">{{ itinerary.name }}</td>
+                                <td class="pointer" (click)="goToItineraryDetail(service.id, itinerary.id)">{{ itinerary.organization.name }}</td>
+                                <td class="pointer" (click)="goToItineraryDetail(service.id, itinerary.id)">{{ itinerary.startDate | formatExpressionDate }}</td>
+                                <td class="pointer"
+                                    (click)="goToItineraryDetail(service.id, itinerary.id)">{{ itinerary.endDate ? (itinerary.endDate | formatExpressionDate) : "N/A" }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                    <div *ngIf="service.itineraries.length == 0">
+                        <div class="center">
+                            <h6 class="margin-b-0">
+                                <i>{{ service.name }}</i>
+                                <i jhiTranslate="familityBackofficeApp.promoterItinerary.notFound"> has no itineraries</i>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </ng-template>
+    </p-table>
+</div>
+
+<div *ngIf="services.length == 0">
+    <div class="margin-t-15 center">
+        <h6 class="margin-b-0">
+            <i jhiTranslate="backoffice.home.famility.noServicesList">There are no services</i>
+        </h6>
+    </div>
+</div>
+<br><br>

@@ -1,0 +1,22 @@
+{
+    "familityBackofficeApp": {
+        "serviceStopPointFrequency": {
+            "home": {
+                "title": "Frequências de Ponto de Parada de Serviço",
+                "createLabel": "Criar uma nova Frequência de Ponto de Parada de Serviço",
+                "createOrEditLabel": "Criar ou editar uma Frequência de Ponto de Parada de Serviço"
+            },
+            "created": "Uma nova Frequência de Ponto de Parada de Serviço foi criada com o identificador {{ param }}",
+            "updated": "Uma Frequência de Ponto de Parada de Serviço foi atualizada com o identificador {{ param }}",
+            "deleted": "Uma Frequência de Ponto de Parada de Serviço foi excluída com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir a Frequência de Ponto de Parada de Serviço {{ id }}?"
+            },
+            "detail": {
+                "title": "Frequência de Ponto de Parada de Serviço"
+            },
+            "description": "Descrição",
+            "weekInterval": "Intervalo Semanal"
+        }
+    }
+}

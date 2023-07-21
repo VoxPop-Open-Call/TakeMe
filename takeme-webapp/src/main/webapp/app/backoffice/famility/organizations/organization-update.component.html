@@ -1,0 +1,137 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div *ngIf="organization">
+        <h1 class="lg-title mb-0">
+            <span *ngIf="!organization.id">{{ 'familityBackofficeApp.organization.detail.newOperator' | translate }}</span>
+            <span *ngIf="organization.id">{{ 'familityBackofficeApp.organization.detail.editOperator' | translate }}</span>
+        </h1>
+
+        <jhi-alert></jhi-alert>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-6 left">
+                <button type="button" class="btn btn-light" (click)="goBack()">
+                    <fa-icon icon="xmark" class="pe-2"></fa-icon>
+                    {{ 'backoffice.cancel' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-6 right">
+                <button type="submit"
+                        class="btn btn-circle btn-primary btn-xs font-white">
+                    <fa-icon icon="check" class="pe-2"></fa-icon>
+                    {{ 'backoffice.save' | translate }}
+                </button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <label class="form-control-label">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.name" name="organization_name" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">NIF</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.nifNumber" name="nif" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">NIF Country</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.nifCountry" name="nifCountry" required/>
+        </div>
+
+        <hr>
+
+        <h4>Address</h4>
+
+        <div class="form-group">
+            <label class="form-control-label">Designation</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.designation" name="designation" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Street</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.street" name="street" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Port number</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.portNumber" name="portNumber" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Floor</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.floor" name="floor"/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Postal Code</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.postalCode" name="postalCode" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">City</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.city" name="city" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Country</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.country" name="country" required/>
+        </div>
+
+        <hr>
+
+        <h4>Location</h4>
+
+        <div class="form-group">
+            <label class="form-control-label">Latitude</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.latitude" name="latitude" required/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Longitude</label>
+            <input type="text" class="form-control" [(ngModel)]="organization.location.longitude" name="longitude" required/>
+        </div>
+
+        <hr>
+
+        <h4>Contacts</h4>
+        <div class="pull-right">
+            <button type="button" class="btn btn-circle btn-outline-primary btn-xs" (click)="addNewContact()">
+                <fa-icon icon="plus" class="pe-2"></fa-icon>
+                Create contact
+            </button>
+        </div>
+        <div *ngFor="let contact of organization.contacts; let i = index; trackBy: trackContactFunction">
+            <br>
+            <div class="form-group">
+                <label class="form-control-label">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="contact.name" name ="contact_name_{{ i }}" required/>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="contact.email" name="contact_email_{{ i }}" required/>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">Number</label>
+                <input type="text" class="form-control" [(ngModel)]="contact.phoneNumber" name="contact_number_{{ i }}" required/>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">Public</label>
+                <input type="checkbox" [(ngModel)]="contact.publicData" name="contact_public_{{ i }}" required/>
+            </div>
+
+            <button type="button" class="btn btn-circle btn-outline-danger" (click)="deleteContact(i)">
+                <fa-icon icon="trash"></fa-icon>
+                Delete
+            </button>
+        </div>
+        <br>
+    </div>
+</form>

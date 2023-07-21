@@ -1,0 +1,76 @@
+<div>
+  <button jhiTranslate="backoffice.back" type="button" class="btn btn-default btn-xs" (click)="back()">Back</button>
+
+  <br><br>
+
+  <h1 jhiTranslate="finishregistration.title">Finish Registration</h1>
+
+  <div class="alert alert-danger" *ngIf="error" jhiTranslate="register.messages.error.fail">
+    <strong>Registration failed!</strong> Please try again later.
+  </div>
+  <form name="form" role="form" (ngSubmit)="confirm()" #infoForm="ngForm">
+    <div class="form-group">
+      <img class="img-thumbnail" *ngIf="!this.accountInfo.photo" src="/content/images/empty_photo.svg"
+           alt="Default photo">
+      <img class="img-thumbnail" *ngIf="this.accountInfo.photo" width="120" height="120"
+           src="{{ 'data:image/jpg;base64,' + this.accountInfo.photo }}" alt="Tutor photo">
+      <br><br>
+      <label for="photoTutorUpload" class="btn btn-outline-secondary" jhiTranslate="global.form.photo">Add
+        Photo</label>
+      <input id="photoTutorUpload" type="file" accept="image/*" style="display: none" (change)="onAddPhoto($event)">
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="idCardNumber" jhiTranslate="global.form.idcard">Identification
+        Card</label>
+      <select class="form-control" [(ngModel)]="idCardType" name="idCardType" required>
+        <option selected disabled hidden>Choose here</option>
+        <option *ngFor="let typeDocument of typeDocuments">{{ typeDocument.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="idCardNumber" jhiTranslate="global.form.idcardnumber">Identification
+        Card Number</label>
+      <input type="text" class="form-control" id="idCardNumber" name="idCardNumber" #idCardNumberInput="ngModel"
+             placeholder="{{'global.form.idcardnumber.placeholder' | translate}}"
+             [(ngModel)]="accountInfo.idCardNumber"
+             minlength=1 maxlength=25 required>
+      <div *ngIf="idCardNumberInput.dirty && idCardNumberInput.invalid">
+        <small class="form-text text-danger" *ngIf="idCardNumberInput.errors.required"
+               jhiTranslate="global.messages.validate.idcardnumber.required">
+          Your identification card number is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="nif" jhiTranslate="global.form.nif">NIF</label>
+      <input type="text" class="form-control" id="nif" name="nif" #nifInput="ngModel"
+             placeholder="{{'global.form.nif.placeholder' | translate}}"
+             [(ngModel)]="accountInfo.nif"
+             minlength=1 maxlength=25 required>
+      <div *ngIf="nifInput.dirty && nifInput.invalid">
+        <small class="form-text text-danger" *ngIf="nifInput.errors.required"
+               jhiTranslate="global.messages.validate.nif.required">
+          Your NIF is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="phoneNumber" jhiTranslate="global.form.phonenumber">Phone
+        Number</label>
+      <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" #phoneNumberInput="ngModel"
+             placeholder="{{'global.form.phonenumber.placeholder' | translate}}"
+             [(ngModel)]="accountInfo.phoneNumber"
+             minlength=1 maxlength=25 required>
+      <div *ngIf="phoneNumberInput.dirty && phoneNumberInput.invalid">
+        <small class="form-text text-danger" *ngIf="phoneNumberInput.errors.required"
+               jhiTranslate="global.messages.validate.phonenumber.required">
+          Your phone number is required.
+        </small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="infoForm.form.invalid" class="btn btn-primary"
+            jhiTranslate="finishregistration.form.button">Confirm
+    </button>
+  </form>
+  <br>
+</div>

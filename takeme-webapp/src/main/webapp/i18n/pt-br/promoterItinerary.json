@@ -1,0 +1,35 @@
+{
+  "familityBackofficeApp": {
+    "promoterItinerary": {
+      "home": {
+        "title": "Itinerários",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo itinerário",
+        "createOrEditLabel": "Criar ou editar itinerário",
+        "notFound": "Nenhum itinerário encontrado"
+      },
+      "created": "Um novo itinerário foi criado com o identificador {{ param }}",
+      "updated": "Um itinerário foi atualizado com o identificador {{ param }}",
+      "deleted": "Um itinerário foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir itinerário {{ id }}?"
+      },
+      "detail": {
+        "title": "Itinerário"
+      },
+      "id": "ID",
+      "name": "Nome do Itinerário",
+      "startDate": "Data Início",
+      "endDate": "Data Fim",
+      "service": "Serviço",
+      "operator": "Operador",
+      "notFound": " não tem itinerários",
+      "yes": "Sim",
+      "no": "Não",
+      "comments": "Comentários",
+      "enrollment": "Adesão",
+      "enrollmentMessage": "Tem que preencher primeiro o formulário de inscrição disponível",
+      "enrollmentUrl": " aqui"
+    }
+  }
+}

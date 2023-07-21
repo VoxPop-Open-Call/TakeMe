@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.new.subscriptions.title}"></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+    </head>
+    <body>
+        <p th:text="#{email.new.subscriptions.greeting(${user.firstName} + ' ' + ${user.lastName})}">
+            Dear
+        </p>
+        <p th:text="#{email.new.subscriptions.text1}">
+        </p>
+        <p>
+            <span th:text="#{email.new.subscriptions.text2}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">Famility.</em>
+        </p>
+    </body>
+</html>

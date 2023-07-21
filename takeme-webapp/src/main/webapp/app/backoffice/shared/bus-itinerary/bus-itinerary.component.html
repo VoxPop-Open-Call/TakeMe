@@ -1,0 +1,157 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 jhiTranslate="backoffice.home.busCompany.itinerary.title" class="lg-title mb-0 float-start">Itineraries</h1>
+        <button type="button" class="btn btn-circle btn-primary sm-button font-white float-end" *ngIf="isOperator" (click)="goAdd()">
+            <fa-icon icon="plus" class="pe-2"></fa-icon>
+            {{ 'backoffice.add' | translate }}
+        </button>
+    </div>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form class="form-row d-flex">
+    <div class="input-group" [ngClass]="isOperator ? 'w-25' : 'w-40'">
+        <input type="text" class="form-control" placeholder="{{'backoffice.search-name' | translate}}" name="filterName" [(ngModel)]="nameFilter"
+               (ngModelChange)="textSearchUpdate.next($event)">
+        <select class="form-select pointer  margin-l-10" [(ngModel)]="organizationFilter" name="filterOrganization" (ngModelChange)="textSearchUpdate.next($event)"
+                *ngIf="!isOperator">
+            <option value="" disabled selected>{{'backoffice.home.busCompany.children.operatorChooseOption' | translate}}</option>
+            <option *ngFor="let organization of organizations" value="{{organization.id}}">{{organization.name}}</option>
+        </select>
+    </div>
+    <button class="btn btn-light margin-l-10" type="submit" (click)="resetFilter()">
+        {{ 'audits.filter.button.clear' | translate }}
+    </button>
+</form>
+
+<hr>
+
+<div class="tab row tab-gutter-x-0">
+    <button jhiTranslate="backoffice.home.busCompany.itinerary.ongoing" class="tablinks col-md-2 center" [ngClass]="{'active font-white':ongoing, 'deactivated':!ongoing}"
+            (click)="showOngoingItinerary()">
+        Ongoing
+    </button>
+    <button jhiTranslate="backoffice.home.busCompany.itinerary.finished" class="tablinks col-md-2 center"
+            [ngClass]="{'active font-white':finished, 'deactivated':!finished}" (click)="showFinishedItinerary()">
+        Finished
+    </button>
+</div>
+
+<div *ngIf="listItineraries.length > 0">
+    <div class="margin-t-15" [hidden]="!ongoing">
+        <p-table [value]="listItineraries" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="backoffice.bus-itinerary.operator" *ngIf="!isOperator">Operator</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.name">Name</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.service">Service</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.location">Location</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.monitor">Monitor</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.status">Status</th>
+                    <th jhiTranslate="backoffice.home.busCompany.itinerary.started-at">Started at</th>
+                    <th *ngIf="isOperator"></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-itinerary>
+                <tr>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)" *ngIf="!isOperator">{{ itinerary.organization.name }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ itinerary.name }}</td>
+                    <td class="pointer"
+                        (click)="goDetailItinerary(itinerary.id)">{{ (itinerary.promoterItinerary ? itinerary.promoterItinerary.service.name : "N/A") }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ buildAddress(itinerary.estimatedStartLocation) }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ itinerary.driver.name }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">
+                        <span *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'" jhiTranslate="backoffice.home.busCompany.itinerary.status.ready-to-start">READY_TO_START</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS'"
+                              jhiTranslate="backoffice.home.busCompany.itinerary.status.in-progress">IN_PROGRESS</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'FINISHED'" jhiTranslate="backoffice.home.busCompany.itinerary.status.finished">FINISHED</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'CANCELED'" jhiTranslate="backoffice.home.busCompany.itinerary.status.canceled">CANCELED</span>
+                    </td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ itinerary.scheduledTime | formatExpressionDateTime }}</td>
+                    <td *ngIf="isOperator">
+                        <div class="d-flex">
+                            <button [disabled]="itinerary.itineraryStatusType !== 'IN_PROGRESS'"
+                                    type="button" class="btn btn-circle btn-primary w-50 font-white margin-r-10"
+                                    jhiTranslate="backoffice.home.busCompany.itinerary.finish"
+                                    (click)=finishItinerary(itinerary.id)>
+                                Finish
+                            </button>
+                            <button type="button" class="btn btn-circle btn-outline-primary w-50"
+                                    jhiTranslate="backoffice.home.busCompany.itinerary.cancel"
+                                    (click)=cancelItinerary(itinerary.id)>
+                                Cancel
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="margin-t-15" [hidden]="!finished">
+        <p-table [value]="listItineraries" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="backoffice.bus-itinerary.operator" *ngIf="!isOperator">Operator</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.name">Name</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.service">Service</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.location">Location</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.monitor">Monitor</th>
+                    <th jhiTranslate="backoffice.bus-itinerary.status">Status</th>
+                    <th jhiTranslate="backoffice.home.busCompany.itinerary.started-at">Started at</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-itinerary>
+                <tr>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)" *ngIf="!isOperator">{{ itinerary.organization.name }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ itinerary.name }}</td>
+                    <td class="pointer"
+                        (click)="goDetailItinerary(itinerary.id)">{{ (itinerary.promoterItinerary ? itinerary.promoterItinerary.service.name : "N/A") }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ buildAddress(itinerary.estimatedStartLocation) }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ itinerary.driver.name }}</td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">
+                        <span *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'" jhiTranslate="backoffice.home.busCompany.itinerary.status.ready-to-start">READY_TO_START</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS'"
+                              jhiTranslate="backoffice.home.busCompany.itinerary.status.in-progress">IN_PROGRESS</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'FINISHED'" jhiTranslate="backoffice.home.busCompany.itinerary.status.finished">FINISHED</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'CANCELED'" jhiTranslate="backoffice.home.busCompany.itinerary.status.canceled">CANCELED</span>
+                    </td>
+                    <td class="pointer" (click)="goDetailItinerary(itinerary.id)">{{ itinerary.effectiveStartTime | formatExpressionDateTime }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="pagination margin-t-15">
+        <ngb-pagination
+                [collectionSize]="totalElements"
+                [page]="page + 1"
+                [pageSize]="pageSize"
+                [maxSize]="5"
+                [rotate]="true"
+                (pageChange)="changePage($event)"
+        >
+            <ng-template ngbPaginationPrevious>
+                <div jhiTranslate="global.paginator.previous">Previous</div>
+            </ng-template>
+            <ng-template ngbPaginationNext>
+                <div jhiTranslate="global.paginator.next">Next</div>
+            </ng-template>
+        </ngb-pagination>
+    </div>
+</div>
+
+<div *ngIf="listItineraries.length == 0">
+    <div class="margin-t-15 center">
+        <h6 class="margin-b-0">
+            <i *ngIf="ongoing" jhiTranslate="backoffice.home.busCompany.noOngoingItinerariesList">There are no ongoing itineraries</i>
+            <i *ngIf="!ongoing" jhiTranslate="backoffice.home.busCompany.noFinishedItinerariesList">There are no finished itineraries</i>
+        </h6>
+    </div>
+</div>
+<br><br>

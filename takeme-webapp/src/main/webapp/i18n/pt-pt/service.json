@@ -1,0 +1,25 @@
+{
+    "familityBackofficeApp": {
+        "service": {
+            "home": {
+                "title": "Serviços",
+                "createLabel": "Criar um novo Serviço",
+                "createOrEditLabel": "Criar ou editar um Serviço"
+            },
+            "created": "Um novo Serviço foi criado com o identificador {{ param }}",
+            "updated": "Um Serviço foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Serviço foi eliminado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o Serviço {{ id }}?"
+            },
+            "detail": {
+                "title": "Serviço"
+            },
+            "recurrent": "Recorrente",
+            "startDate": "Data de Início",
+            "endDate": "Data de Fim",
+            "organization": "Organização",
+            "childSubscription": "Inscrição de Criança"
+        }
+    }
+}

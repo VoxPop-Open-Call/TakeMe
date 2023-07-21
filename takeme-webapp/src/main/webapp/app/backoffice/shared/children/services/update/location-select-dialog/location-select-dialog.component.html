@@ -1,0 +1,80 @@
+<div class="modal-header">
+    <h4 jhiTranslate="backoffice.home.busCompany.services.addresses">Addresses</h4>
+    <button class="btn btn-light" (click)="dismiss()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.cancel' | translate }}
+    </button>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="modal-body">
+    <div class="d-flex justify-content-between">
+        <form class="form-row d-flex px-2">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="{{ 'backoffice.search' | translate }}"
+                       name="filterName" [(ngModel)]="locationFilter" (ngModelChange)="textSearchUpdate.next($event)">
+            </div>
+            <button class="btn btn-light margin-l-10" type="submit" (click)="resetFilter()">
+                {{ 'audits.filter.button.clear' | translate }}
+            </button>
+        </form>
+        <button type="button" class="btn btn-circle btn-outline-primary" (click)="createAddress()">
+            <fa-icon icon="plus" class="pe-2"></fa-icon>
+            {{ 'backoffice.home.busCompany.services.newAddress' | translate }}
+        </button>
+    </div>
+
+    <div *ngIf="organizationLocations?.length > 0">
+
+        <hr>
+
+        <p-table [value]="organizationLocations" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th></th>
+                    <th>{{ 'familityBackofficeApp.location.designation' | translate }}</th>
+                    <th>Address</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-location>
+                <tr>
+                    <td *ngIf="location.type ==='PRIVATE'">
+                        <img alt="Location Logo" [src]="'/content/icons/icon-TUTOR.svg'" data-toggle="tooltip" data-placement="top"
+                             title="{{'backoffice.home.busCompany.services.private'|translate}}">
+                    </td>
+                    <td *ngIf="location.type ==='SCHOOL_EXTERNAL'">
+                        <img alt="Location Logo" [src]="'/content/icons/icon-SCHOOL.svg'" data-toggle="tooltip" data-placement="top"
+                             title="{{'backoffice.home.busCompany.services.school-external'|translate}}">
+                    </td>
+                    <td class="pointer" (click)="goToDetailed(location.id)">{{ location.designation }}</td>
+                    <td class="pointer" (click)="goToDetailed(location.id)">{{ buildAddress(location) }}</td>
+                    <td>
+                        <input class="pointer" type="checkbox" (change)="selectAddressCheckbox(location)" [checked]="locationSelected?.id === location.id">
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<div class="modal-footer justify-content-between">
+    <div class="pagination margin-t-10">
+        <ngb-pagination [collectionSize]="totalItems" [page]="page + 1" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" (pageChange)="navigateToPage($event)">
+            <ng-template ngbPaginationPrevious>
+                <div jhiTranslate="global.paginator.previous">Previous</div>
+            </ng-template>
+            <ng-template ngbPaginationNext>
+                <div jhiTranslate="global.paginator.next">Next</div>
+            </ng-template>
+        </ngb-pagination>
+    </div>
+    <div>
+        <button type="button" class="btn btn-circle btn-primary font-white" (click)="selectAddressConfirm()"
+                [disabled]="!locationSelected">
+            <fa-icon icon="check" class="pe-2"></fa-icon>
+            {{ 'backoffice.home.busCompany.services.select' | translate }}
+        </button>
+    </div>
+</div>

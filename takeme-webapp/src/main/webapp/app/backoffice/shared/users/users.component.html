@@ -1,0 +1,74 @@
+<div class="col-md-12">
+    <h1 jhiTranslate="userManagement.home.title" class="lg-title mb-0">Users</h1>
+</div>
+<br>
+
+<form class="form-row d-flex px-2">
+    <div class="input-group w-40">
+        <input type="text" class="form-control" placeholder="{{'userManagement.firstName' | translate}}"
+            name="first_name_filter" [(ngModel)]="firstNameFilter" (ngModelChange)="textSearchUpdate.next($event)">
+        <input type="text" class="form-control" placeholder="{{'userManagement.lastName' | translate}}"
+               name="last_name_filter" [(ngModel)]="lastNameFilter" (ngModelChange)="textSearchUpdate.next($event)">
+    </div>
+    <button class="btn btn-light margin-l-10" type="submit" (click)="resetFilter()">
+        {{ 'audits.filter.button.clear' | translate }}
+    </button>
+</form>
+
+<hr>
+
+<jhi-alert></jhi-alert>
+
+<p-table [value]="usersOrganization" dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td class="sm-col center"><img class="sm-avatar" src="../../../../content/images/empty_photo.svg"></td>
+            <td class="sm-md-col">{{ user.firstName }} {{ user.lastName }}</td>
+            <td class="md-col sub-title">{{ user.email }}</td>
+
+            <td>
+                <div class="float-end">
+                    <span class="sub-title pe-2" *ngIf="user.activated">{{ 'backoffice.active' | translate }}</span>
+                    <span class="sub-title pe-2" *ngIf="!user.activated">{{ 'backoffice.inactive' | translate }}</span>
+                    <button class="btn btn-circle btn-primary font-white" *ngIf="!user.activated"
+                            (click)="changeStateUser(user.id, user.firstName + ' ' + user.lastName, true)">
+                        <fa-icon icon="user-plus" class="pe-2"></fa-icon>
+                        {{ 'backoffice.reactivate' | translate }}
+                    </button>
+                    <button class="btn btn-circle btn-outline-primary" *ngIf="user.activated"
+                            (click)="changeStateUser(user.id, user.firstName + ' ' + user.lastName, false)">
+                        <fa-icon icon="user-minus" class="pe-2"></fa-icon>
+                        {{ 'backoffice.deactivate' | translate }}
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<br>
+<div class="pagination">
+    <ngb-pagination
+      [collectionSize]="totalElements"
+      [page]="page + 1"
+      [pageSize]="pageSize"
+      [maxSize]="5"
+      [rotate]="true"
+      (pageChange)="changePage($event)"
+    >
+        <ng-template ngbPaginationPrevious>
+            <div jhiTranslate="global.paginator.previous">Previous</div>
+        </ng-template>
+        <ng-template ngbPaginationNext>
+            <div jhiTranslate="global.paginator.next">Next</div>
+        </ng-template>
+    </ngb-pagination>
+</div>

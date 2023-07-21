@@ -1,0 +1,85 @@
+<h1 class="lg-title mb-0 ">{{'backoffice.home.tutors.itineraries' | translate}}</h1>
+
+<jhi-alert></jhi-alert>
+
+<hr>
+
+<div *ngIf="itineraries.length > 0">
+    <p-table [value]="itineraries" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="childName">
+                    {{'backoffice.home.tutors.children.name' | translate}}
+                    <p-sortIcon field="childName"></p-sortIcon>
+                </th>
+                <th pSortableColumn="itineraryName">
+                    {{'backoffice.home.tutors.itinerary.itineraryName' | translate}}
+                    <p-sortIcon field="itineraryName"></p-sortIcon>
+                </th>
+                <th pSortableColumn="collectionScheduledTime">
+                    {{'backoffice.home.tutors.itinerary.collectionTime' | translate}}
+                    <p-sortIcon field="collectionScheduledTime"></p-sortIcon>
+                </th>
+                <th>
+                    {{'backoffice.home.tutors.itinerary.collectionLocation' | translate}}
+                </th>
+                <th pSortableColumn="deliverScheduledTime">
+                    {{'backoffice.home.tutors.itinerary.deliverTime' | translate}}
+                    <p-sortIcon field="deliverScheduledTime"></p-sortIcon>
+                </th>
+                <th>
+                    {{'backoffice.home.tutors.itinerary.deliverLocation' | translate}}
+                </th>
+                <th pSortableColumn="itineraryStatusType">
+                    {{'backoffice.home.tutors.children.status' | translate}}
+                    <p-sortIcon field="itineraryStatusType"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-itinerary>
+            <tr>
+                <td>{{ itinerary.childName }}</td>
+                <td>{{ itinerary.itineraryName }}</td>
+                <td>{{ itinerary.collectionScheduledTime | formatExpressionDateTime }}</td>
+                <td>{{ buildAddress(itinerary.collectionLocation) }}</td>
+                <td>{{ itinerary.deliverScheduledTime | formatExpressionDateTime }}</td>
+                <td>{{ buildAddress(itinerary.deliverLocation) }}</td>
+                <td>
+          <span *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'">
+            {{ "backoffice.home.busCompany.itinerary.status.ready-to-start" | translate }}
+          </span>
+                    <span *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS'">
+            {{ "backoffice.home.busCompany.itinerary.status.in-progress" | translate }}
+          </span>
+                    <span *ngIf="itinerary.itineraryStatusType === 'FINISHED'">
+            {{ "backoffice.home.busCompany.itinerary.status.finished" | translate }}
+          </span>
+                    <span *ngIf="itinerary.itineraryStatusType === 'CANCELED'">
+            {{ "backoffice.home.busCompany.itinerary.status.canceled" | translate }}
+          </span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div class="pagination margin-t-15">
+        <ngb-pagination [collectionSize]="totalItems" [page]="page + 1" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" (pageChange)="navigateToPage($event)">
+            <ng-template ngbPaginationPrevious>
+                <div jhiTranslate="global.paginator.previous">Previous</div>
+            </ng-template>
+            <ng-template ngbPaginationNext>
+                <div jhiTranslate="global.paginator.next">Next</div>
+            </ng-template>
+        </ngb-pagination>
+    </div>
+</div>
+
+<div *ngIf="itineraries.length == 0">
+    <div class="margin-t-15 center">
+        <h6 class="margin-b-0">
+            <i jhiTranslate="backoffice.home.tutors.noItinerariesList">There are no itineraries</i>
+        </h6>
+    </div>
+</div>
+<br><br>

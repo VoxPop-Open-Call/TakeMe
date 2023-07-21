@@ -1,0 +1,34 @@
+{
+    "familityBackofficeApp": {
+        "location": {
+            "home": {
+                "title": "Localizações",
+                "createLabel": "Criar uma nova Localização",
+                "createOrEditLabel": "Criar ou editar uma Localização"
+            },
+            "created": "Nova localização criada com o identificador {{ param }}",
+            "updated": "Localização atualizada com o identificador {{ param }}",
+            "deleted": "Localização excluída com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir a Localização {{ id }}?"
+            },
+            "detail": {
+                "title": "Localização"
+            },
+            "designation": "Designação",
+            "street": "Rua",
+            "portNumber": "Número da Porta",
+            "number": "Número",
+            "floor": "Andar",
+            "postalCode": "CEP",
+            "city": "Cidade",
+            "country": "País",
+            "type": "Tipo",
+            "longitude": "Longitude",
+            "latitude": "Latitude",
+            "plusCode": "Código Plus",
+            "tutor": "Responsável",
+            "organization": "Organização"
+        }
+    }
+}

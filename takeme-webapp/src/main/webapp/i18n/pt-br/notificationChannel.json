@@ -1,0 +1,22 @@
+{
+    "familityBackofficeApp": {
+        "notificationChannel": {
+            "home": {
+                "title": "Canais de Notificação",
+                "createLabel": "Criar um novo Canal de Notificação",
+                "createOrEditLabel": "Criar ou editar um Canal de Notificação"
+            },
+            "created": "Um novo Canal de Notificação foi criado com o identificador {{ param }}",
+            "updated": "Um Canal de Notificação foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Canal de Notificação foi excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Canal de Notificação {{ id }}?"
+            },
+            "detail": {
+                "title": "Canal de Notificação"
+            },
+            "type": "Tipo",
+            "active": "Ativo"
+        }
+    }
+}

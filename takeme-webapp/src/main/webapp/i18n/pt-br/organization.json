@@ -1,0 +1,30 @@
+{
+    "familityBackofficeApp": {
+        "organization": {
+            "home": {
+                "title": "Operadores",
+                "createLabel": "Criar uma nova Organização",
+                "createOrEditLabel": "Criar ou editar uma Organização"
+            },
+            "created": "Uma nova Organização foi criada com o identificador {{ param }}",
+            "updated": "Uma Organização foi atualizada com o identificador {{ param }}",
+            "deleted": "Uma Organização foi excluída com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir a Organização {{ id }}?"
+            },
+            "detail": {
+                "title": "Operador",
+                "newOperator": "Novo Operador",
+                "editOperator": "Editar Operator"
+            },
+            "name": "Nome",
+            "nifCountry": "País CNPJ",
+            "nifNumber": "Número CNPJ",
+            "organizationType": "Tipo de Organização",
+            "statusType": "Tipo de Estado",
+            "location": "Localizaçaõ",
+            "contact": "Contato",
+            "contacts": "Contatos"
+        }
+    }
+}

@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h4>Monitores</h4>
+
+    <button type="button" class="btn btn-light" (click)="close()">
+      <fa-icon icon="xmark" class="pe-2"></fa-icon>
+      {{ 'backoffice.close' | translate }}
+    </button>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="modal-body">
+    <p-table [value]="drivers" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Licença</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-driver>
+            <tr>
+                <td>{{ driver.name }}</td>
+                <td>{{ driver.driverLicense }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<div class="modal-footer justify-content-start">
+    <ngb-pagination
+      [collectionSize]="totalElements"
+      [page]="page + 1"
+      [pageSize]="pageSize"
+      [maxSize]="5"
+      [rotate]="true"
+      (pageChange)="changePage($event)"
+    >
+      <ng-template ngbPaginationPrevious>
+        <div jhiTranslate="global.paginator.previous">Previous</div>
+      </ng-template>
+      <ng-template ngbPaginationNext>
+        <div jhiTranslate="global.paginator.next">Next</div>
+      </ng-template>
+    </ngb-pagination>
+</div>

@@ -1,0 +1,212 @@
+<form (ngSubmit)="save()" [formGroup]="editForm">
+    <h1 *ngIf="!serviceId" jhiTranslate="backoffice.home.busCompany.new-service" class="lg-title mb-0">New Service</h1>
+    <h1 *ngIf="serviceId" jhiTranslate="backoffice.home.busCompany.edit-service" class="lg-title mb-0">Edit Service</h1>
+
+    <jhi-alert></jhi-alert>
+
+    <div *ngIf="editForm.errors?.stopPointLengthValidation">
+        <span class="text-danger text-center font-weight-bold" jhiTranslate="backoffice.home.busCompany.services.new-service-stop-points-validation-error-one-each">Service must have a Collection Point and a Delivery Point.</span>
+    </div>
+
+    <div *ngIf="editForm.errors?.stopPointScheduleValidation">
+        <span class="text-danger text-center font-weight-bold" jhiTranslate="backoffice.home.busCompany.services.new-service-stop-points-validation-error-scheduled-time">The Collection Point's Scheduled Time must be before the Delivery Point's Scheduled Time.</span>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6 left">
+            <button type="button" class="btn btn-light" (click)="previousState()">
+                <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+                {{ 'backoffice.cancel' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-6 right">
+            <button *ngIf="serviceId" type="button" class="btn btn-circle btn-outline-danger margin-l-5" (click)="delete()">
+                <fa-icon icon="trash" class="pe-2"></fa-icon>
+                {{ 'backoffice.delete' | translate }}
+            </button>
+            <button [disabled]="editForm.invalid" type="submit" class="btn btn-circle btn-primary font-white">
+                <fa-icon icon="check" class="pe-2"></fa-icon>
+                {{ 'backoffice.save' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label jhiTranslate="backoffice.start" class="form-label">Start</label>
+            <div class="input-group">
+                <button type="button" class="btn btn-secondary" (click)="startDate.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+                <input type="text" class="form-control" formControlName="startDate" placeholder="YYYY-MM-DD" ngbDatepicker #startDate="ngbDatepicker" readonly>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label jhiTranslate="backoffice.end" class="form-label">End</label>
+            <div class="input-group" [hidden]="editForm.controls.recurrent.value">
+                <button type="button" class="btn btn-secondary" (click)="endDate.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+                <input type="text" class="form-control" formControlName="endDate" placeholder="YYYY-MM-DD" ngbDatepicker #endDate="ngbDatepicker" readonly>
+            </div>
+
+            <div class="form-group margin-t-10">
+                <input type="checkbox" formControlName="recurrent" (change)="selectEndless($event)">
+                <label jhiTranslate="backoffice.endless">Endless</label>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="d-flex v-center">
+                <fa-icon icon="running" class="fa-lg text-secondary"></fa-icon>
+                &nbsp;<fa-icon icon="bus" class="fa-lg text-dark"></fa-icon>
+                &nbsp;&nbsp;<h4 class="margin-b-0" jhiTranslate="backoffice.home.busCompany.collection-point">Collection Point</h4>
+            </div>
+
+            <div class="right margin-t-15">
+                <button *ngIf="serviceId" type="button" class="btn btn-circle btn-primary btn-md font-white" (click)="addCollectionPoint()">
+                    <fa-icon icon="plus" class="pe-2"></fa-icon>
+                    {{ 'backoffice.add' | translate }}
+                </button>
+            </div>
+
+            <div formArrayName="collectionPoints" *ngFor="let collectionPoint of editForm.get('collectionPoints')['controls']; let i = index" class="row-box-shadow pt-3">
+                <div [formGroupName]="i" class="w-100 h-center h-padding column-direction">
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.home.busCompany.schedule-time" class="form-label">Scheduled Time</label>
+                        <input type="time" formControlName="combinedTime" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.home.busCompany.frequency" class="form-label">Frequency</label>
+                        <select formControlName="frequency" class="form-select">
+                            <option *ngFor="let frequency of frequencyEnum" [ngValue]="frequency">{{ translateFrequency(frequency) | async }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.start" class="form-label">Start</label>
+                        <div class="input-group">
+                            <button type="button" class="btn btn-secondary" (click)="startFrequencyDate.toggle()">
+                                <fa-icon icon="calendar-alt"></fa-icon>
+                            </button>
+                            <input type="text" class="form-control" formControlName="startFrequencyDate" placeholder="YYYY-MM-DD" ngbDatepicker
+                                   #startFrequencyDate="ngbDatepicker" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.home.busCompany.days-of-the-week" class="form-label">Weekdays</label>
+                        <br>
+                        <div class="btn-group btn-group-toggle block-display" data-toggle="buttons">
+                            <label *ngFor="let dayOfWeek of weekdaysEnum" class="btn"
+                                   [ngClass]="isSelected(dayOfWeek, collectionPoint)?'btn-primary':'btn-outline-primary'">
+                                <input type="checkbox" class="btn-check" autocomplete="off" [value]="dayOfWeek.id" [checked]="isSelected(dayOfWeek, collectionPoint)"
+                                       (change)="selectWeekday($event, dayOfWeek, collectionPoint)">
+                                <span jhiTranslate="backoffice.home.busCompany.itinerary.day-of-week.{{ dayOfWeek.day }}">Selected</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div formGroupName="location" class="margin-b-20">
+                        <button type="button" class="btn btn-circle btn-outline-primary margin-t-5"
+                                (click)="selectAddress(collectionPoint.get('location').controls)">
+                            <fa-icon icon="location-dot" class="pe-2"></fa-icon>
+                            {{ 'backoffice.home.busCompany.services.search-address' | translate }}
+                        </button>
+                        <jhi-composed-location [pointForm]="collectionPoint"></jhi-composed-location>
+                    </div>
+
+                    <div *ngIf="serviceId" class="right w-100">
+                        <button type="button" class="btn btn-circle btn-outline-danger mb-1" (click)="removeCollectionPoint(i)">
+                            <fa-icon icon="trash" class="pe-2"></fa-icon>
+                            {{ 'backoffice.remove' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-flex v-center">
+                <fa-icon icon="bus" class="fa-lg text-dark"></fa-icon>
+                &nbsp;<fa-icon icon="running" class="fa-lg text-secondary"></fa-icon>
+                &nbsp;&nbsp;<h4 class="margin-b-0" jhiTranslate="backoffice.home.busCompany.delivery-point">Delivery Point</h4>
+            </div>
+
+            <div class="right">
+                <button *ngIf="serviceId" type="button" class="btn btn-circle btn-primary btn-xs font-white margin-t-15" (click)="addDeliveryPoint()">
+                    <fa-icon icon="plus" class="pe-2"></fa-icon>
+                    {{ 'backoffice.add' | translate }}
+                </button>
+            </div>
+
+            <div formArrayName="deliveryPoints" *ngFor="let deliveryPoint of editForm.get('deliveryPoints')['controls']; let i = index" class="row-box-shadow pt-3">
+                <div [formGroupName]="i" class="w-100 h-center h-padding column-direction">
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.home.busCompany.schedule-time" class="form-label">Scheduled Time</label>
+                        <input type="time" formControlName="combinedTime" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.home.busCompany.frequency" class="form-label">Frequency</label>
+                        <select formControlName="frequency" class="form-select">
+                            <option *ngFor="let frequency of frequencyEnum" [ngValue]="frequency">{{ translateFrequency(frequency) | async }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.start" class="form-label">Start</label>
+                        <div class="input-group">
+                            <button type="button" class="btn btn-secondary" (click)="startFrequencyDate.toggle()">
+                                <fa-icon icon="calendar-alt"></fa-icon>
+                            </button>
+                            <input type="text" class="form-control" formControlName="startFrequencyDate" placeholder="YYYY-MM-DD" ngbDatepicker
+                                   #startFrequencyDate="ngbDatepicker" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label jhiTranslate="backoffice.home.busCompany.days-of-the-week" class="form-label">Weekdays</label>
+                        <br>
+                        <div class="btn-group btn-group-toggle block-display" data-toggle="buttons">
+                            <label *ngFor="let dayOfWeek of weekdaysEnum" class="btn"
+                                   [ngClass]="isSelected(dayOfWeek, deliveryPoint)?'btn-primary':'btn-outline-primary'">
+                                <input type="checkbox" class="btn-check" autocomplete="off" [value]="dayOfWeek.id" [checked]="isSelected(dayOfWeek, deliveryPoint)"
+                                       (change)="selectWeekday($event, dayOfWeek, deliveryPoint)">
+                                <span jhiTranslate="backoffice.home.busCompany.itinerary.day-of-week.{{ dayOfWeek.day }}">Selected</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div formGroupName="location" class="margin-b-20">
+                        <button type="button" class="btn btn-circle btn-outline-primary margin-t-5"
+                                (click)="selectAddress(deliveryPoint.get('location').controls)">
+                            <fa-icon icon="location-dot" class="pe-2"></fa-icon>
+                            {{ 'backoffice.home.busCompany.services.search-address' | translate }}
+                        </button>
+                        <jhi-composed-location [pointForm]="deliveryPoint"></jhi-composed-location>
+                    </div>
+
+                    <div *ngIf="serviceId" class="right w-100">
+                        <button type="button" class="btn btn-circle btn-outline-danger mb-1" (click)="removeDeliveryPoint(i)">
+                            <fa-icon icon="trash" class="pe-2"></fa-icon>
+                            {{ 'backoffice.remove' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<br><br>

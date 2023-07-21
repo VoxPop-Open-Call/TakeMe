@@ -1,0 +1,81 @@
+<form [formGroup]="updateForm" (ngSubmit)="save()">
+    <h1 *ngIf="!childId" class="lg-title mb-0" jhiTranslate="backoffice.home.tutors.newPassenger">{{ 'passenger.new.title' | translate }}</h1>
+    <h1 *ngIf="childId" class="lg-title mb-0" jhiTranslate="backoffice.home.tutors.editPassenger">{{ 'passenger.edit.title' | translate }}</h1>
+
+    <jhi-alert></jhi-alert>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6 left">
+            <button type="button" class="btn btn-light" (click)="previousState()">
+                <fa-icon icon="xmark" class="pe-2"></fa-icon>
+                {{ 'backoffice.cancel' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-6 right">
+            <button [disabled]="updateForm.invalid" type="submit"
+                    class="btn btn-circle btn-primary btn-xs font-white">
+                <fa-icon icon="check" class="pe-2"></fa-icon>
+                {{ 'backoffice.save' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div formGroupName="child">
+        <table class="table margin-b-0">
+            <tr class="lg-row-box-shadow no-height width-100">
+                <table class="width-100">
+                    <tr class="v-center width-100 card-borderless">
+                        <td class="col-md-3 center">
+                            <img class="lg-avatar" *ngIf="form.child.get('photo').value" src="{{ 'data:image/jpg;base64,' + form.child.get('photo').value }}"
+                                 alt="Child Photo">
+                            <img class="lg-avatar" *ngIf="!form.child.get('photo').value" src="/content/images/empty_photo.svg" alt="Default Photo"><br>
+                            <label for="photoChildUpload" class="btn btn-circle btn-outline-primary margin-t-10">
+                                <fa-icon icon="pen" class="pe-2"></fa-icon>
+                                {{ 'familityBackofficeApp.contact.change-photo' | translate }}
+                            </label>
+                            <input id="photoChildUpload" type="file" accept="image/*" style="display: none" (change)="onFileChange($event)">
+                        </td>
+
+                        <td class="col-md-8">
+                            <table class="width-100">
+                                <tr>
+                                    <td class="padding-r-15">
+                                        <span jhiTranslate="backoffice.home.tutors.children.name">Name</span>
+                                        <br>
+                                        <input type="text" formControlName="name" class="form-control">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="width-100 margin-t-15">
+                                <tr>
+                                    <td class="padding-r-15">
+                                        <span jhiTranslate="backoffice.home.tutors.children.nif">Tax ID</span>
+                                        <br>
+                                        <input type="text" formControlName="nif" class="form-control">
+                                    </td>
+                                    <td class="padding-r-15">
+                                        <span jhiTranslate="backoffice.home.tutors.children.dateOfBirth">Birthday</span>
+                                        <br>
+                                        <div class="input-group">
+                                            <button type="button" class="btn btn-secondary" (click)="birthdayDate.toggle()">
+                                                <fa-icon icon="calendar-alt"></fa-icon>
+                                            </button>
+                                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" ngbDatepicker #birthdayDate="ngbDatepicker"
+                                                   formControlName="dateOfBirth" readonly>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+        </table>
+    </div>
+</form>
+<br><br>

@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <fa-icon icon="exclamation-triangle" class="lg-icon"></fa-icon>
+    <button class="btn btn-light" (click)="activeModal.dismiss('cancel')">
+      <fa-icon icon="xmark" class="pe-2"></fa-icon>
+      {{ 'backoffice.cancel' | translate }}
+    </button>
+</div>
+
+<div class="modal-body">
+    {{ 'backoffice.are-you-sure' | translate }}
+    <span *ngIf="newStatus === 'INACTIVE'">{{ 'backoffice.INACTIVATE' | translate }}</span>
+    <span *ngIf="newStatus === 'ACTIVE'">{{ 'backoffice.ACTIVATE' | translate }}</span>
+    {{ name }}?
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary btn-circle font-white" (click)="activeModal.close('Ok')">
+        <fa-icon icon="check" class="pe-2"></fa-icon>
+        {{ 'backoffice.confirm' | translate }}
+    </button>
+</div>
+

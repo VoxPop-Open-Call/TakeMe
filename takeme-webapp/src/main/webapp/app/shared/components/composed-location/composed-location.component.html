@@ -1,0 +1,21 @@
+<div *ngIf="getLocationType()" class="margin-t-15">
+    <div class="d-flex flex-row justify-content-start v-center margin-b-5">
+        <div class="mr-2">
+            <img alt="Location Logo" *ngIf="getLocationType() === 'SCHOOL'" class="sm-icon" [src]="'/content/icons/icon-SCHOOL-famility.svg'" data-toggle="tooltip"
+                 data-placement="top" title="{{'backoffice.home.busCompany.services.school'|translate}}">
+            <img alt="Location Logo" *ngIf="getLocationType() === 'SCHOOL_EXTERNAL'" class="sm-icon" [src]="'/content/icons/icon-SCHOOL.svg'" data-toggle="tooltip"
+                 data-placement="top" title="{{'backoffice.home.busCompany.services.school-external'|translate}}">
+            <img alt="Location Logo" *ngIf="getLocationType() === 'PRIVATE'" class="sm-icon" [src]="'/content/icons/icon-TUTOR.svg'" data-toggle="tooltip"
+                 data-placement="top" title="{{'backoffice.home.busCompany.services.private'|translate}}">
+        </div>
+        <div class="form-group d-flex align-items-end justify-content-end margin-l-5 margin-b-0">
+            <label class="m-0">{{getLocationDesignation()}}</label>
+        </div>
+    </div>
+    <div class="margin-b-5">
+        <label>{{getLocationComposedAddress()}}</label>
+    </div>
+    <div class="margin-b-5">
+        <jhi-coordinates-link [latitude]="getLocationLatitude()" [longitude]="getLocationLongitude()"></jhi-coordinates-link>
+    </div>
+</div>

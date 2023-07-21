@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 jhiTranslate="backoffice.home.busCompany.children.services" class="lg-title mb-0 float-start">Services</h1>
+        <div *ngIf="isOperator">
+            <button type="button" class="btn btn-circle btn-primary btn-md font-white mb-0 float-end" (click)="goToCreate()">
+                <fa-icon icon="plus" class="pe-2"></fa-icon>
+                {{ 'backoffice.add' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6 left">
+        <button type="button" class="btn btn-light" (click)="previousState()">
+            <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+            {{ 'backoffice.back' | translate }}
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="services.length > 0">
+    <table class="width-100">
+        <tr *ngFor="let service of services" class="xlg-row-box-shadow v-center card-borderless">
+            <table (click)="goToDetailed(service.id)" class="width-100 pointer">
+                <tr>
+                    <table class="width-100">
+                        <tr>
+                            <td class="col-md-1">
+                                <span jhiTranslate="backoffice.start" class="sub-title">Start</span>
+                                <br>
+                                <span>{{ service.startDate | formatExpressionDate }}</span>
+                            </td>
+                            <td class="col-md-3">
+                                <span jhiTranslate="backoffice.end" class="sub-title">End</span>
+                                <br>
+                                <span>{{ !service.recurrent ? (service.endDate | formatExpressionDate) : "N/A" }}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr *ngFor="let servicePoint of service.serviceStopPoints">
+                    <br>
+                    <table class="width-100">
+                        <tr>
+                            <td class="uppercase bold" jhiTranslate="backoffice.home.busCompany.collection" *ngIf="servicePoint.stopPointType==='COLLECTION'">Collection
+                            </td>
+                            <td class="uppercase bold" jhiTranslate="backoffice.home.busCompany.deliver" *ngIf="servicePoint.stopPointType==='DELIVER'">Delivery</td>
+                        </tr>
+
+                        <tr class="width-100">
+                            <td class="col-md-3">
+                                <span jhiTranslate="backoffice.description" class="sub-title">Description</span>
+                                <br>
+                                <span>{{ servicePoint.location.designation }}</span>
+                            </td>
+                            <td class="col-md-3">
+                                <span jhiTranslate="backoffice.scheduledTime" class="sub-title">Scheduled Time</span>
+                                <br>
+                                <span>{{ servicePoint.combinedTime }}</span>
+                            </td>
+                            <td class="col-md-6">
+                                <span jhiTranslate="backoffice.address" class="sub-title">Address</span>
+                                <br>
+                                <span>{{ buildAddress(servicePoint.location) }}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+            </table>
+        </tr>
+    </table>
+
+    <div class="pagination">
+        <ngb-pagination [collectionSize]="totalItems" [page]="page + 1" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" (pageChange)="navigateToPage($event)">
+            <ng-template ngbPaginationPrevious>
+                <div jhiTranslate="global.paginator.previous">Previous</div>
+            </ng-template>
+            <ng-template ngbPaginationNext>
+                <div jhiTranslate="global.paginator.next">Next</div>
+            </ng-template>
+        </ngb-pagination>
+    </div>
+</div>
+
+<div *ngIf="services.length == 0">
+    <div class="margin-t-15 center">
+        <h6 class="margin-b-0">
+            <i jhiTranslate="backoffice.home.famility.noServicesList">There are no services</i>
+        </h6>
+    </div>
+</div>
+<br><br>

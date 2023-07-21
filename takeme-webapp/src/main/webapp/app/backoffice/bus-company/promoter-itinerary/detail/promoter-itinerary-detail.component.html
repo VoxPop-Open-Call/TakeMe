@@ -1,0 +1,67 @@
+<div *ngIf="promoterItinerary">
+    <h1 class="lg-title mb-0">{{ promoterItinerary.name }}</h1>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-light" (click)="previousState()">
+            <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+            {{ 'backoffice.back' | translate }}
+        </button>
+    </div>
+    <div class="col-md-6 right" *ngIf="promoterItinerary">
+        <button class="btn btn-circle btn-primary font-white" (click)="goEdit()">
+            <fa-icon icon="pen" class="pe-2"></fa-icon>
+            {{ 'backoffice.edit' | translate }}
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="promoterItinerary">
+    <table class="center w-100">
+        <tr>
+            <td *ngIf="promoterItinerary.startDate" class="w-25 left">
+                <span class="sub-title">Start Date</span><br>
+                <span>{{ promoterItinerary.startDate | formatMediumDate }}</span>
+            </td>
+            <td *ngIf="promoterItinerary.endDate" class="w-25 left">
+                <span class="sub-title">End Date</span><br>
+                <span>{{ promoterItinerary.endDate | formatMediumDate }}</span>
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+    <div *ngIf="googleMapsURL">
+        <a [href]="googleMapsURL" target="_blank" jhiTranslate="backoffice.home.busCompany.googleMapsPrompt">Open in Google Maps</a>
+    </div>
+    <br>
+
+    <table class="center w-100" *ngFor="let itineraryStopPoint of promoterItinerary.promoterItineraryStopPoints">
+        <div class="row row-border v-center" style="margin-bottom: 15px;">
+            <table class="center w-100">
+                <tr>
+                    <td class="w-20 center">
+                        <span class="sub-title">
+                            <fa-icon icon="map-marker"></fa-icon>
+                        </span>
+                        <span>{{ itineraryStopPoint.name }}</span>
+                    </td>
+                    <td class="w-20 center">
+                        <span>{{ buildAddress(itineraryStopPoint.location) }}</span>
+                    </td>
+                    <td class="w-20 center">
+                        <span class="sub-title" jhiTranslate="backoffice.home.busCompany.schedule-time">Schedule Time</span>
+                        <span>{{ itineraryStopPoint.scheduledTime | formatMediumTime }}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </table>
+</div>

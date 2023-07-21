@@ -1,0 +1,23 @@
+{
+    "familityBackofficeApp": {
+        "stopAuditEvent": {
+            "home": {
+                "title": "Stop Audit Events",
+                "createLabel": "Criar um(a) novo(a) Stop Audit Event",
+                "createOrEditLabel": "Criar ou editar um(a) Stop Audit Event"
+            },
+            "created": "A new Stop Audit Event is created with identifier {{ param }}",
+            "updated": "A Stop Audit Event is updated with identifier {{ param }}",
+            "deleted": "A Stop Audit Event is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Stop Audit Event {{ id }}?"
+            },
+            "detail": {
+                "title": "Stop Audit Event"
+            },
+            "eventTime": "Event Time",
+            "eventType": "Event Type",
+            "stopPoint": "Stop Point"
+        }
+    }
+}

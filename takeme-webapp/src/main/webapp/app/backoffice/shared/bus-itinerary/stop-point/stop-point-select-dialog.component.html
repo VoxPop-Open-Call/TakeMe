@@ -1,0 +1,145 @@
+<div class="modal-header">
+    <h4 jhiTranslate="backoffice.home.busCompany.itinerary.service-stop-points">
+        Service Stop Points
+    </h4>
+    <button type="button" class="btn btn-light" (click)="dismiss()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.close' | translate }}
+    </button>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="modal-body">
+
+    <div class="col-md-12" *ngFor="let childServices of childServicesList">
+
+        <div class="sm-row-border v-center mb-3 bg-primary">
+            <div class="col-md-12 left">
+                <span class="font-weight-bold ms-2"> {{ childServices.child.name }} </span>
+            </div>
+        </div>
+
+        <ng-container *ngIf="childServices.services.length > 0; then hasData; else noData">
+        </ng-container>
+
+        <ng-template #hasData>
+            <div *ngFor="let service of childServices?.services;  let itemIndex = index"
+                 [ngClass]="itemIndex < childServices.services.length-1 ? 'row border-bottom mb-3 pb-3' : 'row mb-3 pb-3'">
+                <div class="col-11 m-0">
+                    <div *ngFor="let serviceStopPoint of service.serviceStopPoints" class="d-flex pt-2 border-right border-primary">
+
+                        <div class="col-1 d-flex align-items-center justify-content-center md-font-size pl-0 ml-0">
+                            <div *ngIf="serviceStopPoint.stopPointType === stopPointTypes.COLLECTION" class="d-flex"
+                                 data-toggle="tooltip" data-placement="top"  title="{{'backoffice.home.busCompany.itinerary.itinerary-stop-point-type.collection'|translate}}">
+                                <jhi-collection></jhi-collection>
+                            </div>
+                            <div *ngIf="serviceStopPoint.stopPointType === stopPointTypes.DELIVER" class="d-flex"
+                                 data-toggle="tooltip" data-placement="top" title="{{'backoffice.home.busCompany.itinerary.itinerary-stop-point-type.deliver'|translate}}">
+                                <jhi-delivery></jhi-delivery>
+                            </div>
+                        </div>
+
+                        <div class="col-5 d-flex flex-column align-items-start justify-content-center">
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="mr-2">
+                                    <img *ngIf="serviceStopPoint.location.type === 'SCHOOL'" class="xsm-icon"
+                                         [src]="'/content/icons/icon-SCHOOL-famility.svg'"
+                                         data-toggle="tooltip"
+                                         data-placement="top"
+                                         title="{{'backoffice.home.busCompany.services.school'|translate}}">
+                                    <img *ngIf="serviceStopPoint.location.type === 'SCHOOL_EXTERNAL'" class="xsm-icon"
+                                         [src]="'/content/icons/icon-SCHOOL.svg'"
+                                         data-toggle="tooltip"
+                                         data-placement="top"
+                                         title="{{'backoffice.home.busCompany.services.school-external'|translate}}">
+                                    <img *ngIf="serviceStopPoint.location.type === 'PRIVATE'" class="xsm-icon"
+                                         [src]="getPrivateLocationIconPath(childServices?.child.famility)"
+                                         data-toggle="tooltip"
+                                         data-placement="top"
+                                         title="{{'backoffice.home.busCompany.services.private'|translate}}">
+                                </div>
+                                <span>{{serviceStopPoint.location.designation}}</span>
+                            </div>
+                            <div>
+                                <span class="sub-title">{{ buildAddress(serviceStopPoint.location)}}</span>
+                            </div>
+                        </div>
+                        <div class="col-5 d-flex flex-column align-items-start justify-content-center">
+                        <span class="pb-1 align-items-center justify-content-center" data-toggle="tooltip"
+                              data-placement="top" title="{{'backoffice.home.busCompany.schedule-time'|translate}}">
+                            <fa-icon icon="clock" class="sub-title sm-font-size">
+                            </fa-icon>
+                            {{ serviceStopPoint.combinedTime }}
+                        </span>
+                            <span class="pb-1 align-items-center justify-content-center" data-toggle="tooltip"
+                                  data-placement="top"
+                                  title="{{'backoffice.home.busCompany.itinerary.week-interval.frequency'|translate}}">
+                            <fa-icon icon="sync" class="sub-title sm-font-size"></fa-icon>
+                            <span *ngIf="serviceStopPoint.frequency.weekInterval == 1"
+                                  jhiTranslate="backoffice.home.busCompany.itinerary.week-interval.one-week">1
+                            Week</span>
+                            <span *ngIf="serviceStopPoint.frequency.weekInterval == 2"
+                                  jhiTranslate="backoffice.home.busCompany.itinerary.week-interval.two-weeks">2
+                            Weeks</span>
+                        </span>
+                            <span class="d-flex pb-1 align-items-center justify-content-center" data-toggle="tooltip"
+                                  data-placement="top"
+                                  title="{{'backoffice.home.busCompany.itinerary.day-of-week.selected'|translate}}">
+                            <fa-icon icon="calendar-alt" class="sub-title pr-1 sm-font-size"></fa-icon>
+                            <jhi-days-of-week class="d-flex flex-row"
+                                              [daysOfWeekInput]="serviceStopPoint.serviceStopPointDaysOfWeeks"></jhi-days-of-week>
+                        </span>
+                        </div>
+                        <div class="col-1 d-flex align-items-center justify-content-center p-0 m-0">
+                            <small *ngIf="serviceStopPoint.match" class="small"
+                                   data-toggle="tooltip" data-placement="top"
+                                   title="{{'backoffice.home.busCompany.services.match'|translate}}">
+                                <fa-icon icon="check-double" class="sub-title pr-1 sm-font-size"></fa-icon></small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+
+                    <button
+                            *ngIf="service.selectable"
+                            class="btn btn-outline-secondary btn-sm check-box bg-transparent"
+                            (click)="selectService(service, $event)">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <fa-icon icon="check" [ngClass]="service.selected ? 'text-primary': 'transparent'"></fa-icon>
+                        </div>
+                    </button>
+                    <button
+                            *ngIf="!service.selectable"
+                            class="btn btn-outline-secondary btn-sm bg-transparent"
+                            data-toggle="tooltip" data-placement="top"
+                            title="{{'backoffice.home.busCompany.services.not-selectable'|translate}}">
+                        <div class="btn-group btn-group-toggle">
+                            <fa-icon icon="check" class="text-secondary"></fa-icon>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #noData>
+            <div class="row row-space-around h-padding">
+                <div class="col-md-12 left sub-title">
+                    <span jhiTranslate="familityBackofficeApp.child.no-services">Child without valid services</span>
+                </div>
+            </div>
+        </ng-template>
+
+
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button [disabled]="!servicesSelected()" type="button" class="btn btn-circle btn-primary font-white" (click)="addServiceStopPoints()">
+        <fa-icon icon="check" class="pe-2"></fa-icon>
+        {{ 'backoffice.select' | translate }}
+    </button>
+</div>

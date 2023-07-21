@@ -1,0 +1,176 @@
+<nav class="navbar navbar-dark navbar-expand-md jh-navbar flex-column h-100 w-100">
+    <div class="jh-logo-container sidebar-header center">
+        <a class="jh-navbar-toggler d-lg-none float-left" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+            <fa-icon icon="bars"></fa-icon>
+        </a>
+
+        <a *ngIf="!isAuthenticated()" class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+            <span class="logo-img"></span> <br>
+            <span class="navbar-title">{{ 'global.title' | translate }}</span>
+            <span class="navbar-version">{{version}}</span>
+        </a>
+
+    </div>
+
+    <div class="navbar-collapse collapse sidebar-navbar-collapse h-100" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
+        [ngSwitch]="isAuthenticated()" >
+        <ul class="nav nav-pills navbar-nav flex-column h-100">
+
+            <li *jhiHasAnyAuthority="'ROLE_BUS_COMPANY'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+                <div class="pointer pb-4 navbar-organization-logo" [routerLink]="['/profile']" routerLinkActive="activated">
+                    <div class="avatar">
+                        <img class="image-avatar" [src]="photo ? photo : '/content/images/bus.svg'" onError="this.src='/content/images/bus.svg';">
+                        <div class="logo-top">
+                            <img src="/content/images/logo-72x72.png">
+                        </div>
+                    </div>
+                    <div class="sm-title" *ngIf="organization">
+                        <span>{{organization.name}}</span>
+                    </div>
+                </div>
+
+                <ul class="list-group h-100">
+                    <li [routerLink]="['/operator/subscriptions']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="user"></fa-icon>{{ 'backoffice.home.busCompany.subscription.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/operator/passengers']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="users"></fa-icon>{{ 'backoffice.home.busCompany.children.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/operator/promoter-itineraries']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="map"></fa-icon>{{ 'familityBackofficeApp.promoterItinerary.home.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/operator/itineraries']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="map-location"></fa-icon>{{ 'backoffice.home.busCompany.itinerary.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/operator/vehicles']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="bus"></fa-icon>{{ 'familityBackofficeApp.vehicle.home.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/operator/monitors']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="user-tie"></fa-icon>{{ 'familityBackofficeApp.driver.home.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/shared/users']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="user-gear"></fa-icon>{{ 'userManagement.home.title' | translate }}
+                    </li>
+                </ul>
+            </li>
+
+            <li *jhiHasAnyAuthority="'ROLE_FAMILITY'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+                <div class="avatar pointer navbar-organization-logo pb-4" [routerLink]="['/profile']" routerLinkActive="activated">
+                    <img class="image-avatar" src="/content/images/logo-512x512.png">
+                    <br>
+                </div>
+
+                <ul class="list-group h-100">
+                    <li [routerLink]="['/promoter/services']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="list"></fa-icon>{{ 'familityBackofficeApp.service.home.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/promoter/itineraries']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="map-location"></fa-icon>{{ 'backoffice.home.busCompany.itinerary.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/promoter/passengers']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="users"></fa-icon>{{ 'backoffice.home.busCompany.children.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/promoter/subscriptions']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="circle-user"></fa-icon>{{ 'backoffice.home.busCompany.subscription.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/promoter/tutors']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="user-tie"></fa-icon>{{ 'familityBackofficeApp.tutor.home.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/promoter/operators']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="bus"></fa-icon>{{ 'familityBackofficeApp.organization.home.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/promoter/users']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="user-gear"></fa-icon>{{ 'userManagement.home.title' | translate }}
+                    </li>
+                </ul>
+            </li>
+
+            <li *jhiHasAnyAuthority="'ROLE_TUTOR'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+                <div class="avatar pointer navbar-organization-logo pb-4" [routerLink]="['/profile']" routerLinkActive="activated">
+                    <img class="image-avatar" src="/content/images/logo-512x512.png">
+                    <br>
+                </div>
+
+                <ul class="list-group h-100">
+                    <li [routerLink]="['/tutor/passengers']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="users"></fa-icon>{{ 'passenger.title' | translate }}
+                    </li>
+                    <li [routerLink]="['/tutor/itineraries']" routerLinkActive="activated" class="nav-item list-group-item">
+                        <fa-icon icon="map-location"></fa-icon>{{ 'backoffice.home.busCompany.itinerary.title' | translate }}
+                    </li>
+                </ul>
+            </li>
+
+            <li *ngIf="isAuthenticated()" class="mb-auto nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <ul class="list-group h-100">
+
+                    <li ngbDropdown class="nav-item dropdown list-group-item list-group-first-item pointer" placement="bottom-right"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+                            <span *ngIf="!getImageUrl()">
+                                <!--<fa-icon icon="gear"></fa-icon>-->
+                                <span *ngIf="account">
+                                    {{ account.firstName }} {{ account.lastName }}
+                                </span>
+                                <span *ngIf="!account">
+                                    {{ 'global.menu.account.main' | translate }}
+                                </span>
+                            </span>
+                            <span *ngIf="getImageUrl()">
+                                <img [src]="getImageUrl()" class="profile-image img-circle" alt="Avatar">
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu border-radius-10" ngbDropdownMenu>
+                            <li *ngSwitchCase="false">
+                                <a class="dropdown-item">
+                                    <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
+                                    <span>Personal Profile</span>
+                                </a>
+                            </li>
+
+                            <li *ngSwitchCase="true">
+                                <a class="dropdown-item" routerLink="change-password" routerLinkActive="active" (click)="collapseNavbar()">
+                                    <fa-icon icon="clock" [fixedWidth]="true"></fa-icon>
+                                    <span>{{ 'global.menu.account.password' | translate }}</span>
+                                </a>
+                            </li>
+                            <li *ngSwitchCase="true">
+                                <a class="dropdown-item" (click)="logout()" id="logout">
+                                    <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+                                    <span>{{ 'global.menu.account.logout' | translate }}</span>
+                                </a>
+                            </li>
+                            <li *ngSwitchCase="false">
+                                <a class="dropdown-item" (click)="login()" id="login">
+                                    <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
+                                    <span>{{ 'global.menu.account.login' | translate }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li *ngIf="isAuthenticated()" class="nav-item">
+                <ul class="list-group h-100">
+                    <li ngbDropdown class="nav-item dropdown list-group-item list-group-first-item pointer" placement="top-start" *ngIf="languages && languages.length > 1">
+                        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
+                            <fa-icon icon="globe"></fa-icon>{{ 'global.menu.language' | translate }}
+                        </a>
+                        <ul class="dropdown-menu border-radius-10" ngbDropdownMenu>
+                            <li *ngFor="let language of languages">
+                                <a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language);collapseNavbar();">
+                                    <fa-icon icon="flag"></fa-icon> {{language | findLanguageFromKey}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>

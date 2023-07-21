@@ -1,0 +1,13 @@
+{
+    "error": {
+        "auth/email-already-in-use": "Email já em uso",
+        "auth/user-not-found": "Utilizador não encontrado",
+        "auth/wrong-password": "Email ou password inválida",
+        "auth/user-disabled": "A sua conta está desativa",
+        "auth/invalid-email": "O seu email não é válido",
+        "generic-error": "Aconteceu um erro. Tente novamente.",
+        "without-internet": "Sem conexão à internet."
+    }
+
+
+}

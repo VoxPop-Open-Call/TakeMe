@@ -1,0 +1,13 @@
+{
+    "familityBackofficeApp": {
+        "RoleType": {
+            "null": "",
+            "ROLE_FAMILITY": "Famility",
+            "ROLE_ADMIN": "Administrador",
+            "ROLE_TUTOR": "Responsável",
+            "ROLE_BUS_COMPANY_DRIVER": "Condutor",
+            "ROLE_BUS_COMPANY": "Transportadora",
+            "ROLE_USER": "Usuário"
+        }
+    }
+}

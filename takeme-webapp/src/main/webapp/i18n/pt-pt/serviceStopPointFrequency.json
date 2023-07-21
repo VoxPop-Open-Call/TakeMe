@@ -1,0 +1,22 @@
+{
+    "familityBackofficeApp": {
+        "serviceStopPointFrequency": {
+            "home": {
+                "title": "Service Stop Point Frequencies",
+                "createLabel": "Criar um(a) novo(a) Service Stop Point Frequency",
+                "createOrEditLabel": "Criar ou editar um(a) Service Stop Point Frequency"
+            },
+            "created": "A new Service Stop Point Frequency is created with identifier {{ param }}",
+            "updated": "A Service Stop Point Frequency is updated with identifier {{ param }}",
+            "deleted": "A Service Stop Point Frequency is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Service Stop Point Frequency {{ id }}?"
+            },
+            "detail": {
+                "title": "Service Stop Point Frequency"
+            },
+            "description": "Description",
+            "weekInterval": "Week Interval"
+        }
+    }
+}

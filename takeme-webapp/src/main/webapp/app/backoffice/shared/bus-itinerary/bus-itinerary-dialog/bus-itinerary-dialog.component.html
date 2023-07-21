@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <fa-icon icon="exclamation-triangle" class="lg-icon"></fa-icon>
+</div>
+<div class="modal-body center alert-display">
+    <p>
+      <span jhiTranslate="backoffice.are-you-sure">Are you sure that you want to </span>
+      <span *ngIf="actionType === 'cancel'" jhiTranslate="backoffice.cancel" class="text-lowercase text-bold">cancel</span>
+      <span *ngIf="actionType === 'finish'" jhiTranslate="backoffice.finish" class="text-lowercase text-bold">finish</span>
+      <span *ngIf="actionType === 'delete'" jhiTranslate="backoffice.delete" class="text-lowercase text-bold">delete</span>
+      <span jhiTranslate="backoffice.the-itinerary"> the itinerary</span> ?
+    </p>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-circle btn-danger btn-xs"
+        (click)="dismiss()">
+        <span *ngIf="actionType === 'cancel'" jhiTranslate="backoffice.go-back">go-back</span>
+        <span *ngIf="actionType !== 'cancel'" jhiTranslate="backoffice.cancel">cancel</span>
+      </button>
+    <button type="button" class="btn btn-circle btn-primary btn-xs"
+        (click)="delete()">Ok</button>
+</div>

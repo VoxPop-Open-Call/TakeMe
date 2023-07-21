@@ -1,0 +1,9 @@
+{
+    "familityBackofficeApp": {
+        "LocationType": {
+            "null": "",
+            "PRIVATE": "PRIVATE",
+            "SCHOOL": "SCHOOL"
+        }
+    }
+}

@@ -1,0 +1,201 @@
+{
+    "global": {
+        "title": "Portal Famility",
+        "browsehappy": "Está utilizando um navegador <strong>desatualizado</strong>. Por favor <a href=\"http://browsehappy.com/?locale=pt_PT\">atualize o seu navegador</a> para ter uma experiência melhor.",
+        "menu": {
+            "home": "Início",
+            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "entities": {
+                "main": "Entidades",
+                "tutor": "Responsável",
+                "child": "Aluno",
+                "organization": "Organização",
+                "contact": "Contato",
+                "vehicle": "Veículo",
+                "driver": "Condutor",
+                "childSubscription": "Inscrição de Aluno",
+                "location": "Localização",
+                "stopPoint": "Ponto de Parada",
+                "stopAuditEvent": "Evento de Auditoria de Parada",
+                "itinerary": "Itinerário",
+                "service": "Serviço",
+                "serviceStopPoint": "Parada de Serviço",
+                "serviceStopPointFrequency": "Frequência de Parada de Serviço",
+                "serviceStopPointDaysOfWeek": "Dias da semana da Parada de Serviço",
+                "identificationCardType": "Tipo de Documento de Identificação",
+                "userMessagingToken": "Token de Mensagem de Usuário",
+                "notificationChannel": "Canal de Notificação",
+                "notificationChannelUser": "Usuário do Canal de Notificação",
+                "userNotification": "Notificação do Usuário",
+                "notificationType": "Tipo de Notificação",
+                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+            },
+            "account": {
+                "main": "Conta",
+                "settings": "Configurações",
+                "password": "Senha",
+                "sessions": "Sessões",
+                "login": "Entrar",
+                "logout": "Terminar sessão",
+                "register": "Registrar"
+            },
+            "admin": {
+                "main": "Administração",
+                "userManagement": "Gerenciamento de usuário",
+                "tracker": "Atividade dos usuários",
+                "metrics": "Métricas",
+                "health": "Estado do Sistema",
+                "configuration": "Configuração",
+                "logs": "Logs",
+                "audits": "Auditorias",
+                "apidocs": "API",
+                "database": "Base de Dados",
+                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+            },
+            "language": "Idioma"
+        },
+        "form": {
+            "username": "Nome de usuário",
+            "username.placeholder": "O seu nome de usuário",
+            "password": "Senha",
+            "password.placeholder": "A sua senha",
+            "currentpassword": "Senha atual",
+            "currentpassword.placeholder": "A sua senha atual",
+            "newpassword": "Nova senha",
+            "newpassword.placeholder": "A sua nova senha",
+            "confirmpassword": "Confirmação de nova senha",
+            "confirmpassword.placeholder": "Confirme a sua nova senha",
+            "email": "Email",
+            "email.placeholder": "O seu email",
+            "firstname": "Primeiro nome",
+            "firstname.placeholder": "O seu primeiro nome",
+            "lastname": "Último nome",
+            "lastname.placeholder": "O seu último Nome",
+            "readterms1": "Li e aceito os ",
+            "readterms2": "termos e condições",
+            "idcard": "Documento de identificação",
+            "idcard.placeholder": "O seu documento de identificação",
+            "idcardnumber": "Número do documento de identificação",
+            "idcardnumber.placeholder": "Número do seu documento de identificação",
+            "nif": "Número CPF",
+            "nif.placeholder": "O seu CPF",
+            "phonenumber": "Número de telefone",
+            "phonenumber.placeholder": "O seu número de telefone",
+            "photo": "Adicionar fotografia"
+        },
+        "messages": {
+            "info": {
+                "authenticated": {
+                    "prefix": "Comece por ",
+                    "link": "entrar",
+                    "suffix": "."
+                },
+                "register": {
+                    "noaccount": "Ainda não tem uma conta?",
+                    "link": "Crie uma nova conta"
+                },
+                "upload-photo": {
+                    "select": "Selecione nova foto",
+                    "no-file": "Nenhum arquivo selecionado",
+                    "file": "Selecione arquivo"
+                }
+            },
+            "error": {
+                "dontmatch": "A senha e a sua confirmação devem ser iguais!"
+            },
+            "validate": {
+                "newpassword": {
+                    "required": "A senha é obrigatória.",
+                    "minlength": "A senha deve ter pelo menos 5 caracteres",
+                    "maxlength": "A senha não pode ter mais de 50 caracteres",
+                    "strength": "Nível de dificuldade da senha:"
+                },
+                "confirmpassword": {
+                    "required": "A confirmação da senha é obrigatória.",
+                    "minlength": "A confirmação da senha deve ter pelo menos 5 caracteres",
+                    "maxlength": "A confirmação da senha não pode ter mais de 50 caracteres"
+                },
+                "email": {
+                    "required": "O email é obrigatório.",
+                    "invalid": "Email inválido.",
+                    "minlength": "O email deve ter pelo menos 5 caracteres",
+                    "maxlength": "O email não pode ter mais de 50 caracteres"
+                },
+                "firstname": {
+                    "required": "O primeiro nome é obrigatório.",
+                    "minlength": "O primeiro nome deve ter pelo menos 1 caracter",
+                    "maxlength": "O primeiro nome não pode ter mais de 50 caracteres"
+                },
+                "lastname": {
+                    "required": "O último nome é obrigatório.",
+                    "minlength": "O último nome deve ter pelo menos 1 caracter",
+                    "maxlength": "O último nome não pode ter mais de 50 caracteres"
+                },
+                "idcardnumber": {
+                    "required": "O número do documento de identificação é obrigatório."
+                },
+                "nif": {
+                   "required": "O número CPF é obrigatório."
+                },
+                "phonenumber": {
+                    "required": "O número de telefone é obrigatório."
+                }
+            }
+        },
+        "field": {
+            "id": "Código"
+        },
+        "ribbon": {
+            "dev": "Desenvolvimento"
+        },
+        "item-count": "Mostrando {{first}} - {{second}} de {{total}} resultados.",
+        "paginator": {
+            "next": "Próximo",
+            "previous": "Anterior"
+        }
+    },
+    "entity": {
+        "action": {
+            "addblob": "Adicionar blob",
+            "addimage": "Adicionar imagem",
+            "back": "Voltar",
+            "cancel": "Cancelar",
+            "delete": "Excluir",
+            "edit": "Editar",
+            "open": "Abrir",
+            "save": "Salvar",
+            "view": "Visualizar"
+        },
+        "detail": {
+            "field": "Campo",
+            "value": "Valor"
+        },
+        "delete": {
+            "title": "Confirme a exclusão"
+        },
+        "validation": {
+            "required": "O campo é obrigatório.",
+            "minlength": "Este campo deve ter pelo menos {{min}} caracteres.",
+            "maxlength": "Este campo não pode ter mais que {{max}} caracteres.",
+            "min": "Este campo deve ser maior que {{min}}.",
+            "max": "Este campo não pode ser maior que {{max}}.",
+            "minbytes": "Este campo deve ter pelo menos {{min}} bytes.",
+            "maxbytes": "Este campo não pode ter mais que {{max}} bytes.",
+            "pattern": "Este campo deve estar dentro do seguinte padrão {{pattern}}.",
+            "number": "Este campo é do tipo número.",
+            "datetimelocal": "Este campo é do tipo data/hora."
+        }
+    },
+    "error": {
+        "internalServerError": "Internal server error",
+        "server.not.reachable": "Server not reachable",
+        "url.not.found": "Not found",
+        "NotNull": "Campo {{fieldName}} não pode ser vazio!",
+        "Size": "Campo {{fieldName}} não satisfaz os requisitos min/max de tamanho!",
+        "userexists": "Nome de usuário já em uso!",
+        "emailexists": "Email já em uso!",
+        "idexists": "Um novo {{entityName}} não pode ter um ID existente",
+        "idnull": "ID inválido"
+    },
+    "footer": "2019 Famility"
+}

@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <h2>Nova Morada</h2>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<form [formGroup]="locationForm" (ngSubmit)="save()">
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label>Tipo</label>
+            <select formControlName="type" class="form-select">
+                <option *ngFor="let locationType of locationTypes" [value]="locationType">{{ getLocationTypeLabel(locationType) | async }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Designação</label>
+            <input type="text" formControlName="designation" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Rua</label>
+            <input type="text" formControlName="street" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Número de porta</label>
+            <input type="text" formControlName="portNumber" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Piso</label>
+            <input type="text" formControlName="floor" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Código postal</label>
+            <input type="text" formControlName="postalCode" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Cidade</label>
+            <input type="text" formControlName="city" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>País</label>
+            <input type="text" formControlName="country" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Longitude</label>
+            <input type="text" formControlName="longitude" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Latitude</label>
+            <input type="text" formControlName="latitude" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Plus code</label>
+            <input type="text" formControlName="plusCode" class="form-control">
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-xs" (click)="dismiss()">Cancelar</button>
+        <button type="submit" class="btn btn-primary btn-xs" [disabled]="locationForm.invalid">Gravar</button>
+        <button type="button" class="btn btn-danger btn-xs" (click)="delete()" *ngIf="location">Apagar</button>
+    </div>
+</form>

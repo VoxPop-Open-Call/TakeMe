@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="header-image">
+            <img src="assets/img/logo-famility@3x.png">
+        </div>
+        <div class="header-icon info">
+            <ion-button class="icon info" (click)="showInfo()">
+                <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+            </ion-button>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <h1 class="title-sm">Percursos<br>de hoje</h1><br><br><br>
+
+    <div *ngIf="itineraries?.length>0; else content_empty">
+        <app-itinerary *ngFor="let itinerary of itineraries" [itinerary]="itinerary"></app-itinerary>
+    </div>
+
+    <ng-template #content_empty>
+        <div>
+            <div class="sm-empty">
+                <div>
+                    <img class="empty" src="assets/img/empty_list.svg">
+                </div>
+                <div>
+                    <p class="empty sub-title">Não tem nenhum percurso para hoje!</p>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</ion-content>

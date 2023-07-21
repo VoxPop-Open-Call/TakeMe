@@ -1,0 +1,157 @@
+/* ==========================================================================
+Navbar
+========================================================================== */
+
+.navbar-version {
+    font-size: 10px;
+    color: #ccc;
+}
+
+.jh-navbar {
+    background-color: #353d47;
+    padding: 0;
+
+    .profile-image {
+        margin: -10px 0px;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+
+    .dropdown-item.active,
+    .dropdown-item.active:focus,
+    .dropdown-item.active:hover {
+        background-color: #353d47;
+    }
+
+    .dropdown-toggle::after {
+        margin-left: 0.15em;
+    }
+
+    ul.navbar-nav {
+        padding: 1rem;
+        display: flex;
+    }
+
+    a.nav-link {
+        font-weight: 400;
+        padding: 0;
+    }
+
+    .jh-navbar-toggler {
+        color: #ccc;
+        font-size: 1.5em;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .jh-navbar-toggler {
+        display: none;
+    }
+}
+
+/* @media screen and (max-width: 992px) {
+    .jh-logo-container {
+        width: 100%;
+    }
+} */
+
+.navbar-title {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.navbar-organization-logo:active {
+    background-color: grey;
+    border-radius: 10%;
+}
+
+.navbar-organization-logo:hover > div > span {
+    color: #f7bd19;
+}
+
+.navbar-organization-logo {
+    color: #f0f0f0 !important;
+    margin-bottom: 4px;
+
+    &.activated {
+        background-color: transparent !important;
+        color: #f7bd19 !important;
+    }
+}
+
+.navbar-logo {
+    &.activated {
+        background-color: transparent !important;
+    }
+}
+
+.nav-pills .show > .nav-link {
+    background-color: transparent !important;
+}
+
+ul.list-group {
+    cursor: pointer;
+
+    .list-group-item {
+        margin-bottom: 4px;
+        border-radius: 2rem;
+        border: 0;
+        color: #fafafa;
+        background-color: transparent;
+    }
+
+    .dropdown-toggle {
+        color: #fafafa;
+    }
+
+    .list-group-item:hover,
+    .list-group-first-item:hover,
+    .dropdown-toggle:hover {
+        color: #f7bd19;
+    }
+
+    .list-group-item:focus {
+        background-color: grey;
+    }
+
+    .ng-fa-icon {
+        margin-right: 0.5rem;
+    }
+}
+
+div,
+ul,
+li {
+    width: 100%;
+}
+
+/* ==========================================================================
+Logo styles
+========================================================================== */
+.navbar-brand {
+    &.logo {
+        padding: 5px 15px;
+
+        .logo-img {
+            height: 45px;
+            width: 70px;
+            display: inline-block;
+            vertical-align: middle;
+            background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+            background-size: contain;
+        }
+    }
+}
+
+/* ALL */
+
+.activated {
+    color: #353d47 !important;
+    background-color: #f7bd19 !important;
+    outline: 0 !important;
+}

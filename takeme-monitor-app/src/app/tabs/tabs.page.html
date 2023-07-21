@@ -1,0 +1,24 @@
+<ion-tabs>
+
+    <ion-tab-bar slot="bottom" (ionTabBarChanged)="selected($event)">
+
+        <ion-tab-button (click)="changeTab('itineraries')">
+            <ion-icon [ngClass]="(tabBarSelected=='itineraries')?'yellow':'grey'" name="bus"></ion-icon>
+            <ion-label [ngClass]="(tabBarSelected=='itineraries')?'yellow':'grey'">Percursos</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="current-itinerary" class="img-tab">
+            <ion-img
+                [src]="tabBarSelected == 'current-itinerary' ? 'assets/icon/baseline-directions-24px-yellow.svg' : 'assets/icon/baseline-directions-24px-grey.svg'">
+            </ion-img>
+            <ion-label>Em curso</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="changeTab('settings')">
+            <ion-icon [ngClass]="(tabBarSelected=='settings')?'yellow':'grey'" name="settings"></ion-icon>
+            <ion-label [ngClass]="(tabBarSelected=='settings')?'yellow':'grey'">Definições</ion-label>
+        </ion-tab-button>
+
+    </ion-tab-bar>
+
+</ion-tabs>

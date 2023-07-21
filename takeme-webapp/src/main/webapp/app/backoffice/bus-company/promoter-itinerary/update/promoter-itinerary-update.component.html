@@ -1,0 +1,138 @@
+<h1 class="lg-title mb-0">
+    <span jhiTranslate="backoffice.home.busCompany.itinerary.new-itinerary" *ngIf="!promoterItinerary">
+        Novo Percurso
+    </span>
+    <span jhiTranslate="backoffice.home.busCompany.itinerary.edit-itinerary" *ngIf="promoterItinerary">
+        Editar Percurso
+    </span>
+</h1>
+
+<br>
+
+<jhi-alert></jhi-alert>
+
+<form [formGroup]="editForm" (ngSubmit)="save()">
+
+  <div class="row">
+      <div class="col-md-6 left">
+          <button type="button" class="btn btn-light" (click)="previousState()">
+              <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+              {{ 'backoffice.cancel' | translate }}
+          </button>
+      </div>
+      <div class="col-md-6 right">
+          <span *ngIf="promoterItinerary">
+              <button type="button" class="btn btn-circle btn-outline-danger"
+                      (click)="deleteItinerary()">
+                  <fa-icon icon="trash" class="pe-2"></fa-icon>
+                  {{ 'backoffice.delete' | translate }}
+              </button>
+          </span>
+          <button type="submit" class="btn btn-circle btn-primary font-white" [disabled]="editForm.invalid">
+              <fa-icon icon="check" class="pe-2"></fa-icon>
+              {{ 'backoffice.save' | translate }}
+          </button>
+      </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+      <div class="col-md-6 form-group">
+          <label jhiTranslate="familityBackofficeApp.contact.name" class="sub-title">Name</label><br>
+          <input type="text" formControlName="name" class="form-control">
+      </div>
+
+      <div class="col-md-6 form-group">
+          <label class="sub-title" jhiTranslate="familityBackofficeApp.promoterItinerary.service" for="field_service">Service</label>
+          <select
+            class="form-control pointer"
+            id="field_service"
+            data-cy="service"
+            name="service"
+            formControlName="service"
+            [selectedIndex]="promoterItinerary ? promoterServicesSharedCollection.indexOf(promoterItinerary.service) + 1: 0"
+            [compareWith]="comparePromoterService"
+          >
+              <option [ngValue]="null"></option>
+              <option [ngValue]="promoterServiceOption" *ngFor="let promoterServiceOption of promoterServicesSharedCollection">
+                  {{ promoterServiceOption.name }}
+              </option>
+          </select>
+      </div>
+
+      <div class="col-md-6 form-group">
+          <label jhiTranslate="backoffice.start" class="sub-title">Start</label>
+          <div class="input-group">
+              <span class="input-group-append">
+                  <button type="button" class="btn btn-outline-secondary calendar" (click)="startDate.toggle()">
+                      <fa-icon icon="calendar-alt"></fa-icon>
+                  </button>
+              </span>
+              <input class="form-control" type="text" formControlName="startDate" placeholder="DD-MM-YYYY"
+                     ngbDatepicker #startDate="ngbDatepicker" readonly>
+          </div>
+      </div>
+
+      <div class="col-md-6 form-group">
+          <label jhiTranslate="backoffice.end" class="sub-title">End</label>
+          <div class="input-group">
+              <span class="input-group-append">
+                  <button type="button" class="btn btn-outline-secondary calendar" (click)="endDate.toggle()">
+                      <fa-icon icon="calendar-alt"></fa-icon>
+                  </button>
+              </span>
+              <input class="form-control" type="text" formControlName="endDate" placeholder="DD-MM-YYYY"
+                     ngbDatepicker #endDate="ngbDatepicker" readonly>
+          </div>
+      </div>
+  </div>
+
+  <hr *ngIf="promoterItinerary">
+
+  <div *ngIf="promoterItinerary" class="row">
+      <div class="col-md-6 left">
+          <span jhiTranslate="backoffice.home.busCompany.itinerary.itinerary-stop-points" class="md-title uppercase">Itinerary Stop Points</span>
+      </div>
+      <div class="col-md-6 right">
+          <button type="button" class="btn btn-circle btn-primary font-white"
+                  (click)="addItineraryStopPoint()">
+              <fa-icon icon="plus" class="pe-2"></fa-icon>
+              {{ 'backoffice.add' | translate }}
+          </button>
+      </div>
+  </div>
+
+  <br>
+
+  <div *ngIf="promoterItinerary" class="row example-list" cdkDropList (cdkDropListDropped)="changePositionStopPoint($event)">
+    <div style="margin-bottom: 15px" class="col-md-12 left example-box" cdkDrag
+         *ngFor="let itineraryStopPoint of promoterItinerary?.promoterItineraryStopPoints; let index = index">
+
+      <div>
+        <div >
+          <div class="row row-border v-center">
+            <div class="col-md-2 center" >
+              <span class="sub-title"><fa-icon icon="map-marker"></fa-icon></span>
+              <span>{{ itineraryStopPoint.name }}</span>
+            </div>
+
+            <div class="col-md-5 center" >
+              <span>{{ buildAddress(itineraryStopPoint.location) }}</span>
+            </div>
+
+
+            <div class="col-md-3 center" >
+              <span class="sub-title" jhiTranslate="backoffice.home.busCompany.schedule-time">Schedule Time</span>
+              <span>{{ itineraryStopPoint.scheduledTime | formatMediumTime }}</span>
+            </div>
+
+            <div class="col-md-2 center" >
+              <fa-icon [icon]="'times'" style="color: red; cursor: pointer" (click)="deleteWrapper(itineraryStopPoint.id, index)"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

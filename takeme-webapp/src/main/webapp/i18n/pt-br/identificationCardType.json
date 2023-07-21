@@ -1,0 +1,21 @@
+{
+    "familityBackofficeApp": {
+        "identificationCardType": {
+            "home": {
+                "title": "Tipos de Documentos de Identificação",
+                "createLabel": "Criar um novo Tipo de Documento de Identificação",
+                "createOrEditLabel": "Criar ou editar um Tipo de Documento de Identificação"
+            },
+            "created": "Um novo Tipo de Documento de Identificação foi criado com o identificador {{ param }}",
+            "updated": "Um Tipo de Documento de Identificação foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Tipo de Documento de Identificação foi excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Tipo de Documento de Identificação {{ id }}?"
+            },
+            "detail": {
+                "title": "Tipo de Documento de Identificação"
+            },
+            "name": "Nome"
+        }
+    }
+}

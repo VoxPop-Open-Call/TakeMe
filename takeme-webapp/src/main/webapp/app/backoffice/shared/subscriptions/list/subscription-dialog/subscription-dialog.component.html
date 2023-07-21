@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 *ngIf="status === activeSubscription" jhiTranslate="backoffice.home.busCompany.subscription.acceptSubscription">Accept Subscription</h4>
+    <h4 *ngIf="status === inactiveSubscription" jhiTranslate="backoffice.home.busCompany.subscription.refuseSubscription">Refuse Subscription</h4>
+    <button type="button" class="btn btn-light" (click)="dismiss()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.cancel' | translate }}
+    </button>
+</div>
+
+<div class="modal-body form-group">
+    <label class="mb-0 sub-title" for="additional-information" jhiTranslate="backoffice.home.busCompany.subscription.additionalInformationInput">Additional
+        Information:</label>
+    <br>
+    <textarea id="additional-information" class="form-control" [(ngModel)]="additionalInformation" maxlength="2000" rows="4"
+              cols="55"></textarea>
+    <br>
+    <label class="mb-0 sub-title" for="comments" jhiTranslate="backoffice.home.busCompany.subscription.commentsInput">Comments:</label>
+    <br>
+    <textarea id="comments" class="form-control" [(ngModel)]="comments" maxlength="2000" rows="4" cols="55"></textarea>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-circle btn-primary btn-xs font-white" (click)="close()">
+        <fa-icon icon="check" class="pe-2"></fa-icon>
+        {{ 'backoffice.save' | translate }}
+    </button>
+</div>

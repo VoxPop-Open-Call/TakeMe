@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h2 jhiTranslate="backoffice.home.busCompany.children.additionalInformation">Additional Information</h2>
+</div>
+
+<div class="modal-body">
+    <span>{{ additionalInformation ? additionalInformation : "N/A" }}</span>
+</div>
+
+<div class="modal-footer">
+    <button jhiTranslate="backoffice.close" type="button" class="btn btn-default btn-xs" (click)="close()">Close</button>
+</div>

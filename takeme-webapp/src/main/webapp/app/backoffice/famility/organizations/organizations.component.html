@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 jhiTranslate="backoffice.home.famility.operators" class="lg-title mb-0 float-start">Operators</h1>
+        <a [routerLink]="['/promoter/operators/new']">
+            <button type="button" class="btn btn-circle btn-primary btn-md font-white margin-b-0 float-end">
+                <fa-icon icon="plus" class="pe-2"></fa-icon>
+                {{ 'backoffice.add' | translate }}
+            </button>
+        </a>
+    </div>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form class="form-row d-flex">
+    <div class="d-flex w-25">
+        <input type="text" class="form-control" placeholder="{{'backoffice.search-name' | translate}}" name="filterOperator" [(ngModel)]="operatorFilter"
+               (ngModelChange)="textSearchUpdate.next($event)">
+    </div>
+    <button class="btn btn-light margin-l-10" type="submit" (click)="resetFilter()">
+        {{ 'audits.filter.button.clear' | translate }}
+    </button>
+</form>
+
+<hr>
+
+<div class="tab row tab-gutter-x-0">
+    <button jhiTranslate="backoffice.home.famility.active"
+            class="tablinks col-md-2 center" [ngClass]="{'active font-white':showActive, 'deactivated':!showActive}"
+            (click)="showActiveOperators()">
+        Active
+    </button>
+    <button jhiTranslate="backoffice.home.famility.inactive"
+            class="tablinks col-md-2 center" [ngClass]="{'active font-white':showInactive, 'deactivated':!showInactive}"
+            (click)="showInactiveOperators()">
+        Inactive
+    </button>
+</div>
+
+<div *ngIf="operators.length > 0">
+    <div class="margin-t-15">
+        <p-table [value]="operators" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="backoffice.home.famility.name">Name</th>
+                    <th jhiTranslate="backoffice.home.famility.nif">Tax ID</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-operator>
+                <tr>
+                    <td (click)="goToDetailed(operator.id)" class="pointer">{{ operator.name }}</td>
+                    <td (click)="goToDetailed(operator.id)" class="pointer">{{ operator.nifNumber }}</td>
+                    <td>
+                        <button class="btn btn-circle btn-primary font-white float-end" *ngIf="!showActive"
+                                (click)="setOperatorStatus(operator.id, operator.name, activeOperator)">
+                          <fa-icon icon="user-plus" class="pe-2"></fa-icon>
+                          {{ 'backoffice.activate' | translate }}
+                        </button>
+                        <button class="btn btn-circle btn-primary font-white float-end" *ngIf="showActive"
+                                (click)="setOperatorStatus(operator.id, operator.name, inactiveOperator)">
+                          <fa-icon icon="user-minus" class="pe-2"></fa-icon>
+                          {{ 'backoffice.inactivate' | translate }}
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <div class="pagination margin-t-15">
+            <ngb-pagination [collectionSize]="totalItems" [page]="page + 1" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" (pageChange)="navigateToPage($event)">
+                <ng-template ngbPaginationPrevious>
+                    <div jhiTranslate="global.paginator.previous">Previous</div>
+                </ng-template>
+                <ng-template ngbPaginationNext>
+                    <div jhiTranslate="global.paginator.next">Next</div>
+                </ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="operators.length == 0">
+    <div class="margin-t-15 center">
+        <h6 class="margin-b-0">
+            <i *ngIf="!showActive" jhiTranslate="backoffice.home.famility.noInactiveOperators">There are no inactive operators</i>
+            <i *ngIf="showActive" jhiTranslate="backoffice.home.famility.noActiveOperators">There are no active operators</i>
+        </h6>
+    </div>
+</div>
+<br><br>

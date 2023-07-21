@@ -1,0 +1,9 @@
+{
+    "familityBackofficeApp": {
+        "ProfileType": {
+            "null": "",
+            "BUS_COMPANY": "Bus company",
+            "BUS_DRIVER": "Driver"
+        }
+    }
+}

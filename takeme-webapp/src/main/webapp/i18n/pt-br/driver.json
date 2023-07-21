@@ -1,0 +1,23 @@
+{
+    "familityBackofficeApp": {
+        "driver": {
+            "home": {
+                "title": "Monitores",
+                "createLabel": "Criar um novo Monitor",
+                "createOrEditLabel": "Criar ou editar um Monitor"
+            },
+            "created": "Um novo Monitor foi criado com o identificador {{ param }}",
+            "updated": "Um Monitor foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Monitor foi excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Monitor {{ id }}?"
+            },
+            "detail": {
+                "title": "Monitor"
+            },
+            "name": "Nome",
+            "driverLicense": "Carteira de Habilitação",
+            "organization": "Promotor"
+        }
+    }
+}

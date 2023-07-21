@@ -1,0 +1,30 @@
+{
+    "familityBackofficeApp": {
+        "organization": {
+            "home": {
+                "title": "Operadores",
+                "createLabel": "Criar um(a) novo(a) Organization",
+                "createOrEditLabel": "Criar ou editar um(a) Organization"
+            },
+            "created": "A new Organization is created with identifier {{ param }}",
+            "updated": "A Organization is updated with identifier {{ param }}",
+            "deleted": "A Organization is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Organization {{ id }}?"
+            },
+            "detail": {
+                "title": "Operador",
+                "newOperator": "Novo Operador",
+                "editOperator": "Editar Operator"
+            },
+            "name": "Name",
+            "nifCountry": "Nif Country",
+            "nifNumber": "Nif Number",
+            "organizationType": "Organization Type",
+            "statusType": "Status Type",
+            "location": "Location",
+            "contact": "Contact",
+            "contacts": "Contacts"
+        }
+    }
+}

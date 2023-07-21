@@ -1,0 +1,255 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-child-itinerary-subscription-heading"
+        data-cy="ChildItinerarySubscriptionCreateUpdateHeading"
+        jhiTranslate="familityBackofficeApp.childItinerarySubscription.home.createOrEditLabel"
+      >
+        Create or edit a Child Itinerary Subscription
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="familityBackofficeApp.childItinerarySubscription.statusType" for="field_statusType"
+            >Status Type</label
+          >
+          <select class="form-control" name="statusType" formControlName="statusType" id="field_statusType" data-cy="statusType">
+            <option [ngValue]="null">{{ 'familityBackofficeApp.StatusType.null' | translate }}</option>
+            <option *ngFor="let statusType of statusTypeValues" [value]="statusType">
+              {{ 'familityBackofficeApp.StatusType.' + statusType | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('statusType')!.invalid && (editForm.get('statusType')!.dirty || editForm.get('statusType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('statusType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="familityBackofficeApp.childItinerarySubscription.subscriptionDate"
+            for="field_subscriptionDate"
+            >Subscription Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_subscriptionDate"
+              data-cy="subscriptionDate"
+              type="datetime-local"
+              class="form-control"
+              name="subscriptionDate"
+              formControlName="subscriptionDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('subscriptionDate')!.invalid &&
+              (editForm.get('subscriptionDate')!.dirty || editForm.get('subscriptionDate')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('subscriptionDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('subscriptionDate')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="familityBackofficeApp.childItinerarySubscription.activationDate"
+            for="field_activationDate"
+            >Activation Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_activationDate"
+              data-cy="activationDate"
+              type="datetime-local"
+              class="form-control"
+              name="activationDate"
+              formControlName="activationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('activationDate')!.invalid && (editForm.get('activationDate')!.dirty || editForm.get('activationDate')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('activationDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('activationDate')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="familityBackofficeApp.childItinerarySubscription.deactivationDate"
+            for="field_deactivationDate"
+            >Deactivation Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_deactivationDate"
+              data-cy="deactivationDate"
+              type="datetime-local"
+              class="form-control"
+              name="deactivationDate"
+              formControlName="deactivationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="familityBackofficeApp.childItinerarySubscription.comments" for="field_comments"
+            >Comments</label
+          >
+          <input type="text" class="form-control" name="comments" id="field_comments" data-cy="comments" formControlName="comments" />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="familityBackofficeApp.childItinerarySubscription.additionalInformation"
+            for="field_additionalInformation"
+            >Additional Information</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="additionalInformation"
+            id="field_additionalInformation"
+            data-cy="additionalInformation"
+            formControlName="additionalInformation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="familityBackofficeApp.childItinerarySubscription.cardNumber" for="field_cardNumber"
+            >Card Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="cardNumber"
+            id="field_cardNumber"
+            data-cy="cardNumber"
+            formControlName="cardNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="familityBackofficeApp.childItinerarySubscription.child" for="field_child">Child</label>
+          <select class="form-control" id="field_child" data-cy="child" name="child" formControlName="child" [compareWith]="compareChild">
+            <option *ngIf="!editForm.get('child')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="childOption" *ngFor="let childOption of childrenSharedCollection">{{ childOption.name }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['child'])!.invalid && (editForm.get(['child'])!.dirty || editForm.get(['child'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['child'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="familityBackofficeApp.childItinerarySubscription.promoterItinerary"
+            for="field_promoterItinerary"
+            >Promoter Itinerary</label
+          >
+          <select
+            class="form-control"
+            id="field_promoterItinerary"
+            data-cy="promoterItinerary"
+            name="promoterItinerary"
+            formControlName="promoterItinerary"
+            [compareWith]="comparePromoterItinerary"
+          >
+            <option *ngIf="!editForm.get('promoterItinerary')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="promoterItineraryOption" *ngFor="let promoterItineraryOption of promoterItinerariesSharedCollection">
+              {{ promoterItineraryOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['promoterItinerary'])!.invalid &&
+            (editForm.get(['promoterItinerary'])!.dirty || editForm.get(['promoterItinerary'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['promoterItinerary'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="familityBackofficeApp.childItinerarySubscription.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

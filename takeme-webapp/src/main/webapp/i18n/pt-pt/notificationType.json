@@ -1,0 +1,24 @@
+{
+    "familityBackofficeApp": {
+        "notificationType": {
+            "home": {
+                "title": "Notification Types",
+                "createLabel": "Criar um(a) novo(a) Notification Type",
+                "createOrEditLabel": "Criar ou editar um(a) Notification Type"
+            },
+            "created": "A new Notification Type is created with identifier {{ param }}",
+            "updated": "A Notification Type is updated with identifier {{ param }}",
+            "deleted": "A Notification Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Notification Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Notification Type"
+            },
+            "type": "Type",
+            "active": "Active",
+            "title": "Title",
+            "userConfigurable": "User Configurable"
+        }
+    }
+}

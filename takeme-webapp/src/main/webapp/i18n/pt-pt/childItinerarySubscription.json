@@ -1,0 +1,33 @@
+{
+  "familityBackofficeApp": {
+    "childItinerarySubscription": {
+      "home": {
+        "title": "Child Itinerary Subscriptions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Criar novo(a) Child Itinerary Subscription",
+        "createOrEditLabel": "Criar ou editar Child Itinerary Subscription",
+        "notFound": "Nenhum Child Itinerary Subscriptions encontrado"
+      },
+      "created": "Um novo Child Itinerary Subscription foi criado com o identificador {{ param }}",
+      "updated": "Child Itinerary Subscription com identificador {{ param }} foi actualizado",
+      "deleted": "Child Itinerary Subscription com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Child Itinerary Subscription {{ id }}?"
+      },
+      "detail": {
+        "title": "Child Itinerary Subscription"
+      },
+      "id": "ID",
+      "statusType": "Status Type",
+      "subscriptionDate": "Subscription Date",
+      "activationDate": "Activation Date",
+      "deactivationDate": "Deactivation Date",
+      "comments": "Comments",
+      "additionalInformation": "Additional Information",
+      "cardNumber": "Card Number",
+      "child": "Child",
+      "promoterItinerary": "Promoter Itinerary",
+      "user": "User"
+    }
+  }
+}

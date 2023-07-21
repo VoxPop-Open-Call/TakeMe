@@ -1,0 +1,33 @@
+{
+    "familityBackofficeApp": {
+        "child": {
+            "home": {
+                "title": "Alunos",
+                "createLabel": "Adicionar um nova Aluno",
+                "createOrEditLabel": "Adicionar ou editar um Aluno"
+            },
+            "created": "Um novo Aluno foi criada com o identificador {{ param }}",
+            "updated": "Um Aluno foi atualizada com o identificador {{ param }}",
+            "deleted": "Um Aluno foi excluída com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende eliminar o Aluno {{ id }}?"
+            },
+            "detail": {
+                "title": "Aluno"
+            },
+            "name": "Nome",
+            "nifCountry": "País CPF",
+            "nifNumber": "Número CPF",
+            "photoUrl": "Url Foto",
+            "dateOfBirth": "Data de nascimento",
+            "famility": "Famility",
+            "statusType": "Tipo de Estado",
+            "tutor": "Responsável",
+            "organization": "Organização",
+            "active": "Ativas",
+            "no-services": "Aluno sem serviços válidos",
+            "non-famility": "Não-Famility",
+            "non-famility-children": "Alunos Não-Famility: "
+        }
+    }
+}

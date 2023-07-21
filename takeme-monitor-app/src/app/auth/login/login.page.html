@@ -1,0 +1,58 @@
+<ion-content class="ion-padding">
+
+    <h1 class="title-lg">Bem-vindo!<br><span>TakeMe</span></h1>
+
+    <form (ngSubmit)="login(form)" #form="ngForm">
+
+        <ion-item no-padding class="form">
+            <ion-grid class="form">
+                <ion-row>
+                    <div class="form">
+                        <ion-label class="form" position="floating">Introduza o seu e-mail</ion-label>
+                        <ion-input class="form" name="email" email required ngModel #email="ngModel"></ion-input>
+                    </div>
+                </ion-row>
+                <ion-row>
+                    <div class="form-error">
+                        <ion-label *ngIf="!email.valid && email.touched"><span>E-mail inválido</span></ion-label>
+                    </div>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+        <ion-item no-padding class="form">
+            <ion-grid class="form">
+                <ion-row>
+                    <div class="form">
+                        <ion-label class="form" position="floating">Introduza a sua password</ion-label>
+                    </div>
+                </ion-row>
+                <ion-row>
+                    <ion-input class="form" [type]="!showPwd ? 'password' : 'text'" name="password" minlength="6"
+                               required
+                               ngModel #password="ngModel"></ion-input>
+                    <ion-button class="icon eye" (click)="showPwd=!showPwd">
+                        <ion-icon slot="icon-only" [name]="showPwd ? 'eye' : 'eye-off'"></ion-icon>
+                    </ion-button>
+                </ion-row>
+                <ion-row>
+                    <div class="form-error">
+                        <ion-label *ngIf="!password.valid && password.touched"><span>Password inválida</span>
+                        </ion-label>
+                    </div>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+
+        <ion-button class="forgotPwd-button" color="primary" fill="clear" no-padding (click)="goToPasswordReset()">
+            Password esquecida?
+        </ion-button>
+        <ion-button class="main-button" color="primary" shape="round" expand="full" [disabled]=!form.valid
+                    type="submit">
+            Entrar
+        </ion-button>
+
+    </form>
+
+</ion-content>

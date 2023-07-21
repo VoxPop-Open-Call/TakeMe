@@ -1,0 +1,20 @@
+<div class="modal-header" jhiTranslate="global.messages.info.upload-photo.select">
+    Select new photo
+</div>
+
+<jhi-alert></jhi-alert>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="avatar">Avatar</label>
+            <input type="file" id="avatar" (change)="onFileChange($event)" required #fileInput>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-default" (click)="activeModal.dismiss('cancel')" jhiTranslate="entity.action.cancel">Cancel</button>
+        <button type="submit" [disabled]="form.invalid || loading" class="btn btn-sm btn-primary">Ok</button>
+    </div>
+</form>
+

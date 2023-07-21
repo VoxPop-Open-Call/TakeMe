@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 jhiTranslate="backoffice.home.busCompany.subscription.comments">Comments</h4>
+    <button type="button" class="btn btn-light" (click)="close()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.close' | translate }}
+    </button>
+</div>
+
+<div class="modal-body">
+    <span>{{ comment ? comment : "N/A" }}</span>
+</div>
+
+<div class="modal-footer">
+</div>

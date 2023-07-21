@@ -1,0 +1,110 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <h1 *ngIf="!service" class="lg-title mb-0" id="jhi-promoter-service-heading-create" data-cy="PromoterServiceCreateUpdateHeading"
+        jhiTranslate="familityBackofficeApp.promoterService.home.createLabel">New Service</h1>
+    <h1 *ngIf="service" class="lg-title mb-0" id="jhi-promoter-service-heading-edit" data-cy="PromoterServiceCreateUpdateHeading"
+        jhiTranslate="familityBackofficeApp.promoterService.home.editLabel">Edit Service</h1>
+
+    <jhi-alert></jhi-alert>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6 left">
+            <button type="button" class="btn btn-light" (click)="previousState()">
+                <fa-icon icon="xmark" class="pe-2"></fa-icon>
+                {{ 'backoffice.cancel' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-6 right">
+            <button [disabled]="editForm.invalid || isSaving" type="submit"
+                    class="btn btn-circle btn-primary btn-xs font-white">
+                <fa-icon icon="check" class="pe-2"></fa-icon>
+                {{ 'backoffice.save' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="col-5">
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="familityBackofficeApp.promoterService.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name"/>
+            <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">This field is
+                    required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="familityBackofficeApp.promoterService.logo" for="field_logo">Logo</label>
+            <div>
+                <img [src]="'data:' + editForm.get('logoContentType')!.value + ';base64,' + editForm.get('logo')!.value" style="max-height: 100px"
+                     *ngIf="editForm.get('logo')!.value" alt="PromoterService Image"/>
+                <div *ngIf="editForm.get('logo')!.value" class="form-text text-danger clearfix">
+                    <span class="pull-start">{{ editForm.get('logoContentType')!.value }}, {{ byteSize(editForm.get('logo')!.value!) }}</span>
+                    <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'file_logo')" class="btn btn-secondary btn-xs pull-end">
+                        <fa-icon icon="times"></fa-icon>
+                    </button>
+                </div>
+                <input type="file" id="file_logo" data-cy="logo" (change)="setFileData($event, 'logo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="logo" id="field_logo" data-cy="logo" formControlName="logo"/>
+            <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType" formControlName="logoContentType"/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="familityBackofficeApp.promoterService.transportType" for="field_transportType">Transport Type</label>
+            <select class="form-select" name="transportType" id="field_transportType" data-cy="transportType" formControlName="transportType">
+                <option *ngFor="let transport of transportTypeOptions" [value]="transport"
+                        jhiTranslate="familityBackofficeApp.promoterService.transportTypeEnum.{{transport}}"></option>
+            </select>
+            <div *ngIf="editForm.get('transportType')!.invalid && (editForm.get('transportType')!.dirty || editForm.get('transportType')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('transportType')?.errors?.required" jhiTranslate="entity.validation.required">This field is
+                    required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="familityBackofficeApp.promoterService.startDate" for="field_startDate">Start Date</label>
+            <div class="input-group">
+                <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+                <input id="field_startDate" data-cy="startDate" type="text" class="form-control" name="startDate" placeholder="YYYY-MM-DD" ngbDatepicker
+                       #startDateDp="ngbDatepicker" formControlName="startDate" readonly/>
+            </div>
+            <div *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('startDate')?.errors?.required" jhiTranslate="entity.validation.required">This field is
+                    required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="familityBackofficeApp.promoterService.endDate" for="field_endDate">End Date</label>
+            <div class="input-group">
+                <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+                <input id="field_endDate" data-cy="endDate" type="text" class="form-control" name="endDate" placeholder="YYYY-MM-DD" ngbDatepicker
+                       #endDateDp="ngbDatepicker" formControlName="endDate" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="familityBackofficeApp.promoterService.needsETA" for="field_needsETA">Needs ETA?</label>
+            <input type="checkbox" class="form-check" name="needsETA" id="field_needsETA" data-cy="needsETA" formControlName="needsETA"/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="familityBackofficeApp.promoterService.enrollmentURL" for="field_enrollmentURL">Enrollment URL</label>
+            <input type="text" class="form-control" name="enrollmentURL" id="field_enrollmentURL" data-cy="enrollmentURL" formControlName="enrollmentURL"/>
+            <div *ngIf="editForm.get('enrollmentURL')!.invalid && (editForm.get('enrollmentURL')!.dirty || editForm.get('enrollmentURL')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('enrollmentURL')?.errors?.required" jhiTranslate="entity.validation.required">This field is
+                    required.</small>
+            </div>
+        </div>
+    </div>
+</form>
+<br><br>

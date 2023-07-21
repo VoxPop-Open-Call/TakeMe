@@ -1,0 +1,7 @@
+{
+    "name": "TakeMe Monitores",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "angular"
+}

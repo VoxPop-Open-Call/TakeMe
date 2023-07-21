@@ -1,0 +1,50 @@
+<form [formGroup]="stopPointForm" (ngSubmit)="createPromoterStopPoint()">
+    <div class="modal-header">
+        <h4>Stop Points</h4>
+        <button type="button" class="btn btn-light" (click)="dismiss()">
+            <fa-icon icon="xmark" class="pe-2"></fa-icon>
+            {{ 'backoffice.cancel' | translate }}
+        </button>
+    </div>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="modal-body d-flex">
+        <div class="col-md-5 float-start">
+            <label class="sub-title">
+                Name
+            </label>
+            <input type="text" class="form-control" formControlName="name">
+            <br>
+            <label jhiTranslate="backoffice.home.busCompany.schedule-time" class="sub-title">
+                Schedule Time
+            </label>
+            <input type="time" class="form-control margin-bottom" formControlName="time">
+        </div>
+
+        <div class="col-md-7 ms-4 float-end">
+            <div class="col-md-11 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-circle btn-outline-primary mb-3"(click)="createAddress()">
+                    <fa-icon icon="plus" class="pe-2"></fa-icon>
+                    {{ 'backoffice.home.busCompany.services.newAddress' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-11" *ngFor="let location of locations">
+                <div class="sm-row-border v-center mb-3 bg-primary pointer" (click)="selectLocation(location)">
+                    <fa-icon class="l-margin-3" icon="map-marker-alt" *ngIf="selectedLocation == location"></fa-icon>
+                    <div class="col-md-12 left l-margin-3">
+                        <span class="font-weight-bold"> {{ buildAddress(location)}} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-circle btn-primary font-white" [disabled]="!selectedLocation || stopPointForm.invalid">
+            <fa-icon icon="check" class="pe-2"></fa-icon>
+            {{ 'backoffice.select' | translate }}
+        </button>
+    </div>
+</form>

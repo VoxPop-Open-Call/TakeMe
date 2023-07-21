@@ -1,0 +1,9 @@
+{
+    "familityBackofficeApp": {
+        "NotificationChannelType": {
+            "null": "",
+            "EMAIL": "EMAIL",
+            "PUSH_NOTIFICATION": "PUSH_NOTIFICATION"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<ul>
+    <li>Pefil</li>
+    <li>Utilizadores</li>
+    <li>Adesões</li>
+    <ul>
+        <li (click)="goToSubscription(subscriptionFilterType.ACCEPTED)">
+            <a>Accepted</a>
+        </li>
+        <li (click)="goToSubscription(subscriptionFilterType.PENDING)">
+            <a>Pending</a>
+        </li>
+        <li (click)="goToSubscription(subscriptionFilterType.REJECTED)">
+            <a>Rejected</a>
+        </li>
+    </ul>
+    <li>Veiculos</li>
+    <li>Condutores</li>
+    <li>
+        <a [routerLink]="['/bus-company/children-subscription']">Crianças</a>
+    </li>
+    <li>Percursos</li>
+    <ul>
+        <li>Correntes</li>
+        <li>Concluidos</li>
+    </ul>
+</ul>

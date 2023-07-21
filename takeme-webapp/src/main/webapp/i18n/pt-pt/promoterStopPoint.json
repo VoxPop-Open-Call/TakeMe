@@ -1,0 +1,27 @@
+{
+  "familityBackofficeApp": {
+    "promoterStopPoint": {
+      "home": {
+        "title": "Promoter Stop Points",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Criar novo(a) Promoter Stop Point",
+        "createOrEditLabel": "Criar ou editar Promoter Stop Point",
+        "notFound": "Nenhum Promoter Stop Points encontrado"
+      },
+      "created": "Um novo Promoter Stop Point foi criado com o identificador {{ param }}",
+      "updated": "Promoter Stop Point com identificador {{ param }} foi actualizado",
+      "deleted": "Promoter Stop Point com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Promoter Stop Point {{ id }}?"
+      },
+      "detail": {
+        "title": "Promoter Stop Point"
+      },
+      "id": "ID",
+      "name": "Name",
+      "scheduledTime": "Scheduled Time",
+      "promoterItinerary": "Promoter Itinerary",
+      "location": "Location"
+    }
+  }
+}

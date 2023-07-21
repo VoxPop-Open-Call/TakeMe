@@ -1,0 +1,91 @@
+<h1>{{ account?.firstName }} {{ account?.lastName}} </h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6 left">
+        <button jhiTranslate="backoffice.back" type="button"
+                class="btn btn-circle btn-outline-primary btn-xs" (click)="goBack()">Back</button>
+    </div>
+    <div class="col-md-6 right">
+        <button jhiTranslate="backoffice.save" type="button" [disabled]="!(listSelectProfiles.length > 0)"
+                class="btn btn-circle btn-primary btn-xs font-white" (click)="update()">Save</button>
+    </div>
+</div>
+
+<hr>
+
+<table class="center w-100">
+    <tr>
+        <td class="w-15 left">
+            <span class="sub-title" jhiTranslate="backoffice.home.famility.user.first-name">First name</span>
+            <br>
+            <span>{{ account?.firstName }}</span>
+        </td>
+        <td class="w-15 left">
+            <span class="sub-title" jhiTranslate="backoffice.home.famility.user.last-name">Last name</span>
+            <br>
+            <span>{{ account?.lastName }}</span>
+        </td>
+        <td class="w-30 left">
+            <span class="sub-title" jhiTranslate="backoffice.home.famility.user.email">Email</span>
+            <br>
+            <span>{{ account?.email }}</span>
+        </td>
+        <td class="w-20 left">
+            <span class="sub-title" jhiTranslate="backoffice.entity">Entity</span>
+            <br>
+            <span>{{ account?.organization.name }}</span>
+        </td>
+        <td class="w-20 left">
+            <span class="sub-title" jhiTranslate="backoffice.home.famility.user.state">State</span>
+            <br>
+            <span *ngIf="account?.activated" jhiTranslate="backoffice.active">Active</span>
+            <span *ngIf="!account?.activated" jhiTranslate="backoffice.inactive">Inactive</span>
+            <span *ngIf="account?.statusChangeDate"> - {{ account.statusChangeDate | formatExpressionDateTime }}</span>
+        </td>
+    </tr>
+</table>
+
+<hr>
+
+<ng-container *ngIf="account?.authorities.length > 0">
+
+    <span *ngIf="listProfiles.length > 0" jhiTranslate="backoffice.home.famility.user.profile" class="sub-title">Profile</span>
+
+    <br>
+
+    <div class="col-md-4 form-group padding-l-0" *ngIf="listProfiles.length > 0">
+        <div class="form-box">
+            <table class="table margin-0" *ngFor="let profile of listProfiles">
+
+                <tr class="row v-center">
+                    <td class="w-80 left"><span jhiTranslate="{{'familityBackofficeApp.ProfileType.' + profile }}" >{{ profile }}</span></td>
+
+                    <td class="w-20 right">
+                        <input type="checkbox" (change)="selectProfile($event, profile)" [checked]="isSelected(profile)"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="showSelectDriver">
+        <div class="col-md-4 form-group padding-r-0">
+            <label jhiTranslate="backoffice.home.famility.user.driver" class="sub-title">Driver</label><br>
+            <div class="input-group">
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary calendar" (click)="selectDriver()">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                    </button>
+                </span>
+                <input type="text" [ngModel]="driverSelected?.name" class="form-control" readonly/>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+

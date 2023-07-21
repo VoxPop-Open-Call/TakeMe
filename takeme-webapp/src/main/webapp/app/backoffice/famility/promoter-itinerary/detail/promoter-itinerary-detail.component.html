@@ -1,0 +1,73 @@
+<div *ngIf="promoterItinerary">
+    <h1 class="lg-title mb-0">
+        <span>{{ promoterItinerary.name }}</span>
+    </h1>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6">
+        <button type="button" class="btn btn-light" (click)="previousState()">
+            <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+            {{ 'backoffice.back' | translate }}
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="promoterItinerary">
+    <table class="center w-100">
+        <tr>
+            <td *ngIf="promoterItinerary.startDate" class="w-25 left">
+                <span class="sub-title" jhiTranslate="familityBackofficeApp.promoterItinerary.startDate">Start Date</span>
+                <br>
+                <span>{{ promoterItinerary.startDate | formatMediumDate }}</span>
+            </td>
+            <td *ngIf="promoterItinerary.endDate" class="w-25 left">
+                <span class="sub-title" jhiTranslate="familityBackofficeApp.promoterItinerary.endDate">End Date</span>
+                <br>
+                <span>{{ promoterItinerary.endDate ? (promoterItinerary.endDate | formatMediumDate) : "N/A" }}</span>
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <div *ngIf="promoterItinerary.promoterItineraryStopPoints.length > 0">
+        <table class="center w-100" *ngFor="let itineraryStopPoint of promoterItinerary.promoterItineraryStopPoints">
+            <div class="row row-border v-center" style="margin-bottom: 15px;">
+                <table class="center w-100">
+                    <tr>
+                        <td class="w-20 center">
+                            <span class="sub-title">
+                                <fa-icon icon="map-marker"></fa-icon>
+                            </span>
+                            <span>{{ itineraryStopPoint.name }}</span>
+                        </td>
+                        <td class="w-20 center">
+                            <span>{{ buildAddress(itineraryStopPoint.location) }}</span>
+                        </td>
+                        <td class="w-20 center">
+                            <span class="sub-title" jhiTranslate="backoffice.home.busCompany.schedule-time">Scheduled Time</span>
+                            <span>{{ itineraryStopPoint.scheduledTime | formatExpressionDateTime }}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </table>
+    </div>
+
+    <div *ngIf="promoterItinerary.promoterItineraryStopPoints.length == 0">
+        <div class="margin-t-15 center">
+            <h6 class="margin-b-0">
+                <i>{{ promoterItinerary.name }}</i>
+                <i jhiTranslate="backoffice.home.busCompany.noStopPoints"> has no stop points</i>
+            </h6>
+        </div>
+    </div>
+</div>
+<br><br>

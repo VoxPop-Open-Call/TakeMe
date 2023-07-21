@@ -1,0 +1,27 @@
+{
+    "reset": {
+        "request": {
+            "title": "Recupere sua senha",
+            "form": {
+                "button": "Recuperação de senha"
+            },
+            "messages": {
+                "info": "Introduza o endereço de email utilizado para registrar",
+                "success": "Verifique o seu email para mais detalhes sobre como recuperar a senha.",
+                "notfound": "<strong>Endereço de email não registrado!</strong> Por favor, verifique e tente de novo"
+            }
+        },
+        "finish": {
+            "title": "Recuperação de senha",
+            "form": {
+                "button": "Recuperar a senha"
+            },
+            "messages": {
+                "info": "Escolha uma nova senha",
+                "success": "<strong>A sua senha foi alterada.</strong> Por favor ",
+                "keymissing": "Chave de recuperação faltando.",
+                "error": "A sua senha não pode ser recuperada. O pedido de recuperação da senha é válido apenas por 24 horas."
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "familityBackofficeApp": {
+        "userNotification": {
+            "home": {
+                "title": "Notificações de Usuário",
+                "createLabel": "Criar uma nova Notificação de Usuário",
+                "createOrEditLabel": "Criar ou editar uma Notificação de Usuário"
+            },
+            "created": "Uma nova Notificação de Usuário foi criado com identificador {{ param }}",
+            "updated": "Uma Notificação de Usuário foi atualizada com identificador {{ param }}",
+            "deleted": "Uma Notificação de Usuário foi excluída com identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir a Notificação de Usuário {{ id }}?"
+            },
+            "detail": {
+                "title": "Notificação de Usuário"
+            },
+            "sentDate": "Data de Envio",
+            "title": "Título",
+            "body": "Corpo",
+            "userId": "Id Usuário",
+            "notificationChannel": "Canal de Notificação",
+            "notificationType": "Tipo de Notificação"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "familityBackofficeApp": {
+        "ItineraryStatusType": {
+            "null": "",
+            "READY_TO_START": "PRONTO_PARA_INICIAR",
+            "IN_PROGRESS": "EM_PROGRESSO",
+            "FINISHED": "FINALIZADO",
+            "CANCELED": "CANCELADO"
+        }
+    }
+}

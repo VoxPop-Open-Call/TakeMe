@@ -1,0 +1,26 @@
+{
+    "familityBackofficeApp": {
+        "stopPoint": {
+            "home": {
+                "title": "Pontos de Parada",
+                "createLabel": "Criar um novo Ponto de Parada",
+                "createOrEditLabel": "Criar ou editar um Ponto de Parada"
+            },
+            "created": "Um novo Ponto de Parada foi criado com identificador {{ param }}",
+            "updated": "Um Ponto de Parada foi atualizado com identificador {{ param }}",
+            "deleted": "Um Ponto de Parada foi excluído com identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Ponto de Parada {{ id }}?"
+            },
+            "detail": {
+                "title": "Ponto de Parada"
+            },
+            "stopPointType": "Tipo de Ponto de Parada",
+            "combinedTime": "Tempo Combinado",
+            "location": "Localização",
+            "itinerary": "Itinerário",
+            "child": "Aluno",
+            "stopAuditEvent": "Evento de Auditoria de Parada"
+        }
+    }
+}

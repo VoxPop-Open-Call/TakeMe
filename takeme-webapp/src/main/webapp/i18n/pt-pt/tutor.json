@@ -1,0 +1,41 @@
+{
+    "familityBackofficeApp": {
+        "tutor": {
+            "home": {
+                "title": "Tutores",
+                "createLabel": "Criar um(a) novo(a) Tutor",
+                "createOrEditLabel": "Criar ou editar um(a) Tutor"
+            },
+            "created": "Um novo Tutor foi criado com identificador {{ param }}",
+            "updated": "Um Tutor foi atualizado com identificador {{ param }}",
+            "deleted": "Um Tutor foi eliminado com identificador {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Tutor {{ id }}?"
+            },
+            "detail": {
+                "title": "Tutor"
+            },
+            "name": "Name",
+            "nifCountry": "Nif Country",
+            "nifNumber": "Nif Number",
+            "identificationCardNumber": "Identification Card Number",
+            "phoneNumber": "Phone Number",
+            "famility": "Famility",
+            "yes": "Sim",
+            "no": "Não",
+            "photoUrl": "Photo Url",
+            "userId": "Id Utilizador",
+            "statusType": "Tipo de Estado",
+            "identificationCardType": "Tipo de Documento de Identificação",
+            "location": "Localização",
+            "child": "Criança",
+            "itinerary": "Itinerário",
+            "service": "Serviço",
+            "status": "Estado",
+            "subscriptionDate": "Data de Adesão",
+            "activationDate": "Data de Ativação",
+            "deactivationDate": "Data de Desativação",
+            "comments": "Comentários"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "familityBackofficeApp": {
+        "serviceStopPointDaysOfWeek": {
+            "home": {
+                "title": "Dias da Semana de Ponto de Parada de Serviço",
+                "createLabel": "Criar um novo Dia da Semana de Ponto de Parada de Serviço",
+                "createOrEditLabel": "Criar ou editar um Dia da Semana de Ponto de Parada de Serviço"
+            },
+            "created": "Um novo Dia da Semana de Ponto de Parada de Serviço foi criado com o identificador {{ param }}",
+            "updated": "Um Dia da Semana de Ponto de Parada de Serviço foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Dia da Semana de Ponto de Parada de Serviço foi excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Dia da Semana de Ponto de Parada de Serviço {{ id }}?"
+            },
+            "detail": {
+                "title": "Dia da Semana de Ponto de Parada de Serviço"
+            },
+            "day": "Dia"
+        }
+    }
+}

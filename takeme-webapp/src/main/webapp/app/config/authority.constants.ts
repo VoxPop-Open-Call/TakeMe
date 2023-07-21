@@ -1,0 +1,5 @@
+export enum Authority {
+  PROMOTER = 'ROLE_FAMILITY',
+  OPERATOR = 'ROLE_BUS_COMPANY',
+  TUTOR = 'ROLE_TUTOR'
+}

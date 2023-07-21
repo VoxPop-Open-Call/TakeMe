@@ -1,0 +1,25 @@
+<ion-header class="ion-padding">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-icon class="back router" color="primary" ios="arrow-back" md="arrow-back"
+                [routerLink]="['/app/settings/about', {from: fromInformation}]" routerDirection="back"></ion-icon>
+        </ion-buttons>
+        <ion-title class="display">Contatos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <div>
+        <ion-button color="primary" shape="round" href="tel:+351941111000">
+            <ion-icon ios="call" md="call"></ion-icon>&nbsp;+351 941 111 000
+        </ion-button>
+        <br>
+        <ion-button color="primary" shape="round" href="https://www.promotortakeme.pt">
+            <ion-icon ios="globe" md="globe"></ion-icon>&nbsp;www.promotortakeme.pt
+        </ion-button>
+        <br>
+        <ion-button color="primary" shape="round" href="mailto:contato@promotortakeme.pt">
+            <ion-icon ios="mail" md="mail"></ion-icon>&nbsp;contato@promotortakeme.pt
+        </ion-button>
+    </div>
+</ion-content>

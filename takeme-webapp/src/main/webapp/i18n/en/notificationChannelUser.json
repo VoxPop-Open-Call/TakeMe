@@ -1,0 +1,24 @@
+{
+    "familityBackofficeApp": {
+        "notificationChannelUser": {
+            "home": {
+                "title": "Notification Channel Users",
+                "createLabel": "Create a new Notification Channel User",
+                "createOrEditLabel": "Create or edit a Notification Channel User"
+            },
+            "created": "A new Notification Channel User is created with identifier {{ param }}",
+            "updated": "A Notification Channel User is updated with identifier {{ param }}",
+            "deleted": "A Notification Channel User is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Notification Channel User {{ id }}?"
+            },
+            "detail": {
+                "title": "Notification Channel User"
+            },
+            "active": "Active",
+            "userId": "User Id",
+            "notificationChannel": "Notification Channel",
+            "notificationType": "Notification Type"
+        }
+    }
+}

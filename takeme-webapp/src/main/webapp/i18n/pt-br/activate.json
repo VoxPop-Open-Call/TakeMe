@@ -1,0 +1,9 @@
+{
+    "activate": {
+        "title": "Ativação",
+        "messages": {
+            "success": "<strong>Usuário ativado com sucesso.</strong> Por favor ",
+            "error": "<strong>O usuário não pode ser ativado.</strong> Por favor utilize o formulário de registo para criar uma nova conta."
+        }
+    }
+}

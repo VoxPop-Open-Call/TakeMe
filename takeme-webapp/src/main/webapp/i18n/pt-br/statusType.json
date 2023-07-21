@@ -1,0 +1,11 @@
+{
+    "familityBackofficeApp": {
+        "StatusType": {
+            "null": "",
+            "NEW": "NOVO",
+            "ACTIVE": "ATIVO",
+            "INACTIVE": "INATIVO",
+            "PENDING": "PENDENTE"
+        }
+    }
+}

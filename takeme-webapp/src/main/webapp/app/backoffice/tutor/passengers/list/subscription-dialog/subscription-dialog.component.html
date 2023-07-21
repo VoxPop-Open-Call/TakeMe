@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h4 jhiTranslate="backoffice.home.tutors.services">Services</h4>
+    <button type="button" class="btn btn-light" (click)="dismiss()">
+      <fa-icon icon="xmark" class="pe-2"></fa-icon>
+      {{ 'backoffice.close' | translate }}
+    </button>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div *ngIf="services.length > 0">
+    <p-table [value]="services" dataKey="id">
+        <ng-template pTemplate="body" let-service let-expanded="expanded">
+            <tr>
+                <td class="w-1 borderless">
+                    <button type="button" pButton [pRowToggler]="service" class="p-button-text p-button-rounded p-button-plain"
+                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td class="borderless">
+                    <img class="sm-avatar margin-r-15" alt="Service Logo"
+                         [src]="service.logo ? 'data:image/jpg;base64,' + service.logo : '/content/images/empty_photo.svg'">
+                    {{ service.name }}
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-service>
+            <td colspan="7">
+                <div class="p-3 padding-tb-5">
+                    <p-table [value]="service.itineraries" dataKey="detail" *ngIf="service.itineraries.length > 0">
+                        <ng-template pTemplate="body" let-itinerary>
+                            <tr>
+                                <td class="borderless modal-table-td">{{ itinerary.name }}</td>
+                                <td class="float-end borderless modal-table-td">
+                                    <button type="button" class="btn btn-circle btn-primary font-white margin-10"
+                                            (click)="subscribe(itinerary, service.enrollmentURL)">
+                                        <fa-icon icon="pen-to-square" class="pe-2"></fa-icon>
+                                        {{ 'backoffice.subscribe' | translate }}
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                    <div *ngIf="service.itineraries.length <= 0">
+                        <div class="center">
+                            {{ service.name }}
+                            <span jhiTranslate="backoffice.home.tutors.noItineraries"> has no itineraries</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </ng-template>
+    </p-table>
+</div>
+
+<div class="modal-footer">
+</div>

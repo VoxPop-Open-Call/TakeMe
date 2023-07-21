@@ -1,0 +1,3 @@
+<div *ngFor="let dayOfWeekDisplay of daysOfWeekDisplay | keyvalue">
+    <span [ngClass]="dayOfWeekDisplay.value.active ? 'pr-1 text-dark font-weight-bold' : 'pr-1 text-secondary'">{{'backoffice.home.busCompany.itinerary.day-of-week.' + dayOfWeekDisplay.value.weekdayName | translate}} </span>
+</div>

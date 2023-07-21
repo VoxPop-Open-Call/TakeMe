@@ -1,0 +1,41 @@
+{
+    "familityBackofficeApp": {
+        "tutor": {
+            "home": {
+                "title": "Tutors",
+                "createLabel": "Create a new Tutor",
+                "createOrEditLabel": "Create or edit a Tutor"
+            },
+            "created": "A new Tutor is created with identifier {{ param }}",
+            "updated": "A Tutor is updated with identifier {{ param }}",
+            "deleted": "A Tutor is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tutor {{ id }}?"
+            },
+            "detail": {
+                "title": "Tutor"
+            },
+            "name": "Name",
+            "nifCountry": "Tax Country",
+            "nifNumber": "Tax ID",
+            "identificationCardNumber": "Identification Card Number",
+            "phoneNumber": "Phone Number",
+            "famility": "Famility",
+            "yes": "Yes",
+            "no": "No",
+            "photoUrl": "Photo Url",
+            "userId": "User Id",
+            "statusType": "Status Type",
+            "identificationCardType": "Identification Card Type",
+            "location": "Location",
+            "child": "Child",
+            "itinerary": "Itinerary",
+            "service": "Service",
+            "status": "Status",
+            "subscriptionDate": "Subscription Date",
+            "activationDate": "Activation Date",
+            "deactivationDate": "Deactivation Date",
+            "comments": "Comments"
+        }
+    }
+}

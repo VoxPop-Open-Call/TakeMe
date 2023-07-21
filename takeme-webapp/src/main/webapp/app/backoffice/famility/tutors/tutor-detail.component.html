@@ -1,0 +1,54 @@
+<h1 class="lg-title mb-0">{{ tutor.name }}</h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6 left">
+        <button class="btn btn-light" (click)="goBack()">
+            <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+            {{ 'backoffice.back' | translate }}
+        </button>
+    </div>
+    <div class="col-md-6 right">
+        <button class="btn btn-circle btn-outline-primary btn-xs" (click)="goToTutorChildren()">
+            <fa-icon icon="users" class="pe-2"></fa-icon>
+            {{ 'backoffice.home.famility.passengers' | translate }}
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<dl class="row-md jh-entity-details">
+    <dt jhiTranslate="familityBackofficeApp.contact.status"><span>State</span></dt>
+    <dd>
+        <span>{{ tutor.statusType }}</span>
+    </dd>
+
+    <dt *ngIf="tutor.createdDate" jhiTranslate="familityBackofficeApp.contact.date"><span>Date</span></dt>
+    <dd>
+        <span>{{ tutor.createdDate | formatExpressionDate }}</span>
+    </dd>
+
+    <dd>
+        <img *ngIf="photo" class="lg-avatar" src="{{'data:image/jpg;base64,' + photo}}">
+        <img *ngIf="!photo" class="lg-avatar" src="/content/images/empty_photo.svg">
+    </dd>
+
+    <dt><span>{{ tutor.identificationCardTypeName }}</span></dt>
+    <dd>
+        <span>{{ tutor.identificationCardNumber }}</span>
+    </dd>
+
+    <dt><span>NIF</span></dt>
+    <dd>
+        <span>{{ tutor.nifNumber }}</span>
+    </dd>
+
+    <dt><span jhiTranslate="familityBackofficeApp.contact.contact">Contact</span></dt>
+    <dd>
+        <span>{{ tutor.phoneNumber }}</span>
+    </dd>
+</dl>

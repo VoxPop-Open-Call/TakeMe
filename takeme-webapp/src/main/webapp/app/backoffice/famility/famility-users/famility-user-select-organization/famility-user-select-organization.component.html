@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h4 jhiTranslate="backoffice.entity">Entity</h4>
+    <button class="btn btn-light" (click)="dismiss()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.cancel' | translate }}
+    </button>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="modal-body">
+    <div class="row form-group">
+        <div  class="col-md-7">
+            <input name="firstNameFilter" placeholder="Name" [(ngModel)]="nameFilter" type="text" class="form-control w-70"
+                   (ngModelChange)="textSearchUpdate.next($event)">
+        </div>
+
+        <div  class="col-md-5 right">
+            <button class="btn btn-primary btn-circle font-white" (click)="close()">
+                <fa-icon icon="check" class="pe-2"></fa-icon>
+                {{ 'backoffice.select' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <p-table [value]="listOrganization" dataKey="id">
+        <ng-template pTemplate="header">
+          <tr>
+            <th jhiTranslate="backoffice.home.famility.name">Name</th>
+            <th jhiTranslate="backoffice.home.famility.nif">NIF</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-organization>
+            <tr>
+                <td>{{ organization.name }}</td>
+                <td>{{ organization.nifNumber }}</td>
+                <td>
+                    <input type="checkbox" [checked]="organization.id === organizationSelected.id" (change)="newSelection(organization)"/>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<div class="modal-footer justify-content-start">
+    <ngb-pagination
+      [collectionSize]="totalElements"
+      [page]="page + 1"
+      [pageSize]="pageSize"
+      [maxSize]="5"
+      [rotate]="true"
+      (pageChange)="changePage($event)"
+    >
+        <ng-template ngbPaginationPrevious>
+            <div jhiTranslate="global.paginator.previous">Previous</div>
+        </ng-template>
+        <ng-template ngbPaginationNext>
+            <div jhiTranslate="global.paginator.next">Next</div>
+        </ng-template>
+    </ngb-pagination>
+</div>

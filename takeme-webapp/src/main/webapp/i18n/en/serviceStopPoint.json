@@ -1,0 +1,27 @@
+{
+    "familityBackofficeApp": {
+        "serviceStopPoint": {
+            "home": {
+                "title": "Service Stop Points",
+                "createLabel": "Create a new Service Stop Point",
+                "createOrEditLabel": "Create or edit a Service Stop Point"
+            },
+            "created": "A new Service Stop Point is created with identifier {{ param }}",
+            "updated": "A Service Stop Point is updated with identifier {{ param }}",
+            "deleted": "A Service Stop Point is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Service Stop Point {{ id }}?"
+            },
+            "detail": {
+                "title": "Service Stop Point"
+            },
+            "stopPointType": "Stop Point Type",
+            "startHour": "Start Hour",
+            "combinedTime": "Combined Time",
+            "startFrequencyDate": "Start Frequency Date",
+            "statusType": "Status Type",
+            "frequency": "Frequency",
+            "serviceStopPointDaysOfWeek": "Service Stop Point Days Of Week"
+        }
+    }
+}

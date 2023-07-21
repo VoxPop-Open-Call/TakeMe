@@ -1,0 +1,17 @@
+.p-datatable .p-sortable-column.p-highlight {
+    background-color: #353d47 !important;
+}
+
+.p-datatable-tbody > tr {
+    background-color: transparent !important;
+}
+
+.p-datatable-tbody > tr > td {
+    border-right: none !important;
+    border-left: none !important;
+}
+
+.p-datatable-thead > tr > th {
+    border-right: none !important;
+    border-left: none !important;
+}

@@ -1,0 +1,11 @@
+{
+  "passenger": {
+    "title": "Passageiros",
+    "new": {
+      "title": "Novo Passageiros"
+    },
+    "update": {
+      "title": "Editar Passageiro"
+    }
+  }
+}

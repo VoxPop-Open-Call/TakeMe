@@ -1,0 +1,9 @@
+{
+    "familityBackofficeApp": {
+        "OriginType": {
+            "null": "",
+            "BROWSER": "BROWSER",
+            "NATIVE": "NATIVE"
+        }
+    }
+}

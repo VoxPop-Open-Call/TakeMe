@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 jhiTranslate="backoffice.home.busCompany.subscription.updateInformation">Update Information</h4>
+    <button type="button" class="btn btn-light" (click)="dismiss()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.cancel' | translate }}
+    </button>
+</div>
+
+<div class="modal-body form-group">
+    <label class="mb-0 sub-title" for="additional-information">
+        {{ 'backoffice.home.busCompany.subscription.additionalInformationInput' | translate }}
+    </label>
+    <br>
+    <textarea class="form-control" id="additional-information" [(ngModel)]="additionalInformation" maxlength="2000" rows="4"
+              cols="55"></textarea>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-circle btn-primary btn-xs font-white" (click)="close()">
+        <fa-icon icon="check" class="pe-2"></fa-icon>
+        {{ 'backoffice.save' | translate }}
+    </button>
+</div>

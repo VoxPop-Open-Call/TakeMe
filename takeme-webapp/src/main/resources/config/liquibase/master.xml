@@ -1,0 +1,897 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="TakeMeTeam" id="1689934647937-1">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_persistent_audit_event_pkey"/>
+            </column>
+            <column name="principal" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-2">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_persistent_audit_evt_data_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(150)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_persistent_audit_evt_data_pkey"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-3">
+        <createTable tableName="tutor">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tutor_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nif_country" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nif_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="identification_card_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="famility" type="BOOLEAN"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_type" type="VARCHAR(255)"/>
+            <column name="identification_card_type_id" type="BIGINT"/>
+            <column name="photo_file_id" type="BIGINT"/>
+            <column defaultValue="system" name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-4">
+        <createTable tableName="user_messaging_token">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_messaging_token_pkey"/>
+            </column>
+            <column name="token" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="origin" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-5">
+        <createTable tableName="child">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="child_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nif_country" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nif_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="famility" type="BOOLEAN"/>
+            <column name="status_type" type="VARCHAR(255)"/>
+            <column name="photo_file_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-6">
+        <createTable tableName="itinerary">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="itinerary_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scheduled_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="effective_start_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="effective_end_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="itinerary_status_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="estimated_km" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="BIGINT"/>
+            <column name="vehicle_id" type="BIGINT"/>
+            <column name="driver_id" type="BIGINT"/>
+            <column name="estimated_total_time" type="INTEGER"/>
+            <column name="ocupation" type="FLOAT8"/>
+            <column name="estimated_start_location" type="BIGINT"/>
+            <column name="start_location" type="BIGINT"/>
+            <column name="end_location" type="BIGINT"/>
+            <column name="promoter_itinerary_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-7">
+        <createTable tableName="itinerary_stop_point">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="itinerary_stopPoint_pkey"/>
+            </column>
+            <column name="id_stop_point" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_itinerary" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="estimated_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="jhi_order" type="INTEGER"/>
+            <column name="itinerary_status_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-8">
+        <createTable tableName="location">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="location_pkey"/>
+            </column>
+            <column name="designation" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="port_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="floor" type="VARCHAR(255)"/>
+            <column name="postal_code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jhi_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="longitude" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="latitude" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="plus_code" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-9">
+        <createTable tableName="stop_point">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="stop_point_pkey"/>
+            </column>
+            <column name="stop_point_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scheduled_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_id" type="BIGINT"/>
+            <column name="estimated_arrive_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="effective_arrive_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-10">
+        <createTable tableName="stop_point_child">
+            <column name="stop_point_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="stop_point_child_pkey"/>
+            </column>
+            <column name="child_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="stop_point_child_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-11">
+        <createTable tableName="driver">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="driver_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="driver_license" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="photo_file_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-12">
+        <createTable tableName="jhi_user">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_user_pkey"/>
+            </column>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="email" type="VARCHAR(254)"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="activated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lang_key" type="VARCHAR(6)"/>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="reset_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="uid" type="VARCHAR(50)"/>
+            <column name="organization_id" type="BIGINT"/>
+            <column name="status_change_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-13">
+        <createTable tableName="organization">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="organization_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nif_country" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nif_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_type" type="VARCHAR(255)"/>
+            <column name="location_id" type="BIGINT"/>
+            <column name="photo_file_id" type="BIGINT"/>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-14">
+        <createIndex indexName="idx_persistent_audit_event" tableName="jhi_persistent_audit_event">
+            <column name="principal"/>
+            <column name="event_date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-15">
+        <createIndex indexName="idx_persistent_audit_evt_data" tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-16">
+        <createView fullDefinition="false" viewName="itinerary_stop_point_child_v">SELECT child.id AS child_id,
+    itinerary.id AS itinerary_id,
+    child.name AS child_name,
+    itinerary.name AS itinerary_name,
+    string_agg(
+        CASE
+            WHEN ((stop_point.stop_point_type)::text = 'COLLECTION'::text) THEN concat(stop_point.scheduled_time, ';', location.*)
+            ELSE NULL::text
+        END, ','::text) AS collection,
+    string_agg(
+        CASE
+            WHEN ((stop_point.stop_point_type)::text = 'DELIVER'::text) THEN concat(stop_point.scheduled_time, ';', location.*)
+            ELSE NULL::text
+        END, ','::text) AS deliver,
+    itinerary.itinerary_status_type
+   FROM (((((stop_point
+     JOIN itinerary_stop_point ON ((stop_point.id = itinerary_stop_point.id_stop_point)))
+     JOIN itinerary ON ((itinerary_stop_point.id_itinerary = itinerary.id)))
+     JOIN stop_point_child ON ((stop_point.id = stop_point_child.stop_point_id)))
+     JOIN child ON ((stop_point_child.child_id = child.id)))
+     JOIN location ON ((stop_point.location_id = location.id)))
+  GROUP BY child.id, itinerary.id, child.name, itinerary.name, itinerary.itinerary_status_type;</createView>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-17">
+        <addUniqueConstraint columnNames="user_id" constraintName="driver_user_id_key" tableName="driver"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-18">
+        <addUniqueConstraint columnNames="uid" constraintName="uc_jhi_useruid_col" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-19">
+        <addUniqueConstraint columnNames="email" constraintName="ux_user_email" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-20">
+        <addUniqueConstraint columnNames="login" constraintName="ux_user_login" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-21">
+        <addUniqueConstraint columnNames="location_id" constraintName="ux_organization_location_id" tableName="organization"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-22">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="50" maxValue="9223372036854775807" minValue="1" sequenceName="sequence_generator" startValue="1000"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-23">
+        <createTable tableName="child_itinerary_subscription">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="child_itinerary_subscription_pkey"/>
+            </column>
+            <column name="status_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscription_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="deactivation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column name="additional_information" type="VARCHAR(255)"/>
+            <column name="card_number" type="VARCHAR(255)"/>
+            <column name="child_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="promoter_itinerary_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-24">
+        <createTable tableName="child_organization">
+            <column name="organizations_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="children_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-25">
+        <createTable tableName="child_subscription">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="child_subscription_pkey"/>
+            </column>
+            <column name="status_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="famility" type="BOOLEAN"/>
+            <column name="subscription_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="comments" type="VARCHAR(2000)"/>
+            <column name="child_id" type="BIGINT"/>
+            <column name="organization_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="deactivation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="additional_information" type="VARCHAR(50)"/>
+            <column name="card_number" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-26">
+        <createTable tableName="child_tutor">
+            <column name="tutors_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="children_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-27">
+        <createTable tableName="configuration">
+            <column name="jhi_key" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="configuration_pkey"/>
+            </column>
+            <column name="jhi_value" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-28">
+        <createTable tableName="contact">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="contact_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="public_data" type="BOOLEAN"/>
+            <column name="organization_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-29">
+        <createTable tableName="document_file">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="document_file_pkey"/>
+            </column>
+            <column name="file_name" type="VARCHAR(255)"/>
+            <column name="file_content" type="BYTEA"/>
+            <column name="content_type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-30">
+        <createTable tableName="identification_card_type">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="identification_card_type_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-31">
+        <createTable tableName="jhi_authority">
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_authority_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-32">
+        <createTable tableName="jhi_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_user_authority_pkey"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_user_authority_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-33">
+        <createTable tableName="notification_channel">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="notification_channel_pkey"/>
+            </column>
+            <column name="jhi_type" type="VARCHAR(255)"/>
+            <column name="active" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-34">
+        <createTable tableName="notification_channel_user">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="notification_channel_user_pkey"/>
+            </column>
+            <column name="active" type="BOOLEAN"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notification_channel_id" type="BIGINT"/>
+            <column name="notification_type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-35">
+        <createTable tableName="notification_type">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="notification_type_pkey"/>
+            </column>
+            <column name="jhi_type" type="VARCHAR(255)"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="user_configurable" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-36">
+        <createTable tableName="organization_location">
+            <column name="organization_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="organization_location_pkey"/>
+            </column>
+            <column name="location_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="organization_location_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-37">
+        <createTable tableName="promoter_itinerary">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="promoter_itinerary_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date"/>
+            <column name="service_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-38">
+        <createTable tableName="promoter_service">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="promoter_service_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="logo" type="BYTEA"/>
+            <column name="logo_content_type" type="VARCHAR(255)"/>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date"/>
+            <column name="needs_eta" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enrollment_url" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="transport_type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-39">
+        <createTable tableName="promoter_stop_point">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="promoter_stop_point_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scheduled_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="promoter_itinerary_id" type="BIGINT"/>
+            <column name="location_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-40">
+        <createTable tableName="stop_audit_event">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="stop_audit_event_pkey"/>
+            </column>
+            <column name="event_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stop_point_id" type="BIGINT"/>
+            <column name="child_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="itinerary_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-41">
+        <createTable tableName="svc">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="svc_pkey"/>
+            </column>
+            <column name="recurrent" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="organization_id" type="BIGINT"/>
+            <column name="child_itinerary_subscription_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-42">
+        <createTable tableName="svc_sp">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="svc_sp_pkey"/>
+            </column>
+            <column name="stop_point_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_hour" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="combined_time" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_frequency_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="frequency_id" type="BIGINT"/>
+            <column name="location_id" type="BIGINT"/>
+            <column name="service_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-43">
+        <createTable tableName="svc_sp_dow">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="svc_sp_dow_pkey"/>
+            </column>
+            <column name="day" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-44">
+        <createTable tableName="svc_sp_freq">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="svc_sp_freq_pkey"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="week_interval" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-45">
+        <createTable tableName="svc_sp_svc_sp_dow">
+            <column name="service_stop_point_days_of_weeks_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_stop_points_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-46">
+        <createTable tableName="user_notification">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_notification_pkey"/>
+            </column>
+            <column name="sent_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="jhi_body" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notification_channel_id" type="BIGINT"/>
+            <column name="notification_type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-47">
+        <createTable tableName="vehicle">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="vehicle_pkey"/>
+            </column>
+            <column name="designation" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="license_plate" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capacity" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-48">
+        <addPrimaryKey columnNames="children_id, organizations_id" constraintName="child_organization_pkey" tableName="child_organization"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-49">
+        <addPrimaryKey columnNames="children_id, tutors_id" constraintName="child_tutor_pkey" tableName="child_tutor"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-50">
+        <addPrimaryKey columnNames="service_stop_points_id, service_stop_point_days_of_weeks_id" constraintName="service_stop_point_service_stop_point_days_of_week_pkey" tableName="svc_sp_svc_sp_dow"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-51">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="fk_authority_name" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="name" referencedTableName="jhi_authority" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-52">
+        <addForeignKeyConstraint baseColumnNames="child_id" baseTableName="child_itinerary_subscription" constraintName="fk_child_itinerary_subscription__child_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="child" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-53">
+        <addForeignKeyConstraint baseColumnNames="promoter_itinerary_id" baseTableName="child_itinerary_subscription" constraintName="fk_child_itinerary_subscription__promoter_itinerary_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="promoter_itinerary" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-54">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="child_itinerary_subscription" constraintName="fk_child_itinerary_subscription__user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-55">
+        <addForeignKeyConstraint baseColumnNames="children_id" baseTableName="child_organization" constraintName="fk_child_organization_children_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="child" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-56">
+        <addForeignKeyConstraint baseColumnNames="organizations_id" baseTableName="child_organization" constraintName="fk_child_organization_organizations_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-57">
+        <addForeignKeyConstraint baseColumnNames="photo_file_id" baseTableName="child" constraintName="fk_child_photo_file_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="document_file" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-58">
+        <addForeignKeyConstraint baseColumnNames="child_id" baseTableName="child_subscription" constraintName="fk_child_subscription_child_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="child" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-59">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="child_subscription" constraintName="fk_child_subscription_organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-60">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="child_subscription" constraintName="fk_child_subscription_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-61">
+        <addForeignKeyConstraint baseColumnNames="children_id" baseTableName="child_tutor" constraintName="fk_child_tutor_children_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="child" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-62">
+        <addForeignKeyConstraint baseColumnNames="tutors_id" baseTableName="child_tutor" constraintName="fk_child_tutor_tutors_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tutor" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-63">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="contact" constraintName="fk_contact_organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-64">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="driver" constraintName="fk_driver_organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-65">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="driver" constraintName="fk_driver_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-66">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="fk_evt_pers_audit_evt_data" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-67">
+        <addForeignKeyConstraint baseColumnNames="promoter_itinerary_id" baseTableName="itinerary" constraintName="fk_itinerary__promoter_itinerary_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="promoter_itinerary" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-68">
+        <addForeignKeyConstraint baseColumnNames="driver_id" baseTableName="itinerary" constraintName="fk_itinerary_driver_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="driver" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-69">
+        <addForeignKeyConstraint baseColumnNames="end_location" baseTableName="itinerary" constraintName="fk_itinerary_end_location_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="location" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-70">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="itinerary" constraintName="fk_itinerary_organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-71">
+        <addForeignKeyConstraint baseColumnNames="estimated_start_location" baseTableName="itinerary" constraintName="fk_itinerary_start_estimation_location_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="location" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-72">
+        <addForeignKeyConstraint baseColumnNames="start_location" baseTableName="itinerary" constraintName="fk_itinerary_start_location_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="location" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-73">
+        <addForeignKeyConstraint baseColumnNames="id_itinerary" baseTableName="itinerary_stop_point" constraintName="fk_itinerary_stopPoint_id_itinerary" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itinerary" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-74">
+        <addForeignKeyConstraint baseColumnNames="id_stop_point" baseTableName="itinerary_stop_point" constraintName="fk_itinerary_stopPoint_id_stop_point" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="stop_point" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-75">
+        <addForeignKeyConstraint baseColumnNames="vehicle_id" baseTableName="itinerary" constraintName="fk_itinerary_vehicle_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="vehicle" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-76">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="jhi_user" constraintName="fk_jhiuser_organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-77">
+        <addForeignKeyConstraint baseColumnNames="notification_channel_id" baseTableName="notification_channel_user" constraintName="fk_notification_channel_user_notification_channel_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="notification_channel" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-78">
+        <addForeignKeyConstraint baseColumnNames="notification_type_id" baseTableName="notification_channel_user" constraintName="fk_notification_channel_user_notification_type_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="notification_type" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-79">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="notification_channel_user" constraintName="fk_notification_channel_user_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-80">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="organization" constraintName="fk_organization_location_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="location" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-81">
+        <addForeignKeyConstraint baseColumnNames="photo_file_id" baseTableName="organization" constraintName="fk_organization_photo_file_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="document_file" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-82">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="promoter_itinerary" constraintName="fk_promoter_itinerary__organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-83">
+        <addForeignKeyConstraint baseColumnNames="service_id" baseTableName="promoter_itinerary" constraintName="fk_promoter_itinerary__service_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="promoter_service" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-84">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="promoter_stop_point" constraintName="fk_promoter_stop_point__location_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="location" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-85">
+        <addForeignKeyConstraint baseColumnNames="promoter_itinerary_id" baseTableName="promoter_stop_point" constraintName="fk_promoter_stop_point__promoter_itinerary_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="promoter_itinerary" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-86">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="svc" constraintName="fk_service_organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-87">
+        <addForeignKeyConstraint baseColumnNames="frequency_id" baseTableName="svc_sp" constraintName="fk_service_stop_point_frequency_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="svc_sp_freq" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-88">
+        <addForeignKeyConstraint baseColumnNames="child_id" baseTableName="stop_audit_event" constraintName="fk_stop_audit_event_child_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="child" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-89">
+        <addForeignKeyConstraint baseColumnNames="itinerary_id" baseTableName="stop_audit_event" constraintName="fk_stop_audit_event_itinerary_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itinerary" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-90">
+        <addForeignKeyConstraint baseColumnNames="stop_point_id" baseTableName="stop_audit_event" constraintName="fk_stop_audit_event_stop_point_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="stop_point" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-91">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="stop_point" constraintName="fk_stop_point_location_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="location" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-92">
+        <addForeignKeyConstraint baseColumnNames="child_itinerary_subscription_id" baseTableName="svc" constraintName="fk_svc__child_itinerary_subscription_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="child_itinerary_subscription" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-93">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="svc_sp" constraintName="fk_svc_sp_location_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="location" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-94">
+        <addForeignKeyConstraint baseColumnNames="service_id" baseTableName="svc_sp" constraintName="fk_svc_sp_service_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="svc" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-95">
+        <addForeignKeyConstraint baseColumnNames="service_stop_point_days_of_weeks_id" baseTableName="svc_sp_svc_sp_dow" constraintName="fk_svc_sp_svc_sp_dow_svc_sp_dows_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="svc_sp_dow" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-96">
+        <addForeignKeyConstraint baseColumnNames="service_stop_points_id" baseTableName="svc_sp_svc_sp_dow" constraintName="fk_svc_sp_svc_sp_dow_svc_sps_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="svc_sp" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-97">
+        <addForeignKeyConstraint baseColumnNames="identification_card_type_id" baseTableName="tutor" constraintName="fk_tutor_identification_card_type_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="identification_card_type" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-98">
+        <addForeignKeyConstraint baseColumnNames="photo_file_id" baseTableName="driver" constraintName="fk_tutor_photo_file_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="document_file" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-99">
+        <addForeignKeyConstraint baseColumnNames="photo_file_id" baseTableName="tutor" constraintName="fk_tutor_photo_file_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="document_file" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-100">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="tutor" constraintName="fk_tutor_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-101">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="fk_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-102">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_messaging_token" constraintName="fk_user_messaging_token_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-103">
+        <addForeignKeyConstraint baseColumnNames="notification_channel_id" baseTableName="user_notification" constraintName="fk_user_notification_notification_channel_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="notification_channel" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-104">
+        <addForeignKeyConstraint baseColumnNames="notification_type_id" baseTableName="user_notification" constraintName="fk_user_notification_notification_type_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="notification_type" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-105">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_notification" constraintName="fk_user_notification_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="TakeMeTeam" id="1689934647937-106">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="vehicle" constraintName="fk_vehicle_organization_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

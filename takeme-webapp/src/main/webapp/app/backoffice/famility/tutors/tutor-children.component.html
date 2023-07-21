@@ -1,0 +1,51 @@
+<h1 class="lg-title mb-0">{{ 'backoffice.home.famility.passengers' | translate }}</h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<button class="btn btn-light" (click)="goBack()">
+    <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+    {{ 'backoffice.back' | translate }}
+</button>
+
+<hr>
+
+<div>
+    <dl class="row-md jh-entity-details">
+
+        <div *ngFor="let child of children">
+            <dt><span>Name</span></dt>
+            <dd>
+                <span>{{ child.name }}</span>
+            </dd>
+
+            <dd>
+                <img *ngIf="child.photo" class="lg-avatar" src="{{ 'data:image/jpg;base64,' + child.photo }}">
+                <img *ngIf="!child.photo" class="lg-avatar" src="/content/images/empty_photo.svg">
+            </dd>
+
+            <dt><span>NIF</span></dt>
+            <dd>
+                <span>{{ child.nifNumber }}</span>
+            </dd>
+
+            <div *ngIf="child.childSubscriptionChild?.length > 0">
+                <h4>Subscriptions</h4>
+                <div *ngFor="let subscription of child.childSubscriptionChild">
+                      <dt>Name</dt>
+                      <dd>{{ subscription.organization.name }}</dd>
+
+                      <dt>Status</dt>
+                      <dd>{{ subscription.organization.statusType }}</dd>
+
+                      <div *ngIf="subscription.organization.location">
+                          <dt>Location</dt>
+                          <dd>{{ buildAddress(subscription.organization.location) }}</dd>
+                      </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </dl>
+</div>

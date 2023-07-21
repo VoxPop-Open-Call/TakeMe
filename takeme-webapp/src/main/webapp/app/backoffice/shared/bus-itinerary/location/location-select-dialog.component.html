@@ -1,0 +1,50 @@
+<div class="h-v-padding">
+    <h2 jhiTranslate="backoffice.address">Address</h2>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="modal-header">
+        <button jhiTranslate="backoffice.cancel" type="button" class="btn btn-default btn-xs" (click)="dismiss()">Cancelar</button>
+        <button jhiTranslate="backoffice.select" type="button" class="btn btn-default btn-xs" (click)="close()" [disabled]="!locationSelected">Selecionar</button>
+        <button jhiTranslate="backoffice.new-address" type="button" class="btn btn-default btn-xs" (click)="newAddress()">Nova Morada</button>
+    </div>
+
+    <div class="modal-body">
+        <input jhiTranslate="backoffice.search" type="text" [(ngModel)]="designationFilter"><button type="button" (click)="loadOrganizationAddresses()">Procurar</button>
+        <br><br>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><span jhiTranslate="backoffice.designation">Designação</span></th>
+                <th colspan="2"><span jhiTranslate="backoffice.address">Morada</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let location of locations">
+                    <td class="pointer" (click)="goDetail(location.id)">{{ location.designation }}</td>
+                    <td class="pointer" (click)="goDetail(location.id)">{{ buildAddress(location) }}</td>
+                    <td><input type="checkbox" (change)="newSelection(location)"
+                            [checked]="locationSelected?.id === location.id"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <ngb-pagination
+          [collectionSize]="totalElements"
+          [page]="page + 1"
+          [pageSize]="pageSize"
+          [maxSize]="5"
+          [rotate]="true"
+          (pageChange)="changePage($event)"
+        >
+            <ng-template ngbPaginationPrevious>
+                <div jhiTranslate="global.paginator.previous">Previous</div>
+            </ng-template>
+            <ng-template ngbPaginationNext>
+                <div jhiTranslate="global.paginator.next">Next</div>
+            </ng-template>
+        </ngb-pagination>
+    </div>
+</div>

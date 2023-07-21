@@ -1,0 +1,48 @@
+{
+    "familityBackofficeApp": {
+        "childSubscription": {
+            "home": {
+                "title": "Inscrições",
+                "createLabel": "Criar uma nova inscrição",
+                "createOrEditLabel": "Criar ou editar uma inscrição"
+            },
+            "created": "Uma nova Inscrição de Aluno foi criada com o identificador {{ param }}",
+            "updated": "Uma Inscrição de Aluno foi atualizada com o identificador {{ param }}",
+            "deleted": "Uma Inscrição de Aluno foi excluída com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir a inscrição {{ id }}?"
+            },
+            "detail": {
+                "title": "Inscrição"
+            },
+            "statusType": "Tipo de Estado",
+            "famility": "Famility",
+            "not-famility": "Não-Famility",
+            "type": "Tipo",
+            "subscriptionDate": "Data de Inscrição",
+            "activationDate": "Data de Ativação",
+            "comments": "Comentários",
+            "no-comments": "Sem comentários",
+            "no-additional-information": "Sem informação adicional",
+            "additional-information": "Informação adicional",
+            "child": "Aluno",
+            "organization": "Organização",
+            "import": {
+                "title": "Importar Alunos",
+                "button": "Importar",
+                "download": "1. Transfira o modelo de importação",
+                "download-button": "Transferir",
+                "select": "2. Preencha e faça upload do arquivo aqui",
+                "upload": "3. Importe o arquivo selecionado",
+                "success": "Foram processados {{ childrenImportedNumber }} alunos com sucesso",
+                "error": {
+                    "parsing": "Erro ao importar folha de alunos, na linha {{ lineNumber }}, coluna {{ columnLetter }}",
+                    "processing": "Erro ao importar folha de alunos, na linha {{ lineNumber }}",
+                    "no-file": "Por favor escolha um arquivo no formato .xlsx",
+                    "max-children": "Limite de alunos não-famility foi ultrapassado",
+                    "other": "Erro ao importar folha de alunos"
+                }
+            }
+        }
+    }
+}

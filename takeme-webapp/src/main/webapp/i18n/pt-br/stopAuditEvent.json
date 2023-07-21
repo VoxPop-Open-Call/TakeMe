@@ -1,0 +1,23 @@
+{
+    "familityBackofficeApp": {
+        "stopAuditEvent": {
+            "home": {
+                "title": "Eventos de Auditoria de Parada",
+                "createLabel": "Criar um novo Evento de Auditoria de Parada",
+                "createOrEditLabel": "Criar ou editar um Evento de Auditoria de Parada"
+            },
+            "created": "Um novo Evento de Auditoria de Parada foi criado com identificador {{ param }}",
+            "updated": "Um Evento de Auditoria de Parada foi atualizado com identificador {{ param }}",
+            "deleted": "Um Evento de Auditoria de Parada foi excluído com identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Evento de Auditoria de Parada {{ id }}?"
+            },
+            "detail": {
+                "title": "Evento de Auditoria de Parada"
+            },
+            "eventTime": "Hora do Evento",
+            "eventType": "Tipo do Evento",
+            "stopPoint": "Ponto de Parada"
+        }
+    }
+}

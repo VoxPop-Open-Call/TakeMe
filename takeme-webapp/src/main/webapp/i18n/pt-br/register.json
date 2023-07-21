@@ -1,0 +1,30 @@
+{
+    "register": {
+        "title": "Registro",
+        "form": {
+            "button": "Registrar"
+        },
+        "messages": {
+            "validate": {
+                "login": {
+                    "required": "O usuário é obrigatório.",
+                    "minlength": "O usuário deve ter pelo menos 1 caractere",
+                    "maxlength": "O usuário não pode ter mais de 50 caracteres",
+                    "pattern": "O usuário apenas pode conter letras minúsculas e números"
+                }
+            },
+            "success": "<strong>Registro efetuado com sucesso!</strong> Por favor verifique o seu email para confirmar a conta.",
+            "error": {
+                "fail": "<strong>Erro ao realizar o registro!</strong> Por favor, tente novamente mais tarde.",
+                "userexists": "<strong>Usuário já registrado!</strong> Por favor, escolha outro.",
+                "emailexists": "<strong>O email já está em uso!</strong> Por favor, escolha outro."
+            }
+        }
+    },
+    "finishregistration": {
+        "title": "Finalizar Registro",
+        "form": {
+            "button": "Confirmar"
+        }
+    }
+}

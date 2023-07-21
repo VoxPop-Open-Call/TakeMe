@@ -1,0 +1,29 @@
+{
+    "familityBackofficeApp": {
+        "itinerary": {
+            "home": {
+                "title": "Itineraries",
+                "createLabel": "Create a new Itinerary",
+                "createOrEditLabel": "Create or edit a Itinerary"
+            },
+            "created": "A new Itinerary is created with identifier {{ param }}",
+            "updated": "A Itinerary is updated with identifier {{ param }}",
+            "deleted": "A Itinerary is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Itinerary {{ id }}?"
+            },
+            "detail": {
+                "title": "Itinerary"
+            },
+            "name": "Name",
+            "estimatedStartTime": "Estimated Start Time",
+            "effectiveStartTime": "Effective Start Time",
+            "effectiveEndTime": "Effective End Time",
+            "itineraryStatusType": "Itinerary Status Type",
+            "estimatedKM": "Estimated KM",
+            "organization": "Organization",
+            "vehicle": "Vehicle",
+            "driver": "Driver"
+        }
+    }
+}

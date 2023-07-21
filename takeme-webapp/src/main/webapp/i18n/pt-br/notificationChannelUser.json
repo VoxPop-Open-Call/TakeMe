@@ -1,0 +1,24 @@
+{
+    "familityBackofficeApp": {
+        "notificationChannelUser": {
+            "home": {
+                "title": "Usuários do Canal de Notificação",
+                "createLabel": "Criar um novo Usuário do Canal de Notificação",
+                "createOrEditLabel": "Criar ou editar um Usuário do Canal de Notificação"
+            },
+            "created": "Um novo Usuário do Canal de Notificação foi criado com o identificador {{ param }}",
+            "updated": "Um Usuário do Canal de Notificação foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Usuário do Canal de Notificação foi excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Usuário do Canal de Notificação {{ id }}?"
+            },
+            "detail": {
+                "title": "Usuário do Canal de Notificação"
+            },
+            "active": "Ativo",
+            "userId": "Id de Usuário",
+            "notificationChannel": "Canal de Notificação",
+            "notificationType": "Tipo de Notificação"
+        }
+    }
+}

@@ -1,0 +1,74 @@
+<h1 class="lg-title mb-0">
+    <span jhiTranslate="backoffice.home.busCompany.new-driver" *ngIf="!driver">
+        New Driver
+    </span>
+    <span jhiTranslate="backoffice.home.busCompany.edit-driver" *ngIf="driver">
+        Edit Driver
+    </span>
+</h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form [formGroup]="updateForm" (ngSubmit)="save()">
+
+    <div class="row">
+        <div class="col-md-6 left">
+            <button class="btn btn-light" (click)="goBack()">
+                <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+                {{ 'backoffice.cancel' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-6 right">
+            <button type="submit" class="btn btn-circle btn-primary font-white" [disabled]="updateForm.invalid || !updateForm.dirty">
+                <fa-icon icon="check" class="pe-2"></fa-icon>
+                {{ 'backoffice.save' | translate }}
+            </button>
+        </div>
+    </div>
+    <hr>
+
+    <div formGroupName="driver">
+
+        <table class="table">
+            <tr class="row-box-shadow">
+
+                <td class="w-30 center">
+                    <div class="v-padding">
+                        <img class="lg-avatar" *ngIf="form.driver.get('photo').value"
+                            src="{{ 'data:image/jpg;base64,' + form.driver.get('photo').value }}" alt="Photo driver">
+                        <img class="lg-avatar" *ngIf="!form.driver.get('photo').value"
+                            src="/content/images/empty_photo.svg" alt="Default photo">
+                    </div>
+                    <label for="photoUpload" class="btn btn-circle btn-outline-primary">
+                        <fa-icon icon="pen" class="pe-2"></fa-icon>
+                        {{ 'familityBackofficeApp.contact.change-photo' | translate }}
+                    </label>
+                    <input id="photoUpload" type="file" accept="image/*" style="display: none"
+                        (change)="onFileChange($event)">
+                </td>
+
+                <td class="w-70">
+                    <table class="w-100">
+                        <tr class="w-100">
+                            <td class="w-100">
+                                <label class="w-100 sub-title" jhiTranslate="familityBackofficeApp.contact.name">Name</label>
+                                <input type="text" formControlName="name" class="form-control w-100">
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td> <label class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.driver-license">Driver's License</label>
+                                <input type="text" formControlName="driverLicense" class="form-control"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+
+</form>

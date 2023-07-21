@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 jhiTranslate="backoffice.home.busCompany.drivers" class="lg-title mb-0 float-start">Drivers</h1>
+        <a [routerLink]="['/operator/monitors/new']">
+            <button type="button" class="btn btn-circle btn-primary btn-md font-white float-end">
+                <fa-icon icon="plus" class="pe-2"></fa-icon>{{ 'backoffice.add' | translate }}
+            </button>
+        </a>
+    </div>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form class="form-row px-2 d-flex">
+    <div class="input-group w-25">
+        <input type="text" class="form-control" placeholder="{{'backoffice.search' | translate}}"
+        name="filterName" [(ngModel)]="nameFilter" (ngModelChange)="textSearchUpdate.next($event)">
+    </div>
+    <button class="btn btn-light margin-l-10" type="submit" (click)="resetFilter()">
+      {{ 'audits.filter.button.clear' | translate }}
+    </button>
+</form>
+
+<hr>
+
+<p-table [value]="driverList" dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th>{{ 'familityBackofficeApp.contact.name' | translate }}</th>
+            <th>{{ 'backoffice.home.busCompany.itinerary.driver-license' | translate }}</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-driver>
+        <tr class="pointer" (click)="goToEdit(driver.id)">
+            <td>
+                <img class="sm-avatar" [src]="driver.photo? driver.photo: '/content/images/empty_photo.svg'">
+            </td>
+            <td>{{ driver.name}}</td>
+            <td>{{ driver.driverLicense }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<br>
+
+<div class="pagination">
+    <ngb-pagination
+      [collectionSize]="totalElements"
+      [page]="page + 1"
+      [pageSize]="pageSize"
+      [maxSize]="5"
+      [rotate]="true"
+      (pageChange)="changePage($event)"
+    >
+        <ng-template ngbPaginationPrevious>
+            <div jhiTranslate="global.paginator.previous">Previous</div>
+        </ng-template>
+        <ng-template ngbPaginationNext>
+            <div jhiTranslate="global.paginator.next">Next</div>
+        </ng-template>
+    </ngb-pagination>
+</div>

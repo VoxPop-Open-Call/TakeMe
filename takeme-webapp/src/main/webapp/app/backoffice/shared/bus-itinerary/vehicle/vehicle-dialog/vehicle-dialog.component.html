@@ -1,0 +1,35 @@
+<div class="h-v-padding">
+    <h2 jhiTranslate="backoffice.home.busCompany.vehicles">Vehicles</h2>
+
+    <jhi-alert></jhi-alert>
+
+    <div *ngIf="vehicles">
+        <div class="modal-header">
+            <button jhiTranslate="backoffice.cancel" type="button" class="btn btn-default btn-xs" (click)="dismiss()">Cancelar</button>
+            <button jhiTranslate="backoffice.select" type="button" class="btn btn-default btn-xs" (click)="selectedVehicle()"
+                    [disabled]="!vehicleSelected">Selecionar</button>
+        </div>
+        <div class="modal-body">
+            <table class="w-100">
+                <tr>
+                    <th jhiTranslate="familityBackofficeApp.itinerary.vehicle">Vehicle</th>
+                    <th jhiTranslate="backoffice.home.busCompany.license-plate">License Plate</th>
+                    <th jhiTranslate="backoffice.home.busCompany.itinerary.vehicle-capacity">Vehicle Capacity</th>
+                </tr>
+                <tr *ngFor="let vehicle of vehicles" class="w-100">
+                    <td class="w-30">{{vehicle.designation}}</td>
+                    <td class="w-30">{{vehicle.licensePlate}}</td>
+                    <td class="w-30">{{vehicle.capacity}}</td>
+                    <td class="w-10"><input type="checkbox" (change)="newSelection(vehicle)"
+                                            [checked]="vehicleSelected?.id === vehicle.id"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!vehicles">
+    <div class="modal-body">
+        <span>Atualmente não existem veiculos associados a esta transportadora</span>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+{
+  "familityBackofficeApp": {
+    "promoterService": {
+      "home": {
+        "title": "Services",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "New Service",
+        "editLabel": "Edit Service",
+        "createOrEditLabel": "Create or edit a Promoter Service",
+        "notFound": "No services found"
+      },
+      "created": "A new Promoter Service is created with identifier {{ param }}",
+      "updated": "A Promoter Service is updated with identifier {{ param }}",
+      "deleted": "A Promoter Service is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Promoter Service {{ id }}?"
+      },
+      "detail": {
+        "title": "Promoter Service"
+      },
+      "id": "ID",
+      "name": "Name",
+      "logo": "Logo",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "needsETA": "Needs ETA?",
+      "enrollmentURL": "Enrollment URL",
+      "yes": "Yes",
+      "no": "No",
+      "transportType": "Transport Type",
+      "transportTypeEnum": {
+        "CAR": "Car",
+        "BUS": "Bus",
+        "WALKING": "Walking",
+        "BICYCLING": "Bicycling"
+      }
+    }
+  }
+}

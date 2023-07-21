@@ -1,0 +1,20 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+version: '3.8'
+services:
+    famility_takeme_backoffice-app:
+        image: famility_takeme_backoffice
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,api-docs
+            - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://famility_takeme_backoffice-postgresql:5432/famility_takeme_backoffice
+            - SPRING_LIQUIBASE_URL=jdbc:postgresql://famility_takeme_backoffice-postgresql:5432/famility_takeme_backoffice
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - APPLICATION_FIREBASE_CONFIG_FILE=x
+            - APPLICATION_FIREBASE_APP_KEY=x
+        ports:
+            - 8080:8080
+    famility_backoffice-postgresql:
+        extends:
+            file: postgresql.yml
+            service: famility_backoffice-postgresql

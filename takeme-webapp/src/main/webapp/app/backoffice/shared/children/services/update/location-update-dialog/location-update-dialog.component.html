@@ -1,0 +1,82 @@
+<div class="modal-header">
+    <h4 *ngIf="!location" jhiTranslate="backoffice.home.busCompany.services.newAddress">New Address</h4>
+    <h4 *ngIf="location" jhiTranslate="backoffice.home.busCompany.services.editAddress">Edit Address</h4>
+    <button class="btn btn-light" (click)="dismiss()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.cancel' | translate }}
+    </button>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="modal-body">
+    <form [formGroup]="editForm">
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.type">Type</label>
+            <select formControlName="type" class="form-select">
+                <option *ngFor="let locationType of locationTypes" [value]="locationType">{{getLocationTypeLabel(locationType)|async}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.designation">Designation</label>
+            <input type="text" formControlName="designation" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.street">Street</label>
+            <input type="text" formControlName="street" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.door">Door Number</label>
+            <input type="text" formControlName="portNumber" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.floor">Floor Number</label>
+            <input type="text" formControlName="floor" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.postalCode">Postal Code</label>
+            <input type="text" formControlName="postalCode" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.city">City</label>
+            <input type="text" formControlName="city" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.country">Country</label>
+            <input type="text" formControlName="country" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.longitude">Longitude</label>
+            <input type="text" formControlName="longitude" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.latitude">Latitude</label>
+            <input type="text" formControlName="latitude" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" jhiTranslate="backoffice.home.busCompany.services.plusCode">Plus Code</label>
+            <input type="text" formControlName="plusCode" class="form-control">
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button *ngIf="location" type="button" class="btn btn-circle btn-outline-danger" (click)="delete()">
+        <fa-icon icon="trash" class="pe-2"></fa-icon>
+        {{ 'backoffice.delete' | translate }}
+    </button>
+    <button [disabled]="editForm.invalid" type="submit" class="btn btn-circle btn-primary font-white" (click)="save()">
+        <fa-icon icon="check" class="pe-2"></fa-icon>
+        {{ 'backoffice.save' | translate }}
+    </button>
+</div>

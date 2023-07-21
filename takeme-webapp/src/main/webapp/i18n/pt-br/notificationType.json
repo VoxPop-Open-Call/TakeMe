@@ -1,0 +1,24 @@
+{
+    "familityBackofficeApp": {
+        "notificationType": {
+            "home": {
+                "title": "Tipos de Notificação",
+                "createLabel": "Criar um novo Tipo de Notificação",
+                "createOrEditLabel": "Criar ou editar um Tipo de Notificação"
+            },
+            "created": "Um novo Tipo de Notificação foi criado com o identificador {{ param }}",
+            "updated": "Um Tipo de Notificação foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Tipo de Notificação foi excluído com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Tipo de Notificação {{ id }}?"
+            },
+            "detail": {
+                "title": "Tipo de Notificação"
+            },
+            "type": "Tipo",
+            "active": "Ativo",
+            "title": "Título",
+            "userConfigurable": "Configurável por usuário"
+        }
+    }
+}

@@ -1,0 +1,109 @@
+<h1 class="lg-title mb-0" jhiTranslate="backoffice.home.famility.new-user">New User</h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form [formGroup]="userForm" (ngSubmit)="save()">
+    <div class="row">
+        <div class="col-md-6 left">
+            <button type="button" class="btn btn-light" (click)="goBack()">
+                <fa-icon icon="xmark" class="pe-2"></fa-icon>
+                {{ 'backoffice.cancel' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-6 right">
+            <button [disabled]="userForm.invalid && listProfiles.length > 0" type="submit"
+                    class="btn btn-circle btn-primary btn-xs font-white">
+                <fa-icon icon="check" class="pe-2"></fa-icon>
+                {{ 'backoffice.save' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label jhiTranslate="backoffice.home.famility.user.email" class="sub-title">Email</label><br>
+            <input type="text" formControlName="email" class="form-control">
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label jhiTranslate="backoffice.home.famility.user.password" class="sub-title">Password</label><br>
+            <input type="password" formControlName="password" class="form-control">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label jhiTranslate="backoffice.home.famility.user.first-name" class="sub-title">First name</label><br>
+            <input type="text" formControlName="firstName" class="form-control">
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label jhiTranslate="backoffice.home.famility.user.last-name" class="sub-title">Last name</label><br>
+            <input type="text" formControlName="lastName" class="form-control">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label jhiTranslate="backoffice.home.famility.user.type" class="sub-title">Type</label><br>
+            <select formControlName="typeOrganization" class="form-select" (change)="cleanProfiles()">
+                <option *ngFor="let organizationType of listOrganizationTypes" [ngValue]="organizationType"><span jhiTranslate="{{'familityBackofficeApp.OrganizationType.' + organizationType }}">{{ organizationType }}</span></option>
+            </select>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label jhiTranslate="backoffice.entity" class="sub-title">Entity</label><br>
+            <div class="input-group" formGroupName="organization">
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary calendar"
+                            [disabled]="userForm.controls.typeOrganization.invalid" (click)="selectOrganization(userForm.controls.organization)">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                    </button>
+                </span>
+                <input type="text" formControlName="name" class="form-control" readonly/>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div *ngIf="listProfiles.length !== 0">
+        <label jhiTranslate="backoffice.home.famility.user.profile" class="sub-title">Profile</label>
+
+        <div class="row">
+            <div class="col-md-6 form-group" >
+                <div class="form-box">
+                    <table class="table margin-0" *ngFor="let profile of listProfiles">
+                        <tr class="row v-center">
+                            <td class="w-80 left"><span jhiTranslate="{{'familityBackofficeApp.ProfileType.' + profile }}" >{{ profile }}</span></td>
+
+                            <td class="w-20 right">
+                                <input type="checkbox" (change)="selectProfile($event, profile)" [checked]="isSelected(profile)"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group" *ngIf="showDriverSelect">
+                <label jhiTranslate="backoffice.home.famility.user.driver" class="sub-title">Driver</label><br>
+                <div class="input-group" formGroupName="driver">
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary calendar"
+                                [disabled]="userForm.controls.organization.invalid" (click)="selectDriver(userForm.controls.driver)">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                        </button>
+                    </span>
+                    <input type="text" formControlName="name" class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

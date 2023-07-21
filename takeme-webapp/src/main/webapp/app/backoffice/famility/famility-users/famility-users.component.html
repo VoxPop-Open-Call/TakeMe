@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 jhiTranslate="backoffice.home.famility.users" class="lg-title mb-0 float-start">Users</h1>
+        <button type="button" class="btn btn-circle btn-primary btn-md font-white margin-b-0 float-end" (click)="goAdd()">
+            <fa-icon icon="plus" class="pe-2"></fa-icon>
+            {{ 'backoffice.add' | translate }}
+        </button>
+    </div>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form class="form-row d-flex">
+    <div class="input-group w-40">
+        <input type="text" class="form-control" placeholder="{{'userManagement.firstName' | translate}}"
+               name="firstNameFilter" [(ngModel)]="firstNameFilter" (ngModelChange)="textSearchUpdate.next($event)">
+        <input type="text" class="form-control margin-l-10" placeholder="{{'userManagement.lastName' | translate}}"
+               name="lastNameFilter" [(ngModel)]="lastNameFilter" (ngModelChange)="textSearchUpdate.next($event)">
+    </div>
+    <button class="btn btn-light margin-l-10" type="submit" (click)="resetFilter()">
+        {{ 'audits.filter.button.clear' | translate }}
+    </button>
+</form>
+
+<hr>
+
+<div class="tab row tab-gutter-x-0">
+    <button jhiTranslate="backoffice.home.famility.active"
+            class="tablinks col-md-2 center" [ngClass]="{'active font-white':active, 'deactivated':!active}"
+            (click)="showActiveUsers()">
+        Active
+    </button>
+    <button jhiTranslate="backoffice.home.famility.inactive"
+            class="tablinks col-md-2 center" [ngClass]="{'active font-white':!active, 'deactivated':active}"
+            (click)="showInactiveUsers()">
+        Inactive
+    </button>
+</div>
+
+<div *ngIf="listUsers.length > 0">
+    <div class="margin-t-15">
+        <p-table [value]="listUsers" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>{{ 'familityBackofficeApp.contact.name' | translate }}</th>
+                    <th>{{ 'backoffice.home.famility.user.organization' | translate }}</th>
+                    <th>{{ 'backoffice.home.famility.user.profile' | translate }}</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-account>
+                <tr>
+                    <td (click)="goDetail(account.email)" class="pointer">
+                        <img class="sm-avatar margin-r-15" *ngIf="account.organization?.organizationType === organizationType.FAMILITY"
+                             src="/content/images/logo-512x512.png">
+                        <img class="sm-avatar margin-r-15" *ngIf="account.organization?.organizationType !== organizationType.FAMILITY"
+                             [src]="'/content/icons/icon-'+account.organization?.organizationType+'.svg'">
+                        {{ account.firstName }} {{ account.lastName }}
+                    </td>
+                    <td class="pointer" (click)="goDetail(account.email)">
+                        <span *ngIf="account.organization?.organizationType !== organizationType.FAMILITY && account.organization?.organizationType !== organizationType.TUTOR">{{ account.organization?.name }}</span>
+                    </td>
+                    <td class="pointer" (click)="goDetail(account.email)">
+                        {{ buildAuthorities(account.authorities) }}
+                    </td>
+                    <td>
+                      <button class="btn btn-circle btn-primary font-white float-end" *ngIf="!active"
+                              (click)="updateStatusUser(account.id, !account.activated)">
+                        <fa-icon icon="user-plus" class="pe-2"></fa-icon>
+                        {{ 'backoffice.activate' | translate }}
+                      </button>
+                      <button class="btn btn-circle btn-primary font-white float-end" *ngIf="active"
+                              (click)="updateStatusUser(account.id, !account.activated)">
+                        <fa-icon icon="user-minus" class="pe-2"></fa-icon>
+                        {{ 'backoffice.inactivate' | translate }}
+                      </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="pagination margin-t-15">
+        <ngb-pagination
+                [collectionSize]="totalElements"
+                [page]="page + 1"
+                [pageSize]="pageSize"
+                [maxSize]="5"
+                [rotate]="true"
+                (pageChange)="changePage($event)"
+        >
+            <ng-template ngbPaginationPrevious>
+                <div jhiTranslate="global.paginator.previous">Previous</div>
+            </ng-template>
+            <ng-template ngbPaginationNext>
+                <div jhiTranslate="global.paginator.next">Next</div>
+            </ng-template>
+        </ngb-pagination>
+    </div>
+</div>
+
+<div *ngIf="listUsers.length == 0">
+    <div class="margin-t-15 center">
+        <h6 class="margin-b-0">
+            <i *ngIf="active" jhiTranslate="backoffice.home.famility.noActiveUsers">There are no active users</i>
+            <i *ngIf="!active" jhiTranslate="backoffice.home.famility.noInactiveUsers">There are no inactive users</i>
+        </h6>
+    </div>
+</div>
+<br><br>

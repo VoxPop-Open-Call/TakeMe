@@ -1,0 +1,216 @@
+<div *ngIf="itinerary">
+    <h1 class="lg-title mb-0">
+        <span>{{ itinerary.name }}</span>
+    </h1>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6">
+        <button type="button" class="btn btn-light" (click)="goBack()">
+            <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+            {{ 'backoffice.back' | translate }}
+        </button>
+    </div>
+
+    <div class="col-md-6 right" *ngIf="itinerary">
+        <button *ngIf="isOperator" type="button" (click)="createByTemplate()"
+                class="btn btn-circle btn-outline-primary">
+            <fa-icon icon="copy" class="pe-2"></fa-icon>
+            {{ 'backoffice.copy' | translate }}
+        </button>
+        <button *ngIf="itinerary.itineraryStatusType === 'READY_TO_START' && isOperator" type="button" (click)="goEdit()"
+                class="btn btn-circle btn-primary font-white">
+            <fa-icon icon="pen" class="pe-2"></fa-icon>
+            {{ 'backoffice.edit' | translate }}
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="itinerary">
+    <table class="center w-100">
+        <tr>
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.schedule-time">ScheduledTime</span>
+                <br>
+                <span>{{ itinerary.scheduledTime | formatExpressionDateTime }}</span>
+            </td>
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.address">Address</span>
+                <br>
+                <span>{{ buildAddress(itinerary.estimatedStartLocation) }}</span>
+            </td>
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.driver">Driver</span>
+                <br>
+                <span>{{ itinerary.driver.name }}</span>
+            </td>
+
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.license-plate">License Plate</span>
+                <br>
+                <span>{{ itinerary.vehicle.licensePlate }}</span>
+            </td>
+        </tr>
+
+        <br>
+
+        <tr>
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.status">Status</span><br>
+                <span *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'"
+                      jhiTranslate="backoffice.home.busCompany.itinerary.status.ready-to-start">READY_TO_START</span>
+                <span *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS'" jhiTranslate="backoffice.home.busCompany.itinerary.status.in-progress">IN_PROGRESS</span>
+                <span *ngIf="itinerary.itineraryStatusType === 'FINISHED'" jhiTranslate="backoffice.home.busCompany.itinerary.status.finished">FINISHED</span>
+                <span *ngIf="itinerary.itineraryStatusType === 'CANCELED'" jhiTranslate="backoffice.home.busCompany.itinerary.status.canceled">CANCELED</span>
+            </td>
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.vehicle-capacity">VehicleCapacity
+                </span>
+                <span class="sub-title"> / </span>
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.occupation">VehicleOccupation
+                </span>
+                <br>
+                <span>{{ itinerary.vehicle.capacity }} / {{ (itinerary.ocupation * 100) | number: '1.0-0'}}%</span>
+            </td>
+            <td *ngIf="(itinerary.estimatedTotalTime)" class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.estimated-total-time">Estimated Total Time</span>
+                <br>
+                <span>{{ convertToTime(itinerary.estimatedTotalTime) }}</span>
+            </td>
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.estimatedKM">EstimatedKm</span>
+                <br>
+                <span>{{ roundTotalDistance(itinerary.estimatedKM) }} Km</span>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table class="center w-100">
+        <tr>
+            <td class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.service">Service</span>
+                <br>
+                <span>{{ itinerary.promoterItinerary.service.name }}</span>
+            </td>
+            <td *ngIf="itinerary.effectiveStartTime" class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.start-time">Start Time</span>
+                <br>
+                <span>{{ itinerary.effectiveStartTime | formatExpressionDateTime }}</span>
+            </td>
+            <td *ngIf="itinerary.effectiveEndTime" class="w-25 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.end-time">End time</span>
+                <br>
+                <span>{{ itinerary.effectiveEndTime | formatExpressionDateTime }}</span>
+            </td>
+            <td *ngIf="(itinerary.effectiveStartTime) && (itinerary.effectiveEndTime)" class="w-50 left">
+                <span class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.time-spent">Time Spent</span>
+                <br>
+                <span>{{ convertToTime(itineraryDurationInSeconds) }}</span>
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <div *ngIf="itinerary.itineraryStopPointList.length > 0">
+        <div *ngIf="googleMapsURL">
+            <a [href]="googleMapsURL" target="_blank" jhiTranslate="backoffice.home.busCompany.googleMapsPrompt">Open in Google Maps</a>
+        </div>
+
+        <br>
+
+        <table class="center w-100" *ngFor="let itineraryStopPoint of itinerary.itineraryStopPointList">
+            <div class="row row-border v-center">
+                <table class="center w-100">
+                    <tr>
+                        <td class="w-20 center">
+                        <span class="sub-title">
+                            <fa-icon icon="map-marker"></fa-icon>
+                        </span>
+                            <span>{{ itineraryStopPoint.stopPoint.location.designation }}</span>
+                        </td>
+                        <td class="w-20 center">
+                            <span>{{ buildAddress(itineraryStopPoint.stopPoint.location) }}</span>
+                        </td>
+                        <td class="w-20 center">
+                            <span class="sub-title" jhiTranslate="backoffice.home.busCompany.schedule-time">Schedule Time</span>
+                            <span>{{ itineraryStopPoint.stopPoint.scheduledTime | formatExpressionDateTime }}</span>
+                        </td>
+                        <td class="w-20 center">
+                            <span class="sub-title" jhiTranslate="backoffice.home.busCompany.estimated-hour">Estimated Hour</span>
+                            <span>{{ itineraryStopPoint.stopPoint.estimatedArriveTime | formatExpressionDateTime }}</span>
+                        </td>
+                        <td class="w-20 center">
+                            <span class="sub-title" jhiTranslate="backoffice.home.busCompany.effective-hour">Effective Hour</span>
+                            <span *ngIf="itineraryStopPoint.stopPoint.effectiveArriveTime">
+                            {{ itineraryStopPoint.stopPoint.effectiveArriveTime | formatExpressionDateTime }}
+                        </span>
+                            <span *ngIf="!itineraryStopPoint.stopPoint.effectiveArriveTime">-</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div *ngIf="itineraryStopPoint.stopPoint.stopAuditEvents.length == 0 && itineraryStopPoint.stopPoint.childList">
+                <div class="row row-space-around h-padding" *ngFor="let child of itineraryStopPoint.stopPoint.childList">
+                    <table class="center w-100">
+                        <tr>
+                            <td class="w-50 left">{{ child.name }}</td>
+                            <td class="w-50 left">
+                                <span *ngIf="itineraryStopPoint.stopPoint.stopPointType === stopPointType.COLLECTION"
+                                      jhiTranslate="backoffice.home.busCompany.itinerary.itinerary-stop-point-type.collection">
+                                    COLLECTION
+                                </span>
+                                <span *ngIf="itineraryStopPoint.stopPoint.stopPointType === stopPointType.DELIVER"
+                                      jhiTranslate="backoffice.home.busCompany.itinerary.itinerary-stop-point-type.deliver">
+                                DELIVER
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="itineraryStopPoint.stopPoint.stopAuditEvents">
+                <div class="row row-space-around h-padding" *ngFor="let stopAuditEvent of itineraryStopPoint.stopPoint.stopAuditEvents">
+                    <table class="center w-100">
+                        <tr>
+                            <td class="w-20 left">{{ stopAuditEvent.child.name }}</td>
+                            <td class="w-20 left">{{ stopAuditEvent.eventTime | formatExpressionDateTime }}</td>
+                            <td class="w-20 left">
+                            <span *ngIf="stopAuditEvent.eventType === 'CHECK_IN'" jhiTranslate="backoffice.home.busCompany.itinerary.stop-event-type.check-in">
+                                CHECK_IN
+                            </span>
+                                <span *ngIf="stopAuditEvent.eventType === 'CHECK_OUT'" jhiTranslate="backoffice.home.busCompany.itinerary.stop-event-type.check-out">
+                                CHECK_OUT
+                            </span>
+                                <span *ngIf="stopAuditEvent.eventType === 'CANCELED' && itineraryStopPoint.stopPoint.stopPointType === stopPointType.COLLECTION"
+                                      jhiTranslate="backoffice.home.busCompany.itinerary.stop-event-type.check-in-cancelled">
+                                CHECK_IN_CANCELLED
+                            </span>
+                                <span *ngIf="stopAuditEvent.eventType === 'CANCELED' && itineraryStopPoint.stopPoint.stopPointType === stopPointType.DELIVER"
+                                      jhiTranslate="backoffice.home.busCompany.itinerary.stop-event-type.check-out-cancelled">
+                                CHECK_OUT_CANCELLED
+                            </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </table>
+    </div>
+
+    <div *ngIf="itinerary.itineraryStopPointList.length == 0">
+        <div class="margin-t-15 center">
+            <h6 class="margin-b-0">
+                <i>{{ itinerary.name }}</i>
+                <i jhiTranslate="backoffice.home.busCompany.noStopPoints"> has no stop points</i>
+            </h6>
+        </div>
+    </div>
+</div>
+<br><br>

@@ -1,0 +1,200 @@
+<h1 jhiTranslate="backoffice.home.busCompany.subscription.title" class="lg-title mb-0">Subscriptions</h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form class="form-row d-flex">
+    <div class="d-flex">
+        <input type="text" class="form-control" placeholder="{{'backoffice.search-passenger' | translate}}" name="filterPassenger" [(ngModel)]="passengerFilter"
+               (ngModelChange)="textSearchUpdate.next($event)">
+        <input type="text" class="form-control margin-l-10" placeholder="{{'backoffice.search-itinerary' | translate}}" name="filterItinerary"
+               [(ngModel)]="promoterItineraryFilter" (ngModelChange)="textSearchUpdate.next($event)">
+        <select *ngIf="!isOperator" class="form-select pointer margin-l-10" [(ngModel)]="promoterServiceFilter" name="filterService"
+                (ngModelChange)="textSearchUpdate.next($event)">
+            <option value="" disabled selected>{{'backoffice.search-service' | translate}}</option>
+            <option *ngFor="let service of promoterServices" value="{{service.id}}">{{service.name}}</option>
+        </select>
+        <select *ngIf="!isOperator" class="form-select pointer margin-l-10" [(ngModel)]="operatorFilter" name="filterOrganization"
+                (ngModelChange)="textSearchUpdate.next($event)">
+            <option value="" disabled selected>{{'backoffice.search-operator' | translate}}</option>
+            <option *ngFor="let organization of operators" value="{{organization.id}}">{{organization.name}}</option>
+        </select>
+    </div>
+    <button class="btn btn-light margin-l-10" type="submit" (click)="resetFilter()">
+        {{ 'audits.filter.button.clear' | translate }}
+    </button>
+</form>
+
+<hr>
+
+<div *ngIf="pendingSubscriptions.length > 0">
+    <span jhiTranslate="backoffice.home.busCompany.subscription.pending" class="md-title uppercase">Pending Subscriptions: </span>
+    <span class="sub-title">{{ pendingSubscriptions.length }}</span>
+
+    <br>
+
+    <div class="card sm-card" *ngFor="let pendingSubscription of pendingSubscriptions">
+        <div class="card-body">
+            <table (click)="goToDetailed(pendingSubscription.id)" class="pointer">
+                <tr>
+                    <td>
+                        <img class="sm-md-avatar" alt="Child Photo"
+                             [src]="pendingSubscription.child.photo ? 'data:image/jpg;base64,' + pendingSubscription.child.photo : '/content/images/empty_photo.svg'">
+                    </td>
+                    <table>
+                        <tr>
+                            <td>
+                                <h5 class="card-title">{{ pendingSubscription.child.name }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="card-text">
+                                    <span *ngIf="!isOperator">{{ pendingSubscription.promoterItinerary.service.name }} /</span>
+                                    {{ pendingSubscription.promoterItinerary.name }}
+                                </span>
+                                <span class="card-text" *ngIf="!isOperator">({{ pendingSubscription.promoterItinerary.organization.name }})</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="card-text">
+                                    <span jhiTranslate="backoffice.since">Since </span>
+                                    {{ pendingSubscription.subscriptionDate | formatExpressionDate }}
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+            </table>
+
+            <br *ngIf="isOperator">
+
+            <div class="center" *ngIf="isOperator">
+                <button type="button" (click)="setSubscriptionStatus(pendingSubscription, inactiveSubscription)"
+                        class="btn btn-circle btn-primary md-button outline margin-r-15">
+                    <fa-icon icon="user-minus" class="pe-2"></fa-icon>
+                    {{ 'backoffice.home.busCompany.subscription.refuse' | translate }}
+                </button>
+                <button type="button" (click)="setSubscriptionStatus(pendingSubscription, activeSubscription)"
+                        class="btn btn-circle btn-primary md-button font-white">
+                    <fa-icon icon="user-plus" class="pe-2"></fa-icon>
+                    {{ 'backoffice.home.busCompany.subscription.accept' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <br><br>
+</div>
+
+<div *ngIf="activeSubscriptions.length > 0">
+    <span jhiTranslate="backoffice.home.busCompany.subscription.accepted" class="md-title uppercase">Active Subscriptions: </span>
+    <span class="sub-title">{{ activeTotalItems }}</span>
+
+    <div class="margin-t-15">
+        <p-table [value]="activeSubscriptions" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.passenger">Passenger</th>
+                    <th *ngIf="!isOperator" jhiTranslate="backoffice.home.busCompany.subscription.service">Service</th>
+                    <th *ngIf="!isOperator" jhiTranslate="backoffice.home.busCompany.subscription.operator">Operator</th>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.itinerary">Itinerary</th>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.activationDate">Activation Date</th>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.comments">Comments</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-activeSubscriptions>
+                <tr>
+                    <td (click)="goToDetailed(activeSubscriptions.id)" class="pointer">
+                        <img class="sm-avatar margin-r-15" alt="Child Photo"
+                             [src]="activeSubscriptions.child.photo ? 'data:image/jpg;base64,' + activeSubscriptions.child.photo : '/content/images/empty_photo.svg'">
+                        {{ activeSubscriptions.child.name }}
+                    </td>
+                    <td *ngIf="!isOperator" (click)="goToDetailed(activeSubscriptions.id)" class="pointer">{{ activeSubscriptions.promoterItinerary.service.name }}</td>
+                    <td *ngIf="!isOperator" (click)="goToDetailed(activeSubscriptions.id)"
+                        class="pointer">{{ activeSubscriptions.promoterItinerary.organization.name }}</td>
+                    <td (click)="goToDetailed(activeSubscriptions.id)" class="pointer">{{ activeSubscriptions.promoterItinerary.name }}</td>
+                    <td (click)="goToDetailed(activeSubscriptions.id)" class="pointer">{{ activeSubscriptions.activationDate | formatExpressionDate }}</td>
+                    <td (click)="showCommentModal(activeSubscriptions.comments)"
+                        class="pointer">{{ activeSubscriptions.comments ? ((activeSubscriptions.comments.length > 15) ? (activeSubscriptions.comments  | slice:0:15) + '...' : (activeSubscriptions.comments)) : "N/A" }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <div class="pagination margin-t-15">
+            <ngb-pagination [collectionSize]="activeTotalItems" [page]="activePage + 1" [pageSize]="activeItemsPerPage" [maxSize]="5" [rotate]="true"
+                            (pageChange)="activeNavigateToPage($event)">
+                <ng-template ngbPaginationPrevious>
+                    <div jhiTranslate="global.paginator.previous">Previous</div>
+                </ng-template>
+                <ng-template ngbPaginationNext>
+                    <div jhiTranslate="global.paginator.next">Next</div>
+                </ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+    <br>
+</div>
+
+<div *ngIf="inactiveSubscriptions.length > 0">
+    <span jhiTranslate="backoffice.home.busCompany.subscription.rejected" class="md-title uppercase">Rejected Subscriptions: </span>
+    <span class="sub-title">{{ inactiveTotalItems }}</span>
+
+    <div class="margin-t-15">
+        <p-table [value]="inactiveSubscriptions" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.passenger">Passenger</th>
+                    <th *ngIf="!isOperator" jhiTranslate="backoffice.home.busCompany.subscription.service">Service</th>
+                    <th *ngIf="!isOperator" jhiTranslate="backoffice.home.busCompany.subscription.operator">Operator</th>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.itinerary">Itinerary</th>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.deactivationDate">Deactivation Date</th>
+                    <th jhiTranslate="backoffice.home.busCompany.subscription.comments">Comments</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-inactiveSubscriptions>
+                <tr>
+                    <td (click)="goToDetailed(inactiveSubscriptions.id)" class="pointer">
+                        <img class="sm-avatar margin-r-15" alt="Child Photo"
+                             [src]="inactiveSubscriptions.child.photo ? 'data:image/jpg;base64,' + inactiveSubscriptions.child.photo : '/content/images/empty_photo.svg'">
+                        {{ inactiveSubscriptions.child.name }}
+                    </td>
+                    <td *ngIf="!isOperator" (click)="goToDetailed(inactiveSubscriptions.id)"
+                        class="pointer">{{ inactiveSubscriptions.promoterItinerary.service.name }}</td>
+                    <td *ngIf="!isOperator" (click)="goToDetailed(inactiveSubscriptions.id)"
+                        class="pointer">{{ inactiveSubscriptions.promoterItinerary.organization.name }}</td>
+                    <td (click)="goToDetailed(inactiveSubscriptions.id)" class="pointer">{{ inactiveSubscriptions.promoterItinerary.name }}</td>
+                    <td (click)="goToDetailed(inactiveSubscriptions.id)" class="pointer">{{ inactiveSubscriptions.deactivationDate | formatExpressionDate }}</td>
+                    <td (click)="showCommentModal(inactiveSubscriptions.comments)"
+                        class="pointer">{{ inactiveSubscriptions.comments ? ((inactiveSubscriptions.comments.length > 15) ? (inactiveSubscriptions.comments  | slice:0:15) + '...' : (inactiveSubscriptions.comments)) : "N/A" }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <div class="pagination margin-t-15">
+            <ngb-pagination [collectionSize]="inactiveTotalItems" [page]="inactivePage + 1" [pageSize]="inactiveItemsPerPage" [maxSize]="5" [rotate]="true"
+                            (pageChange)="inactiveNavigateToPage($event)">
+                <ng-template ngbPaginationPrevious>
+                    <div jhiTranslate="global.paginator.previous">Previous</div>
+                </ng-template>
+                <ng-template ngbPaginationNext>
+                    <div jhiTranslate="global.paginator.next">Next</div>
+                </ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+    <br>
+</div>
+
+<div *ngIf="pendingSubscriptions.length == 0 && activeSubscriptions.length == 0 && inactiveSubscriptions.length == 0">
+    <div class="margin-t-15 center">
+        <h6 class="margin-b-0">
+            <i jhiTranslate="backoffice.home.busCompany.noSubscriptionsList">There are no subscriptions</i>
+        </h6>
+    </div>
+    <br>
+</div>
+<br>

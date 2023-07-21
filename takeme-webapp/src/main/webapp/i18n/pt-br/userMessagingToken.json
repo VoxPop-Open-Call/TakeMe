@@ -1,0 +1,23 @@
+{
+    "familityBackofficeApp": {
+        "userMessagingToken": {
+            "home": {
+                "title": "Tokens de Menssagem de Usuário",
+                "createLabel": "Criar um novo Token de Menssagem de Usuário",
+                "createOrEditLabel": "Criar ou editar um Token de Menssagem de Usuário"
+            },
+            "created": "Um novo Token de Menssagem de Usuário foi criado com identificador {{ param }}",
+            "updated": "Um Token de Menssagem de Usuário foi atualizado com identificador {{ param }}",
+            "deleted": "Um Token de Menssagem de Usuário foi excluído com identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza que pretende excluir o Token de Menssagem de Usuário {{ id }}?"
+            },
+            "detail": {
+                "title": "Token de Menssagem de Usuário"
+            },
+            "token": "Token",
+            "origin": "Origem",
+            "userId": "Id Usuário"
+        }
+    }
+}

@@ -1,0 +1,45 @@
+<ion-header class="ion-padding">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-icon class="back router" color="primary" name="arrow-back" routerDirection="back"
+              [routerLink]="['/app/' + goTo]"></ion-icon>
+      </ion-buttons>        
+      <ion-title class="display">Sobre TakeMe by Famility<br><ion-text class="sm-sub-title">Versão {{ appVersion }}</ion-text></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <br>
+  <ion-grid class="display">
+      <ion-row>
+          <ion-col size="small">
+              <ion-icon class="xsm-image-icon-bkg" ios="help" md="help"></ion-icon>
+          </ion-col>
+          <ion-col class="long-label" (click)="goToFaq()">
+              <ion-label class="sm-display">FAQ's/Sugestões</ion-label>
+              <ion-icon color="primary" ios="arrow-forward" md="arrow-forward"></ion-icon>
+          </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col size="small">
+              <ion-icon class="xsm-image-icon-bkg" ios="list" md="list"></ion-icon>
+          </ion-col>
+          <ion-col class="long-label" (click)="goToTermsAndConditions()">
+              <ion-label class="sm-display">Termos e Condições</ion-label>
+              <ion-icon color="primary" ios="arrow-forward" md="arrow-forward"></ion-icon>
+          </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+          <ion-col size="small">
+              <ion-icon class="xsm-image-icon-bkg" ios="call" md="call"></ion-icon>
+          </ion-col>
+          <ion-col class="long-label" (click)="goToContacts()">
+              <ion-label class="sm-display">Contatos</ion-label>
+              <ion-icon color="primary" ios="arrow-forward" md="arrow-forward"></ion-icon>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+
+</ion-content>

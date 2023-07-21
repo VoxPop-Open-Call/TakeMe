@@ -1,0 +1,69 @@
+<h1 *jhiHasAnyAuthority="['ROLE_FAMILITY']" class="lg-title">{{'profile.promoter.title'|translate}}</h1>
+<h1 *jhiHasAnyAuthority="['ROLE_BUS_COMPANY']" class="lg-title">{{'profile.busCompany.title'|translate}}</h1>
+<h1 *jhiHasAnyAuthority="['ROLE_TUTOR']" class="lg-title">{{'profile.tutor.title'|translate}}</h1>
+
+<jhi-alert></jhi-alert>
+
+<div *jhiHasAnyAuthority="['ROLE_BUS_COMPANY', 'ROLE_TUTOR']">
+
+    <table class="table" *ngIf="organization" >
+        <tr class="lg-row-box-shadow v-center">
+            <td class="v-center">
+                <div class="avatar">
+                    <img class="image-avatar-edit" [src]="photo ? photo : '/content/images/bus.svg'">
+                    <div class="icon-bottom pointer" (click)="selectNewPhoto()">
+                        <img src="/content/images/edit.svg">
+                    </div>
+                </div>
+            </td>
+            <td class="md-col">
+                <table>
+                    <tr >{{ organization.name }}</tr>
+                </table>
+            </td>
+            <td class="md-col">
+                <table>
+                    <tr>
+                        <table>
+                            <tr>NIF</tr>
+                            <tr class="sub-title">{{ organization?.nifNumber }}</tr>
+                        </table>
+                    </tr>
+                    <br>
+                    <tr>
+                        <table>
+                            <tr jhiTranslate="backoffice.address">Address</tr>
+                            <tr class="sub-title">{{ buildAddress(organization?.location) }}</tr>
+                        </table>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+
+    <h4 jhiTranslate="backoffice.contacts" *ngIf="organization?.contacts.length > 0">Contacts</h4>
+    <table class="table" *ngFor="let contact of organization?.contacts">
+        <tr class="row-box-shadow v-center">
+            <td class="md-col">
+                <table>
+                    <tr >{{ contact?.name }}</tr>
+                    <tr class="sub-title">{{ contact?.email }}</tr>
+                </table>
+            </td>
+            <td class="md-col">
+                <fa-icon icon="phone"></fa-icon> <span>{{ contact?.phoneNumber }}</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div *jhiHasAnyAuthority="'ROLE_FAMILITY'">
+    <br><br><br><br>
+    <div class="center">
+        <fa-icon icon="exclamation-triangle" class="lg-icon"></fa-icon>
+        <br><br><br>
+        <div><h4>Novidades em breve!</h4></div>
+    </div>
+</div>
+

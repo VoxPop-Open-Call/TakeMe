@@ -1,0 +1,35 @@
+<h2>
+    <span jhiTranslate="familityBackofficeApp.childSubscription.import.title">Import Children</span>
+</h2>
+<jhi-alert></jhi-alert>
+<jhi-alert-error></jhi-alert-error>
+<div class="d-flex mt-4">
+    <button jhiTranslate="backoffice.back" type="button" class="btn btn-circle btn-primary btn-md font-white" (click)="goBack()">Back</button>
+</div>
+<hr>
+
+<div class="d-flex flex-column">
+    <div class="p-2 mb-4">
+        <h4 jhiTranslate="familityBackofficeApp.childSubscription.import.download">Download</h4>
+        <button type="button" class="btn btn-primary" (click)="download()">
+            <fa-icon [icon]="'download'"></fa-icon>&nbsp;<span jhiTranslate="familityBackofficeApp.childSubscription.import.download-button">Download</span>
+        </button>
+    </div>
+    <div class="p-2 mb-4">
+        <h4 jhiTranslate="familityBackofficeApp.childSubscription.import.select">Select File</h4>
+        <div class="custom-file w-20">
+            <input type="file" class="custom-file-input" accept=".xlsx" (change)="uploadFile($event)">
+            <label class="custom-file-label">
+                <span *ngIf="file">&nbsp;{{file.name}}</span>
+                <span *ngIf="!file">&nbsp;Choose file</span>
+            </label>
+        </div>
+    </div>
+    <div class="p-2 mb-4">
+        <h4 jhiTranslate="familityBackofficeApp.childSubscription.import.upload">Upload File</h4>
+        <button [disabled]="uploading" type="button" class="btn btn-primary" (click)="upload()">
+            <fa-icon [icon]="'upload'"></fa-icon>&nbsp;<span jhiTranslate="familityBackofficeApp.childSubscription.import.button">Import</span>
+        </button>
+    </div>
+</div>
+

@@ -1,0 +1,172 @@
+<div *ngIf="subscription">
+    <h1 class="lg-title mb-0">
+        <span>{{ subscription.child.name }}</span>
+    </h1>
+
+    <jhi-alert></jhi-alert>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-light" (click)="previousState()">
+                <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+                {{ 'backoffice.back' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table margin-b-0">
+        <tr class="lg-row-box-shadow no-height width-100">
+            <table class="width-100">
+                <tr class="v-center width-100 card-borderless">
+                    <td class="col-md-3 center">
+                        <img class="lg-avatar" alt="Child Photo"
+                             [src]="subscription.child.photo ? 'data:image/jpg;base64,' + subscription.child.photo : '/content/images/empty_photo.svg'">
+                    </td>
+                    <td class="col-md-9">
+                        <table class="width-100">
+                            <tr class="width-100">
+                                <td class="col-md-3">
+                                    <span jhiTranslate="backoffice.home.busCompany.children.birthday" class="sub-title">Birthday</span>
+                                    <br>
+                                    <span>{{ subscription.child.dateOfBirth | formatExpressionDate }}</span>
+                                </td>
+                                <td class="col-md-3">
+                                    <span class="sub-title" jhiTranslate="backoffice.home.busCompany.children.nif">Tax ID</span>
+                                    <br>
+                                    <span>{{ subscription.child.nifNumber }}</span>
+                                </td>
+                                <td class="col-md-6 pointer" (click)="showAdditionalInformation()">
+                                    <span jhiTranslate="backoffice.home.busCompany.children.additionalInformation" class="sub-title">Additional Information</span>
+                                    <br>
+                                    <span>{{ subscription.additionalInformation ? ((subscription.additionalInformation.length > 30) ? (subscription.additionalInformation  | slice:0:30) + '...' : (subscription.additionalInformation)) : "N/A" }}</span>
+                                </td>
+                            </tr>
+                            <tr class="width-100">
+                                <td class="col-md-3">
+                                    <span jhiTranslate="backoffice.home.busCompany.children.service" class="sub-title">Service</span>
+                                    <br>
+                                    <span>{{ subscription.promoterItinerary.service.name }}</span>
+                                </td>
+                                <td class="col-md-3">
+                                    <span jhiTranslate="backoffice.home.busCompany.children.acceptanceDate" class="sub-title">Acceptance Date</span>
+                                    <br>
+                                    <span>{{ subscription.activationDate | formatExpressionDate }}</span>
+                                </td>
+                                <td class="col-md-6 pointer" (click)="showCommentModal()">
+                                    <span jhiTranslate="backoffice.home.busCompany.children.comments" class="sub-title">Comments</span>
+                                    <br>
+                                    <span>{{ subscription.comments ? ((subscription.comments.length > 30) ? (subscription.comments  | slice:0:30) + '...' : (subscription.comments)) : "N/A" }}</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="width-100">
+                            <tr class="width-100">
+                                <td>
+                                    <span jhiTranslate="backoffice.home.busCompany.children.itinerary" class="sub-title">Itinerary</span>
+                                    <br>
+                                    <span>{{ subscription.promoterItinerary.name }}</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </tr>
+    </table>
+
+    <br>
+
+    <div *ngIf="tutors.length > 0">
+        <h4 jhiTranslate="backoffice.home.busCompany.children.tutor">Tutor</h4>
+        <div class="margin-t-15">
+            <p-table [value]="tutors" dataKey="id">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th jhiTranslate="backoffice.home.busCompany.children.name">Name</th>
+                        <th jhiTranslate="backoffice.home.busCompany.children.nif">Tax ID</th>
+                        <th jhiTranslate="backoffice.home.busCompany.children.idCard">Identification Card</th>
+                        <th jhiTranslate="backoffice.home.busCompany.children.contactInformation">Contact Information</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-tutors>
+                    <tr>
+                        <td>
+                            <img class="sm-avatar margin-r-15" alt="Tutor Photo"
+                                 [src]="tutors.photo ? 'data:image/jpg;base64,' + tutors.photo : '/content/images/empty_photo.svg'">
+                            {{ tutors.name }}
+                        </td>
+                        <td>{{ tutors.nifNumber }}</td>
+                        <td>
+                            {{ tutors.identificationCardTypeName }}
+                            <br>
+                            {{ tutors.identificationCardNumber }}
+                        </td>
+                        <td>
+                            {{ tutors.phoneNumber }}
+                            <br>
+                            {{ tutors.user.email }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div *ngIf="tutors.length == 0">
+        <div class="margin-t-15 center">
+            <h6 class="margin-b-0">
+                <i>{{ subscription.child.name }}</i>
+                <i jhiTranslate="backoffice.home.tutors.noTutors"> has no tutors</i>
+            </h6>
+        </div>
+    </div>
+
+    <br>
+
+    <div *ngIf="childSubscriptions.length > 0">
+        <h4 jhiTranslate="backoffice.home.busCompany.children.subscriptions">Subscriptions</h4>
+        <div class="margin-t-15">
+            <p-table [value]="childSubscriptions" dataKey="id">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th jhiTranslate="backoffice.home.busCompany.children.itinerary">Itinerary</th>
+                        <th jhiTranslate="backoffice.home.busCompany.children.service">Service</th>
+                        <th jhiTranslate="backoffice.home.busCompany.children.subscriptionDate">Subscription Date</th>
+                        <th jhiTranslate="backoffice.home.busCompany.children.activationDate">Activation Date</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-childSubscriptions>
+                    <tr>
+                        <td (click)="goToDetailed(childSubscriptions.id)" class="pointer">{{ childSubscriptions.promoterItinerary.name }}</td>
+                        <td (click)="goToDetailed(childSubscriptions.id)" class="pointer">{{ childSubscriptions.promoterItinerary.service.name }}</td>
+                        <td (click)="goToDetailed(childSubscriptions.id)" class="pointer">{{ childSubscriptions.subscriptionDate | formatExpressionDate }}</td>
+                        <td (click)="goToDetailed(childSubscriptions.id)" class="pointer">{{ childSubscriptions.activationDate | formatExpressionDate }}</td>
+                        <td>
+                            <button type="button" class="btn btn-circle btn-primary font-white float-end" (click)="goToServices(childSubscriptions.id)">
+                                <fa-icon icon="list" class="pe-2"></fa-icon>
+                                {{ 'backoffice.home.busCompany.children.services' | translate }}
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div *ngIf="childSubscriptions.length == 0">
+        <div class="margin-t-15 center">
+            <h6 class="margin-b-0">
+                <i>{{ subscription.child.name }}</i>
+                <i jhiTranslate="backoffice.home.tutors.noSubscriptions"> has no subscriptions</i>
+            </h6>
+        </div>
+    </div>
+</div>
+<br><br>

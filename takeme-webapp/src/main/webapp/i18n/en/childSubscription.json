@@ -1,0 +1,48 @@
+{
+    "familityBackofficeApp": {
+        "childSubscription": {
+            "home": {
+                "title": "Child Subscriptions",
+                "createLabel": "Create a new Child Subscription",
+                "createOrEditLabel": "Create or edit a Child Subscription"
+            },
+            "created": "A new Child Subscription is created with identifier {{ param }}",
+            "updated": "A Child Subscription is updated with identifier {{ param }}",
+            "deleted": "A Child Subscription is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Child Subscription {{ id }}?"
+            },
+            "detail": {
+                "title": "Child Subscription"
+            },
+            "statusType": "Status Type",
+            "famility": "Famility",
+            "not-famility": "Not Famility",
+            "type": "Type",
+            "subscriptionDate": "Subscription Date",
+            "activationDate": "Activation Date",
+            "comments": "Comments",
+            "no-comments": "Without comments",
+            "no-additional-information": "Without additional information",
+            "additional-information": "Additional information",
+            "child": "Child",
+            "organization": "Organization",
+            "import": {
+                "title": "Import Children",
+                "button": "Import",
+                "download": "1. Download the import template",
+                "download-button": "Download",
+                "select": "2. Fill in and upload the file here",
+                "upload": "3. Import the selected file",
+                "success": "{{ childrenImportedNumber }} children were successfully processed",
+                "error": {
+                    "parsing": "Error importing children sheet, at line {{ lineNumber }}, column {{ columnLetter }}",
+                    "processing": "Error importing children sheet at line {{ lineNumber }}",
+                    "no-file": "Please select an .xlsx file to upload",
+                    "max-children": "You exceeded the maximum number of non-famility children available",
+                    "other": "Error importing children sheet"
+                }
+            }
+        }
+    }
+}

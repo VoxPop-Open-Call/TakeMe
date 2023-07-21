@@ -1,0 +1,138 @@
+<div *ngIf="service">
+    <h1 jhiTranslate="backoffice.home.busCompany.services.service-details" class="lg-title mb-0">Service Details</h1>
+
+    <jhi-alert></jhi-alert>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6 left">
+            <button type="button" class="btn btn-light" (click)="previousState()">
+                <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+                {{ 'backoffice.back' | translate }}
+            </button>
+        </div>
+        <div *ngIf="isOperator" class="col-md-6 right">
+            <button type="button" class="btn btn-circle btn-primary btn-xs font-white" (click)="goToUpdate()">
+                <fa-icon icon="pen" class="pe-2"></fa-icon>
+                {{ 'backoffice.edit' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="width-100">
+        <tr>
+            <td class="col-md-6">
+                <span jhiTranslate="backoffice.start" class="sub-title">Start</span>
+                <br>
+                <span>{{ service.startDate | formatExpressionDate }}</span>
+            </td>
+            <td class="col-md-6">
+                <span jhiTranslate="backoffice.end" class="sub-title">End</span>
+                <br>
+                <span>{{ !service.recurrent ? (service.endDate | formatExpressionDate) : "N/A" }}</span>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <div class="d-flex v-center">
+        <fa-icon icon="running" class="fa-lg text-secondary"></fa-icon>
+        &nbsp;<fa-icon icon="bus" class="fa-lg text-dark"></fa-icon>
+        &nbsp;&nbsp;<h4 class="margin-b-0" jhiTranslate="backoffice.home.busCompany.collection-points">Collection Points</h4>
+    </div>
+
+    <table class="width-100">
+        <tr *ngFor="let collectionPoint of collectionPoints" class="row-box-shadow v-center card-borderless height-auto">
+            <td class="width-100">
+                <table class="width-100">
+                    <tr class="width-100">
+                        <td class="col-md-3">
+                            <fa-icon icon="calendar-check" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.start-date" class="sub-title">Start Date</span>
+                            <br>
+                            {{ collectionPoint.startFrequencyDate | formatExpressionDate }}
+                        </td>
+                        <td class="col-md-3">
+                            <fa-icon icon="clock" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.scheduledTime" class="sub-title">Scheduled Time</span>
+                            <br>
+                            {{ collectionPoint.combinedTime }}
+                        </td>
+                        <td class="col-md-3">
+                            <fa-icon icon="sync" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.frequency" class="sub-title">Frequency</span>
+                            <br>
+                            {{ translateFrequency(collectionPoint.frequency) | async }}
+                        </td>
+                        <td class="col-md-3">
+                            <fa-icon icon="calendar-alt" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.weekdays" class="sub-title">Weekdays</span>
+                            <br>
+                            <jhi-days-of-week [daysOfWeekInput]="collectionPoint.serviceStopPointDaysOfWeeks" class="d-flex flex-row"></jhi-days-of-week>
+                        </td>
+                    </tr>
+                </table>
+                <table class="width-100">
+                    <tr class="width-100">
+                        <td class="col-md-12">
+                            <jhi-composed-location [point]="collectionPoint"></jhi-composed-location>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div class="d-flex v-center margin-t-10">
+        <fa-icon icon="bus" class="fa-lg text-dark"></fa-icon>
+        &nbsp;<fa-icon icon="running" class="fa-lg text-secondary"></fa-icon>
+        &nbsp;&nbsp;<h4 class="margin-b-0" jhiTranslate="backoffice.home.busCompany.delivery-points">Delivery Points</h4>
+    </div>
+
+    <table class="width-100">
+        <tr *ngFor="let deliveryPoint of deliveryPoints" class="row-box-shadow v-center card-borderless height-auto">
+            <td class="width-100">
+                <table class="width-100">
+                    <tr class="width-100">
+                        <td class="col-md-3">
+                            <fa-icon icon="calendar-check" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.start-date" class="sub-title">Start Date</span>
+                            <br>
+                            {{ deliveryPoint.startFrequencyDate | formatExpressionDate }}
+                        </td>
+                        <td class="col-md-3">
+                            <fa-icon icon="clock" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.scheduledTime" class="sub-title">Scheduled Time</span>
+                            <br>
+                            {{ deliveryPoint.combinedTime }}
+                        </td>
+                        <td class="col-md-3">
+                            <fa-icon icon="sync" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.frequency" class="sub-title">Frequency</span>
+                            <br>
+                            {{ translateFrequency(deliveryPoint.frequency) | async }}
+                        </td>
+                        <td class="col-md-3">
+                            <fa-icon icon="calendar-alt" class="sub-title pr-2"></fa-icon>
+                            <span jhiTranslate="backoffice.weekdays" class="sub-title">Weekdays</span>
+                            <br>
+                            <jhi-days-of-week [daysOfWeekInput]="deliveryPoint.serviceStopPointDaysOfWeeks" class="d-flex flex-row"></jhi-days-of-week>
+                        </td>
+                    </tr>
+                </table>
+                <table class="width-100">
+                    <tr class="width-100">
+                        <td class="col-md-12">
+                            <jhi-composed-location [point]="deliveryPoint"></jhi-composed-location>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<br><br>

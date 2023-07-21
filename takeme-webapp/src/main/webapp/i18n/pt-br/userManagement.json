@@ -1,0 +1,36 @@
+{
+    "userManagement": {
+        "home": {
+            "title": "Usuários",
+            "createLabel": "Adicionar",
+            "createOrEditLabel": "Criar ou editar usuário"
+        },
+        "created": "Um novo Usuário foi criado com identificador {{ param }}",
+        "updated": "Um Usuário foi atualizado com identificador {{ param }}",
+        "deleted": "Um Usuário foi excluído com identificador {{ param }}",
+        "delete": {
+            "question": "Tem certeza que deseja excluir o Usuário {{ login }}?"
+        },
+        "deactivate": {
+            "bus-company": {
+                "question": "Tem certeza que quer desativar a Transportadora?",
+                "afirmation": "Desativar Transportadora"
+            }
+        },
+        "detail": {
+            "title": "Usuário"
+        },
+        "login": "Login",
+        "firstName": "Nome",
+        "lastName": "Sobrenome",
+        "email": "Email",
+        "activated": "Ativo",
+        "deactivated": "Inativo",
+        "profiles": "Perfis",
+        "langKey": "Linguagem",
+        "createdBy": "Criado por",
+        "createdDate": "Criado em",
+        "lastModifiedBy": "Alterado por",
+        "lastModifiedDate": "Alterado em"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "familityBackofficeApp": {
+        "DaysOfWeekType": {
+            "null": "",
+            "SUNDAY": "DOMINGO",
+            "MONDAY": "SEGUNDA-FEIRA",
+            "TUESDAY": "TERÇA-FEIRA",
+            "WEDNESDAY": "QUARTA-FEIRA",
+            "THURSDAY": "QUINTA-FEIRA",
+            "FRIDAY": "SEXTA-FEIRA",
+            "SATURDAY": "SÁBADO"
+        }
+    }
+}

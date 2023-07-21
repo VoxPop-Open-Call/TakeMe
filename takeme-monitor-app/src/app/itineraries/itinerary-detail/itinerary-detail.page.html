@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar *ngIf="itinerary">
+        <ion-grid>
+            <ion-row>
+                <ion-col size="9" class="flex-row-hleft-vcenter">
+                    <ion-icon class="back router" color="primary" ios="arrow-back" md="arrow-back"
+                        [routerLink]="['/app/itineraries']" routerDirection="back"></ion-icon>
+                    <ion-label>{{itinerary.name}}</ion-label>
+                </ion-col>
+                <ion-col size="3" class="flex-row-hleft-vcenter">
+                    <ion-button *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'" (click)="startService()"
+                        [disabled]="hasActiveItineraries()" shape="round" size="small"> Iniciar </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-item class="sub-title sm-title">
+            <ion-grid class="center ion-padding">
+                <ion-row>
+                    <ion-col size="8" class="left">
+                        <ion-icon name="calendar"></ion-icon>&nbsp;{{itinerary.scheduledTime | date:'dd/MM/yy HH:mm'}}
+                    </ion-col>
+                    <ion-col size="4" class="left" style="display: flex;">
+                        <ion-icon name="bus"></ion-icon>&nbsp;
+                        <ion-select *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'"
+                            [(ngModel)]="selectedVehicle" [selectedText]="selectedVehicle?.designation" (ionChange)="onVehicleChange()">
+                            <ion-select-option *ngFor="let vehicle of vehicles" [value]="vehicle">
+                                {{ vehicle.designation }} 
+                                <ng-container *ngIf="vehicle.licensePlate">({{ vehicle.licensePlate }})</ng-container>
+                            </ion-select-option>
+                        </ion-select>
+                        <ion-input *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS' ||
+                        itinerary.itineraryStatusType === 'CANCELED' ||
+                        itinerary.itineraryStatusType === 'FINISHED'" class="w-70 left"
+                            value="{{itinerary.vehicle.licensePlate}}" readonly>
+                        </ion-input>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="w-100">
+                    <ion-col size="8" class="left">
+                        <app-location-link [location]="itinerary.estimatedStartLocation"></app-location-link>
+                    </ion-col>
+                    <ion-col size="4" class="left"><span *ngIf="itinerary.itineraryStatusType === 'READY_TO_START'">Por
+                            iniciar</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'IN_PROGRESS'">Em curso</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'FINISHED'">Concluído</span>
+                        <span *ngIf="itinerary.itineraryStatusType === 'CANCELED'">Cancelado</span></ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <div *ngIf="itinerary?.itineraryStopPointList">
+        <ion-list>
+<!--            <ion-reorder-group [disabled]="(itinerary.itineraryStatusType!=='READY_TO_START')" (ionItemReorder)="reorderServices($event.detail)">-->
+
+                <ion-item class="no-padding" *ngFor="let itineraryStopPoint of itinerary.itineraryStopPointList" >
+                    <app-itinerary-stop-point [itineraryStopPoint]="itineraryStopPoint" class="w-90"></app-itinerary-stop-point>
+                    <ion-reorder slot="start" class="w-10"></ion-reorder>
+                </ion-item>
+
+<!--            </ion-reorder-group>-->
+        </ion-list>
+    </div>
+
+</ion-content>

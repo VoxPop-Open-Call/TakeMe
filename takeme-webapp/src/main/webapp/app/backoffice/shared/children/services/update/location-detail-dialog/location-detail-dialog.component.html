@@ -1,0 +1,85 @@
+<div class="modal-header">
+    <h4 jhiTranslate="backoffice.home.busCompany.services.addressDetail">Address Detail</h4>
+    <button class="btn btn-light" (click)="dismiss()">
+        <fa-icon icon="xmark" class="pe-2"></fa-icon>
+        {{ 'backoffice.close' | translate }}
+    </button>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="modal-body" *ngIf="location">
+    <div>
+        <span class="bold" jhiTranslate="backoffice.home.busCompany.services.type">Type</span>
+        <br>
+        <span>{{getLocationType(location.type)|async}}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <span class="bold" jhiTranslate="backoffice.home.busCompany.services.designation">Designation</span>
+        <br>
+        <span>{{ location.designation }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <span class="bold" jhiTranslate="backoffice.home.busCompany.services.street">Street</span>
+        <br>
+        <span>{{ location.street }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.door">Door Number</label>
+        <br>
+        <span>{{ location.portNumber }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.floor">Floor Number</label>
+        <br>
+        <span>{{ location.floor ? location.floor : "N/A" }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.postalCode">Postal Code</label>
+        <br>
+        <span>{{ location.postalCode }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.city">City</label>
+        <br>
+        <span>{{ location.city }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.country">Country</label>
+        <br>
+        <span>{{ location.country }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.longitude">Longitude</label>
+        <br>
+        <span>{{ location.longitude }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.latitude">Latitude</label>
+        <br>
+        <span>{{ location.latitude }}</span>
+    </div>
+
+    <div class="margin-t-15">
+        <label class="bold" jhiTranslate="backoffice.home.busCompany.services.plusCode">Plus Code</label>
+        <br>
+        <span>{{ location.plusCode }}</span>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button *ngIf="location" type="button" class="btn btn-circle btn-primary font-white" (click)="update()">
+        <fa-icon icon="pen" class="pe-2"></fa-icon>
+        {{ 'backoffice.edit' | translate }}
+    </button>
+</div>

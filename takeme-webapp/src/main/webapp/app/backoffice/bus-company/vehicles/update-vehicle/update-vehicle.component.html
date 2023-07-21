@@ -1,0 +1,51 @@
+<h1 class="lg-title mb-0">
+    <span jhiTranslate="backoffice.home.busCompany.new-vehicle" *ngIf="!vehicle">
+        New Vehicle
+    </span>
+    <span jhiTranslate="backoffice.home.busCompany.edit-vehicle" *ngIf="vehicle">
+        Edit Vehicle
+    </span>
+</h1>
+
+<jhi-alert></jhi-alert>
+
+<br>
+
+<form [formGroup]="updateForm" (ngSubmit)="save()">
+
+    <div class="row">
+        <div class="col-md-6 left">
+            <button class="btn btn-light" (click)="goBack()">
+                <fa-icon icon="arrow-left" class="pe-2"></fa-icon>
+                {{ 'backoffice.cancel' | translate }}
+            </button>
+        </div>
+
+        <div class="col-md-6 right">
+            <button type="submit" class="btn btn-circle btn-primary font-white" [disabled]="updateForm.invalid || !updateForm.dirty">
+                <fa-icon icon="check" class="pe-2"></fa-icon>
+                {{ 'backoffice.save' | translate }}
+            </button>
+        </div>
+    </div>
+    <hr>
+
+    <div formGroupName="vehicle">
+
+        <table class="table">
+            <tr class="row-box-shadow">
+
+                <td class="w-33"> <label class="sub-title" jhiTranslate="familityBackofficeApp.location.designation">Designation</label>
+                    <input type="text" formControlName="designation" class="form-control"></td>
+
+                <td class="w-33"> <label class="sub-title" jhiTranslate="backoffice.home.busCompany.license-plate">License Plate</label>
+                    <input type="text" formControlName="licensePlate" class="form-control"></td>
+
+                <td class="w-33"> <label class="sub-title" jhiTranslate="backoffice.home.busCompany.itinerary.vehicle-capacity">Capacity</label>
+                    <input type="text" formControlName="capacity" class="form-control"></td>
+            </tr>
+        </table>
+    </div>
+    <br>
+
+</form>

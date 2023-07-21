@@ -1,0 +1,39 @@
+{
+  "familityBackofficeApp": {
+    "promoterService": {
+      "home": {
+        "title": "Serviços",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo serviço",
+        "editLabel": "Editar serviço",
+        "createOrEditLabel": "Criar ou editar serviço",
+        "notFound": "Nenhum serviço encontrado"
+      },
+      "created": "Um novo serviço foi criado com o identificador {{ param }}",
+      "updated": "Serviço com identificador {{ param }} foi actualizado",
+      "deleted": "Serviço com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o serviço {{ id }}?"
+      },
+      "detail": {
+        "title": "Serviço"
+      },
+      "id": "ID",
+      "name": "Nome",
+      "logo": "Logo",
+      "startDate": "Data Início",
+      "endDate": "Data Fim",
+      "needsETA": "Precisa ETA?",
+      "enrollmentURL": "URL Inscrição",
+      "yes": "Sim",
+      "no": "Não",
+      "transportType": "Tipo de Transporte",
+      "transportTypeEnum": {
+        "CAR": "Carro",
+        "BUS": "Autocarro",
+        "WALKING": "Pedestre",
+        "BICYCLING": "Bicicleta"
+      }
+    }
+  }
+}

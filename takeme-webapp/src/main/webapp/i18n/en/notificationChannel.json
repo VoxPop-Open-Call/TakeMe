@@ -1,0 +1,22 @@
+{
+    "familityBackofficeApp": {
+        "notificationChannel": {
+            "home": {
+                "title": "Notification Channels",
+                "createLabel": "Create a new Notification Channel",
+                "createOrEditLabel": "Create or edit a Notification Channel"
+            },
+            "created": "A new Notification Channel is created with identifier {{ param }}",
+            "updated": "A Notification Channel is updated with identifier {{ param }}",
+            "deleted": "A Notification Channel is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Notification Channel {{ id }}?"
+            },
+            "detail": {
+                "title": "Notification Channel"
+            },
+            "type": "Type",
+            "active": "Active"
+        }
+    }
+}

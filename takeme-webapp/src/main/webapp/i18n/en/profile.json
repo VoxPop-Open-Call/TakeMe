@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "title": "Profile",
+    "promoter": {
+      "title": "Promoter Profile"
+    },
+    "busCompany": {
+      "title": "Operator Profile"
+    },
+    "tutor": {
+      "title": "Tutor Profile"
+    }
+  }
+}

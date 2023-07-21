@@ -1,0 +1,34 @@
+<div class="h-v-padding">
+    <h2 jhiTranslate="backoffice.home.busCompany.drivers">Drivers</h2>
+
+    <jhi-alert></jhi-alert>
+
+    <div *ngIf="drivers">
+        <div class="modal-header">
+            <button jhiTranslate="backoffice.cancel" type="button" class="btn btn-default btn-xs" (click)="dismiss()">Cancelar</button>
+            <button jhiTranslate="backoffice.select" type="button" class="btn btn-default btn-xs" (click)="selectedDriver()"
+                [disabled]="!driverSelected">Selecionar</button>
+        </div>
+        <div class="modal-body">
+            <table class="w-100">
+                <tr>
+                    <th jhiTranslate="backoffice.home.busCompany.itinerary.driver-name">Name</th>
+                    <th jhiTranslate="backoffice.home.busCompany.itinerary.driver-license">Driver License</th>
+                </tr>
+                <tr *ngFor="let driver of drivers" style="width: 100%">
+                    <td class="w-45">{{driver.name}}</td>
+                    <td class="w-45">{{driver.driverLicense}}</td>
+                    <td class="w-10"><input type="checkbox" (change)="newSelection(driver)"
+                            [checked]="driverSelected?.id === driver.id"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="!drivers">
+    <div class="modal-body">
+        <span>Atualmente não existem condutores associados a esta transportadora.</span>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{
+    "login": {
+        "title": "Autenticação",
+        "form": {
+            "password": "Senha",
+            "password.placeholder": "A sua senha",
+            "rememberme": "Manter-me conectado",
+            "button": "Entrar"
+        },
+        "messages": {
+            "error": {
+                "authentication": "<strong>Erro de autenticação!</strong> Por favor verifique as suas credenciais e tente novamente.",
+                "verification": "<strong>Erro de autenticação!</strong> Por favor valide o seu email e tente novamente."
+            }
+        },
+        "password": {
+            "forgot": "Esqueceu sua senha?"
+        }
+    }
+}

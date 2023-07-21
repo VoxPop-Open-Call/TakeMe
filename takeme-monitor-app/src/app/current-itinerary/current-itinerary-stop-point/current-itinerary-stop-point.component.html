@@ -1,0 +1,185 @@
+<ion-card>
+    <ion-card-content>
+        <ion-item>
+            <ion-grid class="center padding-0 ">
+                 <ion-row class="padding-0 v-align">
+                    <ion-col size="7">
+                        <div class="col-top p-bottom-5" (click)="showDestinationLocationDetail(itineraryStopPoint.stopPoint.location)">
+                            {{itineraryStopPoint.stopPoint.location.designation}}
+                            <!-- <span class="bkg-display xsm-title" *ngIf="itineraryStopPoint?.stopPoint.location.type === 'SCHOOL'"><b>Famility</b></span> -->
+                        </div>
+                        <span class="sub-title sm-title col-bottom"><app-location-link [location]="itineraryStopPoint.stopPoint.location"></app-location-link></span>
+                    </ion-col>
+                    <ion-col size="5">
+                        <div (click)="showTimeDetails()">
+                            <div *ngIf="itineraryStopPoint.itineraryStatusType === 'FINISHED'">
+                                <span class="grey-text sm-title col-top">{{timeString}}</span>
+                            </div>
+                            <div *ngIf="itineraryStopPoint.itineraryStatusType === 'IN_PROGRESS' || itineraryStopPoint.itineraryStatusType === 'READY_TO_START'">
+                                <div *ngIf="itineraryStopPoint.stopPoint.estimatedArriveTime">
+                                    <span *ngIf="differenceInMinutesInteger>0" class="red-text sm-title col-top">{{timeString}}</span>
+                                    <span *ngIf="differenceInMinutesInteger==0" class="yellow-text sm-title col-top">{{timeString}}</span>
+                                    <span *ngIf="differenceInMinutesInteger<0" class="green-text sm-title col-top">{{timeString}}</span>
+                                </div>
+                                <div *ngIf="!itineraryStopPoint.stopPoint.estimatedArriveTime">
+                                    <span class="yellow-text sm-title col-top">Hora combinada</span>
+                                    <span class="md-title yellow-text col-bottom">{{itineraryStopPoint.stopPoint.scheduledTime| date:'H:mm'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <br>
+
+        <!--        FINISHED STOPS           -->
+        <div *ngIf="itineraryStopPoint.itineraryStatusType === 'FINISHED'">
+            <ion-list *ngFor="let stopAuditEvent of itineraryStopPoint.stopPoint.stopAuditEvents" class="padding-0">
+                <ion-grid class="padding-0">
+                    <ion-row>
+                        <ion-col size="2" class="padding-r-0" (click)="showChildDetail(stopAuditEvent.child)">
+                            <img class="xsm-image-avatar" [src]="stopAuditEvent.child.photo ? stopAuditEvent.child.photo: 'assets/img/empty_photo.svg'">
+                        </ion-col>
+                        <ion-col size="6" class="label-text" (click)="showChildDetail(stopAuditEvent.child)"><span><b>{{stopAuditEvent.child.name}}</b></span><br>
+                            
+                            <ion-row class="padding-0">
+                                <ion-col size="6" class="padding-0">
+                                    <span class="sub-title sm-title left"
+                                        *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'COLLECTION'">Recolha</span>
+                                    <span class="sub-title sm-title left"
+                                        *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'DELIVER'">Entrega</span>
+                                </ion-col>
+                                <ion-col size="6" class="padding-0">
+                                        <!-- <span class="bkg-display xsm-title right" *ngIf="stopAuditEvent.child.famility"><b>Famility</b></span> -->
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-col>
+                        <ion-col size="4" class="padding-0 right">
+                            <ion-grid class="sm-grid padding-0">
+                                <ion-row class="right">
+                                    <ion-col size="small">
+                                        <ion-icon *ngIf="stopAuditEvent.eventType !== 'CANCELED'" class="icon-disabled"
+                                                  name="close"></ion-icon>
+                                        <ion-icon *ngIf="stopAuditEvent.eventType === 'CANCELED'"
+                                                  class="icon-closed-grey"
+                                                  name="close"></ion-icon>
+                                    </ion-col>
+                                    <ion-col size="small">
+                                        <ion-icon
+                                            *ngIf="stopAuditEvent.eventType !== 'CHECK_IN' && stopAuditEvent.eventType !== 'CHECK_OUT'"
+                                            class="icon-disabled"
+                                            name="checkmark"></ion-icon>
+                                        <ion-icon
+                                            *ngIf="stopAuditEvent.eventType === 'CHECK_IN' || stopAuditEvent.eventType === 'CHECK_OUT'"
+                                            class="icon-checked-grey" name="checkmark"></ion-icon>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </div>
+
+<!--        IN PROGRESS STOPS    -->
+        <div *ngIf="itineraryStopPoint.itineraryStatusType === 'IN_PROGRESS'">
+            <ion-list *ngFor="let stopAuditEvent of itineraryStopPoint.stopPoint.stopAuditEvents" class="padding-0">
+                <ion-grid class="padding-0">
+                    <ion-row>
+                        <ion-col size="2" class="padding-r-0" (click)="showChildDetail(stopAuditEvent.child)">
+                            <img class="xsm-image-avatar" [src]="stopAuditEvent.child.photo ? stopAuditEvent.child.photo: 'assets/img/empty_photo.svg'">
+                        </ion-col>
+                        <ion-col size="6" class="label-text" (click)="showChildDetail(stopAuditEvent.child)"><span><b>{{stopAuditEvent.child.name}}</b></span><br>
+                            
+                            <ion-row class="padding-0">
+                                <ion-col size="6" class="padding-0">
+                                    <span class="sub-title sm-title"
+                                    *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'COLLECTION'">Recolha</span>                              
+                                    <span class="sub-title sm-title"
+                                    *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'DELIVER'">Entrega</span>
+                                </ion-col>
+                                <ion-col size="6" class="padding-0">
+                                    <!-- <span class="bkg-display xsm-title right" *ngIf="stopAuditEvent.child.famility"><b>Famility</b></span> -->
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-col>
+                        <ion-col size="4" class="padding-0 right">
+                            <ion-grid *ngIf="itineraryStopPoint.itineraryStatusType === 'IN_PROGRESS'"
+                                      class="sm-grid padding-0">
+                                <ion-row class="right">
+                                    <ion-col size="small">
+                                        <ion-icon (click)="activateCancelButton(stopAuditEvent.child.id)"
+                                                  *ngIf="stopAuditEvent.eventType!== 'CANCELED'" class="icon-disabled"
+                                                  name="close"></ion-icon>
+                                        <ion-icon (click)="deactivateCancelButton(stopAuditEvent.child.id)"
+                                                  *ngIf="stopAuditEvent.eventType=== 'CANCELED'" class="icon-closed"
+                                                  name="close"></ion-icon>
+                                    </ion-col>
+                                    <ion-col size="small">
+                                        <ion-icon (click)="activateCheckInOrOutButton(stopAuditEvent.child.id)"
+                                                  *ngIf="stopAuditEvent.eventType !== 'CHECK_IN' && stopAuditEvent.eventType !== 'CHECK_OUT'"
+                                                  class="icon-disabled" name="checkmark"></ion-icon>
+                                        <ion-icon (click)="deactivateCheckInOrOutButton(stopAuditEvent.child.id)"
+                                                  *ngIf="stopAuditEvent.eventType ==='CHECK_IN' || stopAuditEvent.eventType === 'CHECK_OUT'"
+                                                  class="icon-checked" name="checkmark"></ion-icon>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </div>
+
+<!--   READY TO START STOPS   -->
+        <div *ngIf="itineraryStopPoint.itineraryStatusType === 'READY_TO_START'">
+            <ion-list *ngFor="let child of itineraryStopPoint.stopPoint.childList" class="padding-0">
+                <ion-grid class="padding-0">
+                    <ion-row>
+                        <ion-col size="2" class="padding-r-0" (click)="showChildDetail(child)">
+                            <img class="xsm-image-avatar" [src]="child.photo ? child.photo: 'assets/img/empty_photo.svg'">
+                        </ion-col>
+                        <ion-col size="6"  class="label-text" (click)="showChildDetail(child)"><span><b>{{child.name}}</b></span><br>
+
+                            <ion-row class="padding-0">
+                                <ion-col size="6" class="padding-0">
+                                    <span class="sub-title sm-title"
+                                        *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'COLLECTION'">Recolha</span>
+                                    <span class="sub-title sm-title"
+                                        *ngIf="itineraryStopPoint.stopPoint.stopPointType === 'DELIVER'">Entrega</span>
+                                </ion-col>
+                                <ion-col size="6" class="padding-0">
+                                    <!-- <span class="bkg-display xsm-title" *ngIf="child.famility"><b>Famility</b></span> -->
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-col>
+                        <ion-col size="4" class="padding-0 right">
+                            <ion-grid *ngIf="itineraryStopPoint.itineraryStatusType ==='READY_TO_START'"
+                                      class="sm-grid padding-0">
+                                <ion-row class="right">
+                                    <ion-col size="small">
+                                        <ion-icon class="icon-disabled" name="close"></ion-icon>
+                                    </ion-col>
+                                    <ion-col size="small">
+                                        <ion-icon class="icon-disabled" name="checkmark"></ion-icon>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-list>
+        </div>
+
+        <ion-button class="form-button" shape="round" *ngIf="itineraryStopPoint.current" (click)="finishStopPointDialog()"
+                    [disabled]="!allChildStatusDefined()">
+            <span *ngIf="!itineraryStopPoint.last" class="no-text-transform">Concluir Paragem</span>
+            <span *ngIf="itineraryStopPoint.last" class="no-text-transform">Finalizar Percurso</span>
+        </ion-button>
+    </ion-card-content>
+</ion-card>

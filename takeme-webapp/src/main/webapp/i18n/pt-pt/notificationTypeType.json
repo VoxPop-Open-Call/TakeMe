@@ -1,0 +1,9 @@
+{
+    "familityBackofficeApp": {
+        "NotificationTypeType": {
+            "null": "",
+            "START_ITINERARY_TUTOR": "START_ITINERARY_TUTOR",
+            "FINISH_STOP_POINT_TUTOR": "FINISH_STOP_POINT_TUTOR"
+        }
+    }
+}

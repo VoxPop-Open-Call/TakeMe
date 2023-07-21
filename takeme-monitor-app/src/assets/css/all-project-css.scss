@@ -1,0 +1,647 @@
+:root {
+
+    /* -------------- Header --------------- */
+
+    ion-header::after {
+        background-image: none;
+    }
+
+    div.header-icon {
+        position: relative;
+        z-index: 10;
+
+        &.close {
+            text-align: start;
+        }
+
+        &.info {
+            height: 5rem;
+            text-align: end;
+        }
+    }
+
+    div.header-image {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        top: 25%;
+
+        img {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+
+    /* -------------- Buttons & Icons -------------- */
+
+    ion-button {
+        --background-activated: transparent;
+
+        &.sm-button {
+            text-transform: none;
+            height: 2rem;
+            width: 8rem;
+            font-size: 0.8rem;
+
+            @media only screen and (max-width: 320px) and (max-height: 568px) {
+                height: 2rem;
+                width: 7rem;
+            }
+        }
+    }
+
+    ion-button.icon {
+        --background: transparent;
+        --box-shadow: none;
+        --border-color: transparent;
+        --margin: 0;
+        --padding: 0;
+
+        &.eye {
+            --color: rgba(56, 59, 60, 0.4);
+        }
+
+        &.info,
+        &.close {
+            --color: var(--appYellow);
+        }
+
+    }
+
+    ion-icon.md-bus {
+        font-size: 3rem;
+    }
+
+    ion-button {
+        &.main-button {
+            display: flex;
+            justify-content: center;
+            text-transform: none;
+            font-size: 1rem;
+            margin-top: 8%;
+            padding: 0 1.5rem 0 1.5rem;
+            height: 3rem;
+            letter-spacing: 0.05rem;
+            margin-bottom: 5%;
+        }
+
+        &.forgotPwd-button {
+            text-transform: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        &.main {
+            text-transform: none;
+            position: fixed;
+            bottom: 3rem;
+            left: 0;
+
+            @supports (-webkit-overflow-scrolling: touch) {
+                /* CSS specific to iOS devices */
+                bottom: 10%;
+            }
+
+            @supports not (-webkit-overflow-scrolling: touch) {
+                /* CSS for other than iOS devices */
+                bottom: 0;
+            }
+        }
+    }
+
+    ion-icon.back {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+
+    ion-icon.xsm-image-icon-bkg {
+        width: 1.3rem;
+        height: 1.3rem;
+        padding: 0.2rem;
+        margin: -0.5rem 0.5rem 0 0;
+        border-radius: 100%;
+        color: white;
+        background-color: var(--appDarkYellow);
+    }
+
+    ion-icon.xsm-image-icon {
+        width: 1.3rem;
+        height: 1.3rem;
+        padding: 0.2rem;
+        margin: -0.5rem 0.5rem 0 0;
+        border-radius: 100%;
+        color: var(--appYellow);
+        background-color: transparent;
+    }
+
+    ion-img.sm-image-icon-bkg {
+        width: 1.7rem;
+        height: 1.7rem;
+        padding: 0.3rem;
+        margin: -0.5rem 0.5rem 0 0;
+        border-radius: 100%;
+        background-color: var(--appDarkYellow);
+    }
+
+    .form-button {
+        height: 3rem;
+
+        @media only screen and (max-width: 320px) and (max-height: 568px) {
+            height: 2rem;
+        }
+    }
+
+    /* -------------- Form fields -------------- */
+
+    ion-grid.form {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    ion-grid.display,
+    ion-title.display {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    ion-label.form {
+        padding-top: 0.3rem;
+        font-size: 0.8rem;
+        height: 1.3rem;
+    }
+
+    ion-label {
+        &.display {
+            color: var(--appGrey);
+            font-size: 1rem;
+            font-weight: bold;
+
+            @media only screen and (max-width: 320px) and (max-height: 568px) {
+                font-size: 0.8rem;
+            }
+        }
+
+        &.sub-display {
+            color: rgba(56, 59, 60, 0.4);
+        }
+
+        &.sm-display {
+            font-size: 0.9rem;
+
+            @media only screen and (max-width: 320px) and (max-height: 568px) {
+                font-size: 0.7rem;
+            }
+        }
+
+    }
+
+    ion-item:not(item-has-focus) {
+        ion-label.form {
+            --color: rgba(56, 59, 60, 0.4);
+        }
+    }
+
+    ion-item.item-has-focus {
+        ion-label.form {
+            padding-top: 0.3rem;
+            font-size: 0.8rem;
+            height: 1.3rem;
+            --color: var(--appYellow);
+        }
+    }
+
+    ion-item {
+        &.display {
+            --border-color: none;
+            --border-width: 0;
+            --highlight-color-focused: none;
+            /* ios */
+            --inner-border-width: 0;
+        }
+    }
+
+    div.form {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    div.form-error {
+        padding: 0.3rem 0 0.3rem 0;
+        font-size: 0.65rem;
+        color: red;
+    }
+
+    ion-item.form {
+        --border-color: none;
+        --border-width: 0;
+        --highlight-color-focused: none;
+        /* ios */
+        --inner-border-width: 0;
+        --highlight-height: 0;
+    }
+
+    ion-input.form,
+    ion-datetime.form {
+        border-bottom: solid 1px var(--appLightGrey);
+
+        &.ng-invalid.ng-touched {
+            border-bottom: solid 1px red;
+        }
+    }
+
+    ion-card.form {
+        padding: 5%;
+    }
+
+    .long-label {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    ion-row {
+        &.display {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 1% 0 1% 0;
+            text-align: left;
+        }
+
+        &.title {
+            margin-bottom: 1.2rem;
+
+            span {
+                color: rgba(56, 59, 60, 0.4);
+                text-transform: uppercase;
+                font-size: 0.7rem;
+            }
+        }
+    }
+
+    /* -------------- Text - titles -------------- */
+    h1 {
+        width: 100%;
+        color: var(--appGrey);
+        height: 2rem;
+        font-size: 2rem;
+        font-weight: bold;
+
+        &.title-lg {
+            height: 2.3rem;
+            font-size: 2.3rem;
+            margin: 3rem 0.5rem 7.5rem 0.5rem;
+
+            & span {
+                color: var(--appYellow);
+            }
+
+        }
+
+        &.title-sm {
+            margin: 0.5rem 0.5rem 1rem 0.5rem;
+        }
+
+        &.title-lg-slide {
+            height: 2rem;
+            font-size: 2rem;
+            margin: 1rem 0.5rem 2rem 0.5rem;
+        }
+
+    }
+
+    .label-text {
+        font-size: 1rem;
+
+        @media only screen and (max-width: 320px) and (max-height: 568px) {
+            font-size: 0.8rem;
+        }
+    }
+
+    .pop-up-title {
+        font-weight: bold;
+        color: var(--appYellow);
+    }
+
+
+    .sub-title {
+        color: #383b3c;
+        opacity: 0.5;
+    }
+
+    .md-title {
+        font-size: 1.1rem;
+    }
+
+    .sm-title {
+        font-size: 0.8rem;
+
+        @media only screen and (max-width: 320px) and (max-height: 568px) {
+            font-size: 0.7rem;
+        }
+    }
+
+    .xsm-title {
+        font-size: 0.6rem;
+    }
+
+    .bkg-display {
+        padding: 0 0.3rem;
+        opacity: 0.5;
+        color: var(--appGrey);
+        background-color: var(--appYellow);
+        border-radius: 0.5rem;
+        text-align: center;
+    }
+    
+
+    /* --- Cards ---*/
+
+    .card-content-ios {
+        -webkit-padding-start: 0;
+        padding-inline-start: 0;
+        -webkit-padding-end: 0;
+        padding-inline-end: 0;
+        padding: 5%;
+    }
+
+    /*--- Empty list ---*/
+
+    div {
+
+        &.empty {
+            margin-top: 30%;
+            text-align: center;
+        }
+
+        &.md-empty {
+            margin-top: 20%;
+            text-align: center;
+        }
+
+        &.sm-empty {
+            margin-top: 10%;
+            text-align: center;
+        }
+
+    }
+
+    /* -------------- Images -------------- */
+
+    img.md-image-avatar {
+        height: 5.5rem;
+        width: 5.5rem;
+        border-radius: 100%;
+    }
+
+    .xsm-image-avatar {
+        height: 2.4rem;
+        width: 2.4rem;
+        border-radius: 100%;
+
+        @media only screen and (max-width: 320px) and (max-height: 568px) {
+            height: 2.2rem;
+            width: 2.2rem;
+        }
+    }
+
+    img.sm-image-icon-bkg {
+        width: 2.7rem;
+        height: 2.7rem;
+        padding: 0.4rem;
+        border-radius: 100%;
+        background-color: var(--appLightYellow);
+    }
+
+
+    /* -------------- Coming soon pages -------------- */
+
+    div.coming-soon {
+        text-align: center;
+        font-size: 1rem;
+        color: var(--appLightGrey);
+        height: 100%;
+        width: 100%;
+        padding-top: 23%;
+    }
+
+    /* -------------- Tabs --------------- */
+
+    @supports (-webkit-overflow-scrolling: touch) {
+        /* CSS specific to iOS devices */
+
+        .img-tab>ion-img {
+            margin-top: 4px;
+        }
+
+        .img-tab>ion-label {
+            font-size: 0.65rem;
+        }
+    }
+
+    @supports not (-webkit-overflow-scrolling: touch) {
+        /* CSS for other than iOS devices */
+
+        .img-tab>ion-label {
+            font-size: 0.75rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .img-tab>ion-img {
+            height: 40%;
+            width: 40%;
+            margin-bottom: 4px;
+        }
+    }
+
+    ion-tab-bar {
+        ion-icon, ion-label{
+            &.yellow {
+                color: var(--appYellow);
+            }
+            
+            &.grey{
+                color: #666666;
+            }
+        }
+    }
+
+    /* --- ALL ---*/
+
+    .disabled {
+        color: #BABABB;
+    }
+
+    ion-toolbar {
+        --border-color: transparent;
+    }
+
+    /* -- width -- */
+
+    .w-10 {
+        width: 10%;
+    }
+
+    .w-40 {
+        width: 40%;
+    }
+
+    .w-50 {
+        width: 50%;
+    }
+
+    .w-70 {
+        width: 70%;
+    }
+
+    .w-90 {
+        width: 90%;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    /* -- text align -- */
+
+    .bottom {
+        position: fixed;
+        bottom: 3rem;
+        left: 0;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .left {
+        text-align: left;
+    }
+
+    .right {
+        text-align: right;
+    }
+
+    .flex-right {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .flex-row-hleft-vcenter {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .flex-row-center {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .v-align {
+        display: flex;
+        align-items: center;
+    }
+
+    /* -- text color -- */
+
+    .yellow-text {
+        color: var(--appYellow);
+    }
+
+    
+    .red-text {
+        color:red;
+    }
+
+    .green-text {
+        color:limegreen;
+    }
+
+    .grey-text {
+        color:#383b3c;;
+    }
+
+    /* -- text margin -- */
+
+    .v-margin-3 {
+        margin: 0.3rem 0;
+    }
+
+    .margin-0 {
+        margin: 0;
+    }
+
+    /* -- text padding -- */
+
+    .v-h-padding-5-10 {
+        padding: 5% 10%;
+    }
+
+    .h-padding-7 {
+        padding: 0 7%;
+    }
+
+    .padding-0 {
+        padding: 0;
+    }
+
+    .padding-r-0 {
+        padding-right: 0;
+    }
+
+
+    ion-item {
+        --padding-start: 0;
+        --padding-end: 0;
+    }
+
+    /* -- drag-drop -- */
+
+    ion-reorder {
+        margin: 0;
+    }
+
+    app-itinerary-stop-point {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+    }
+
+    ion-item {
+        --inner-padding-end: 0;
+    }
+
+    /* -- slides -- */
+    .swiper-pagination {
+        bottom: 95%;
+    }
+
+    .underline {
+        text-decoration: underline;
+    }
+
+    /* -- other -- */
+
+    .router:focus {
+        outline: 0;
+    }
+
+    .ion-padding {
+        --padding-start: var(--ion-padding, 16px); 
+        --padding-end: var(--ion-padding, 16px);
+        --padding-top: var(--ion-padding, 16px);
+        --padding-bottom: var(--ion-padding, 16px);
+        padding-left: var(--ion-padding,16px);
+        padding-right: var(--ion-padding,16px);
+        padding-top: var(--ion-padding,16px);
+        padding-bottom: var(--ion-padding,16px);
+    }
+}
